@@ -9,17 +9,23 @@ public class UIControl : MonoBehaviour
     public Text president;
     public Text vicePresident;
     public Text party;
-    public Image logo;
+    public Sprite logo;
 
     public Text wealth;
     public Text prestige;
     public Text stability;
     public Text happiness;
 
+    string randomlogo;
+
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start ()
+    {
+        randomlogo = Mathf.RoundToInt(Random.value * 3).ToString();
+        Debug.Log(randomlogo);
+        Debug.Log(Resources.Load<Sprite>("logo/1"));
+        logo = Resources.Load<Sprite>("logo/1");
+    }
 	
 	// Update is called once per frame
 	void Update ()

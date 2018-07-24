@@ -314,7 +314,6 @@ public class Country
     void ChangeValue(string stat, float rate)
     {
         FieldInfo field = typeof(Country).GetField(stat);
-        Debug.Log(field.ToString());
         float value = (float)field.GetValue(this);
 
         field.SetValue(this, value + rate);
