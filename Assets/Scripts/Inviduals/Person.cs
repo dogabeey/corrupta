@@ -17,11 +17,11 @@ public class Person : MonoBehaviour
 
     public Ideology ideology;
 
-    public float Management = UnityEngine.Random.value * 10;
-    public float Diplomacy = UnityEngine.Random.value * 10;
-    public float Wisdom = UnityEngine.Random.value * 10;
-    public float Speech = UnityEngine.Random.value * 10;
-    public float Intrigue = UnityEngine.Random.value * 10;
+    public int Management = Mathf.RoundToInt(UnityEngine.Random.value * 10);
+    public int Diplomacy = Mathf.RoundToInt(UnityEngine.Random.value * 10);
+    public int Wisdom = Mathf.RoundToInt(UnityEngine.Random.value * 10);
+    public int Speech = Mathf.RoundToInt(UnityEngine.Random.value * 10);
+    public int Intrigue = Mathf.RoundToInt(UnityEngine.Random.value * 10);
 
     public Person(string firstName,string lastName,Ideology ideology, float fame = 0, float corruption = 0,bool isPolitician = true)
     {
