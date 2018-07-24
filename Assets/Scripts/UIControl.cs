@@ -21,9 +21,7 @@ public class UIControl : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        randomlogo = Mathf.RoundToInt((Random.value * 2)+1).ToString();
-        Debug.Log(randomlogo);
-        Debug.Log(Resources.Load<Texture2D>("logo/" + randomlogo));
+        randomlogo = Mathf.RoundToInt((Random.value * 2) + 1).ToString();
         Texture2D tex = Resources.Load<Texture2D>("logo/" + randomlogo);
         logo.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
     }
