@@ -1,0 +1,130 @@
+<cities>
+	<city>
+    <name>istanbul</name>
+		<description>
+      An urban city with burstling economy but shitty people.
+		</description>
+		<demographys>
+			<demography name='centrism'>12</demography>
+			<demography name='conservatism'>-84</demography>
+			<demography name='enviromentalism'>26</demography>
+			<demography name='liberalism'>6</demography>
+			<demography name='nationalism'>-24</demography>
+			<demography name='religionism'>-45</demography>
+			<demography name='republicanism'>5</demography>
+			<demography name='socialism'>57</demography>
+		</demographys>
+	</city>
+	<city>
+    <name>ankara</name>
+		<description>
+      Best part of this city is the returning back to istanbul.
+			</description>
+		<demographys>
+			<demography name='antiauthoritarianism'>12</demography>
+			<demography name='conservatism'>4</demography>
+			<demography name='enviromentalism'>26</demography>
+			<demography name='liberalism'>2</demography>
+			<demography name='nationalism'>5</demography>
+			<demography name='religionism'>-10</demography>
+			<demography name='republicanism'>5</demography>
+			<demography name='socialism'>5</demography>
+		</demographys>
+	</city>
+	<city>
+    <name>izmir</name>
+		<description>
+      A city with full of leftist whose have a strange habit of making up names for everything.
+		</description>
+		<demographys>
+			<demography name='centrism'>12</demography>
+			<demography name='antiauthoritarianism'>4</demography>
+			<demography name='enviromentalism'>26</demography>
+			<demography name='liberalism'>2</demography>
+			<demography name='nationalism'>2</demography>
+			<demography name='religionism'>-10</demography>
+			<demography name='republicanism'>5</demography>
+			<demography name='socialism'>5</demography>
+		</demographys>
+	</city>
+	<city>
+    <name>konya</name>
+		<description>
+      A high-tech religionist city that famous with konyalı bilim adamları.
+			</description>
+		<demographys>
+			<demography name='centrism'>12</demography>
+			<demography name='conservatism'>4</demography>
+			<demography name='antiauthoritarianism'>26</demography>
+			<demography name='liberalism'>2</demography>
+			<demography name='nationalism'>4</demography>
+			<demography name='religionism'>-10</demography>
+			<demography name='republicanism'>5</demography>
+			<demography name='socialism'>5</demography>
+		</demographys>
+	</city>
+	<city>
+    <name>edirne</name>
+		<description>
+      Millios of immigrants use this city as a gate the europe.
+		</description>
+		<demographys>
+			<demography name='centrism'>12</demography>
+			<demography name='conservatism'>4</demography>
+			<demography name='enviromentalism'>26</demography>
+			<demography name='antiauthoritarianism'>2</demography>
+			<demography name='nationalism'>3</demography>
+			<demography name='religionism'>-10</demography>
+			<demography name='republicanism'>5</demography>
+			<demography name='socialism'>5</demography>
+		</demographys>
+	</city>
+	<city>
+    <name>hakkari</name>
+		<description>
+      An ancient city with full of history and syrians.
+		</description>
+		<demographys>
+			<demography name='centrism'>12</demography>
+			<demography name='conservatism'>4</demography>
+			<demography name='enviromentalism'>26</demography>
+			<demography name='liberalism'>2</demography>
+			<demography name='antiauthoritarianism'>1</demography>
+			<demography name='religionism'>-10</demography>
+			<demography name='republicanism'>5</demography>
+			<demography name='socialism'>5</demography>
+		</demographys>
+	</city>
+	<city>
+    <name>rize</name>
+		<description>
+      Heart of the tea production and shitty catchphrases about tea, rize is cleanest city in the country.
+		</description>
+		<demographys>
+			<demography name='centrism'>12</demography>
+			<demography name='conservatism'>4</demography>
+			<demography name='enviromentalism'>26</demography>
+			<demography name='liberalism'>2</demography>
+			<demography name='nationalism'>4</demography>
+			<demography name='antiauthoritarianism'>-10</demography>
+			<demography name='republicanism'>5</demography>
+			<demography name='socialism'>5</demography>
+		</demographys>
+	</city>
+	<city>
+    <name>antalya</name>
+		<description>
+      A city centered in tourism, festivals, vegans and home of a certain wow player.
+		</description>
+		<demographys>
+			<demography name='centrism'>12</demography>
+			<demography name='conservatism'>4</demography>
+			<demography name='enviromentalism'>26</demography>
+			<demography name='liberalism'>2</demography>
+			<demography name='nationalism'>1</demography>
+			<demography name='religionism'>-10</demography>
+			<demography name='antiauthoritarianism'>5</demography>
+			<demography name='socialism'>5</demography>
+		</demographys>
+	</city>
+</cities>

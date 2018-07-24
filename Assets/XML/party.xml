@@ -1,0 +1,33 @@
+<parties>
+	<party>
+		<name>
+			antiauthoritarianism
+		</name>
+		<description>
+		A radical philisopy that advocates self-governed 
+		societies based on voluntary institutions which denies 
+		authority of law and lawmakers.
+		</description>
+		<ideology></ideology>
+		<founder></founder>
+		<chairperson></chairperson>
+		<vicechairperson></vicechairperson>
+		<deputies>
+			<deputy></deputy>
+			<deputy></deputy>
+			<deputy></deputy>
+			<deputy></deputy>
+			<deputy></deputy>
+			<deputy></deputy>
+			<deputy></deputy>
+			<deputy></deputy>
+		</deputies>
+		<members>
+			<member></member>
+			<member></member>
+			<member></member>
+			<member></member>
+			<member></member>
+		</members>
+	</party>
+</parties>

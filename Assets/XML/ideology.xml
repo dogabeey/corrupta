@@ -1,0 +1,164 @@
+<ideologies>
+	<ideology>
+    <name>antiauthoritarianism</name>
+		<description>
+			A radical philisopy that advocates self-governed 
+			societies based on voluntaryinstitutions which denies 
+			authority of law and lawmakers.
+		</description>
+		<opinions>
+			<opinion name='centrism'>12</opinion>
+			<opinion name='conservatism'>-84</opinion>
+			<opinion name='enviromentalism'>26</opinion>
+			<opinion name='liberalism'>6</opinion>
+			<opinion name='nationalism'>-24</opinion>
+			<opinion name='religionism'>-45</opinion>
+			<opinion name='republicanism'>5</opinion>
+			<opinion name='socialism'>57</opinion>
+		</opinions>
+	</ideology>
+	<ideology>
+    <name>centrism</name>
+		<description>
+			A political view that involves acceptance or support
+			of a balance of a degree of social equality and a degree 
+			of social hierarchy.
+			</description>
+		<opinions>
+			<opinion name='antiauthoritarianism'>12</opinion>
+			<opinion name='conservatism'>4</opinion>
+			<opinion name='enviromentalism'>26</opinion>
+			<opinion name='liberalism'>2</opinion>
+			<opinion name='nationalism'>5</opinion>
+			<opinion name='religionism'>-10</opinion>
+			<opinion name='republicanism'>5</opinion>
+			<opinion name='socialism'>5</opinion>
+		</opinions>
+	</ideology>
+	<ideology>
+    <name>conservatism</name>
+		<description>
+			A political belief that favors conservation of cultural
+			and/or religious values and praises traditional view in
+			lawmaking.
+		</description>
+		<opinions>
+			<opinion name='centrism'>12</opinion>
+			<opinion name='antiauthoritarianism'>4</opinion>
+			<opinion name='enviromentalism'>26</opinion>
+			<opinion name='liberalism'>2</opinion>
+			<opinion name='nationalism'>2</opinion>
+			<opinion name='religionism'>-10</opinion>
+			<opinion name='republicanism'>5</opinion>
+			<opinion name='socialism'>5</opinion>
+		</opinions>
+	</ideology>
+	<ideology>
+    <name>enviromentalism</name>
+		<description>
+			An ideology regarding concerns for environmental protection 
+			and improvement of the health of the environment, particularly 
+			as the measure for this health seeks to incorporate the impact 
+			of changes to the environment on the planet.
+			</description>
+		<opinions>
+			<opinion name='centrism'>12</opinion>
+			<opinion name='conservatism'>4</opinion>
+			<opinion name='antiauthoritarianism'>26</opinion>
+			<opinion name='liberalism'>2</opinion>
+			<opinion name='nationalism'>4</opinion>
+			<opinion name='religionism'>-10</opinion>
+			<opinion name='republicanism'>5</opinion>
+			<opinion name='socialism'>5</opinion>
+		</opinions>
+	</ideology>
+	<ideology>
+    <name>liberalism</name>
+		<description>
+			A political view based on liberty and equality which supports
+			civil rights, democracy, secularism, gender equality, internationalism
+			and the freedoms of speech, the press, religion and markets.
+			</description>
+		<opinions>
+			<opinion name='centrism'>12</opinion>
+			<opinion name='conservatism'>4</opinion>
+			<opinion name='enviromentalism'>26</opinion>
+			<opinion name='antiauthoritarianism'>2</opinion>
+			<opinion name='nationalism'>3</opinion>
+			<opinion name='religionism'>-10</opinion>
+			<opinion name='republicanism'>5</opinion>
+			<opinion name='socialism'>5</opinion>
+		</opinions>
+	</ideology>
+	<ideology>
+    <name>nationalism</name>
+		<description>
+			A political system characterized by promoting the interests of a
+			particular nation particularly with the aim of gaining and maintaining
+			full sovereignty over the group's homeland.
+			</description>
+		<opinions>
+			<opinion name='centrism'>12</opinion>
+			<opinion name='conservatism'>4</opinion>
+			<opinion name='enviromentalism'>26</opinion>
+			<opinion name='liberalism'>2</opinion>
+			<opinion name='antiauthoritarianism'>1</opinion>
+			<opinion name='religionism'>-10</opinion>
+			<opinion name='republicanism'>5</opinion>
+			<opinion name='socialism'>5</opinion>
+		</opinions>
+	</ideology>
+	<ideology>
+    <name>religionism</name>
+		<description>
+			A view that upholds religious laws and determining a state's laws by
+			majority religion in that state. 
+			</description>
+		<opinions>
+			<opinion name='centrism'>12</opinion>
+			<opinion name='conservatism'>4</opinion>
+			<opinion name='enviromentalism'>26</opinion>
+			<opinion name='liberalism'>2</opinion>
+			<opinion name='nationalism'>4</opinion>
+			<opinion name='antiauthoritarianism'>-10</opinion>
+			<opinion name='republicanism'>5</opinion>
+			<opinion name='socialism'>5</opinion>
+		</opinions>
+	</ideology>
+	<ideology>
+    <name>republicanism</name>
+		<description>
+			 An ideology centered on citizenship in a state organized as a republic
+			 under which the people hold popular sovereignty, which upholds that
+			 majority's favor is always the best.
+			</description>
+		<opinions>
+			<opinion name='centrism'>12</opinion>
+			<opinion name='conservatism'>4</opinion>
+			<opinion name='enviromentalism'>26</opinion>
+			<opinion name='liberalism'>2</opinion>
+			<opinion name='nationalism'>1</opinion>
+			<opinion name='religionism'>-10</opinion>
+			<opinion name='antiauthoritarianism'>5</opinion>
+			<opinion name='socialism'>5</opinion>
+		</opinions>
+	</ideology>
+	<ideology>
+    <name>socialism</name>
+		<description>
+			 A social and political system characterised by social ownership and
+			 democratic control of the means of production as well as the political
+			 theories and movements associated with them.
+			</description>
+		<opinions>
+			<opinion name='centrism'>12</opinion>
+			<opinion name='conservatism'>4</opinion>
+			<opinion name='enviromentalism'>26</opinion>
+			<opinion name='liberalism'>2</opinion>
+			<opinion name='nationalism'>8</opinion>
+			<opinion name='religionism'>-10</opinion>
+			<opinion name='republicanism'>5</opinion>
+			<opinion name='antiauthoritarianism'>5</opinion>
+		</opinions>
+	</ideology>
+</ideologies>

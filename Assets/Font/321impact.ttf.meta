@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: e5945a4ad10a65d4e81cf8179fc49b10
+timeCreated: 1527802786
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: 321impact
+  fontNames:
+  - 321impact
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
