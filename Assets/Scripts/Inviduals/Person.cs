@@ -17,6 +17,12 @@ public class Person : MonoBehaviour
 
     public Ideology ideology;
 
+    public float Management = UnityEngine.Random.value * 10;
+    public float Diplomacy = UnityEngine.Random.value * 10;
+    public float Wisdom = UnityEngine.Random.value * 10;
+    public float Speech = UnityEngine.Random.value * 10;
+    public float Intrigue = UnityEngine.Random.value * 10;
+
     public Person(string firstName,string lastName,Ideology ideology, float fame = 0, float corruption = 0,bool isPolitician = true)
     {
         this.firstName = firstName;
