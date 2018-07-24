@@ -9,7 +9,7 @@ public class UIControl : MonoBehaviour
     public Text president;
     public Text vicePresident;
     public Text party;
-    public Sprite logo;
+    public Image logo;
 
     public Text wealth;
     public Text prestige;
@@ -21,10 +21,11 @@ public class UIControl : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        randomlogo = Mathf.RoundToInt(Random.value * 3).ToString();
+        randomlogo = Mathf.RoundToInt((Random.value * 2)+1).ToString();
         Debug.Log(randomlogo);
-        Debug.Log(Resources.Load<Sprite>("logo/1"));
-        logo = Resources.Load<Sprite>("logo/1");
+        Debug.Log(Resources.Load<Texture2D>("logo/" + randomlogo));
+        Texture2D tex = Resources.Load<Texture2D>("logo/" + randomlogo);
+        logo.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
     }
 	
 	// Update is called once per frame
