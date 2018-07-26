@@ -42,15 +42,60 @@ public class TestInitializer : MonoBehaviour
                                 (
                                 new government.Ministry
                                         (
-                                            "Ministry of Culture", 
+                                            "Ministry of Culture",
                                             new Person(
-                                                        RandomName("names.txt"), 
-                                                        RandomName("names.txt"), 
-                                                        presidentIdeology, 
-                                                        president.fame - UnityEngine.Random.Range(10, 30), 
-                                                        president.corruption - UnityEngine.Random.Range(10, 30), 
+                                                        RandomName("names.txt"),
+                                                        RandomName("names.txt"),
+                                                        presidentIdeology,
+                                                        president.fame - UnityEngine.Random.Range(10, 30),
+                                                        president.corruption - UnityEngine.Random.Range(10, 30),
                                                         true),
                                             Country.ChangeableStats.baseCulture
+                                        )
+                                );
+        government.cabinet.Add
+                                (
+                                new government.Ministry
+                                        (
+                                            "Ministry of Education",
+                                            new Person(
+                                                        RandomName("names.txt"),
+                                                        RandomName("names.txt"),
+                                                        presidentIdeology,
+                                                        president.fame - UnityEngine.Random.Range(10, 30),
+                                                        president.corruption - UnityEngine.Random.Range(10, 30),
+                                                        true),
+                                            Country.ChangeableStats.baseEducation
+                                        )
+                                );
+        government.cabinet.Add
+                                (
+                                new government.Ministry
+                                        (
+                                            "Ministry of Military",
+                                            new Person(
+                                                        RandomName("names.txt"),
+                                                        RandomName("names.txt"),
+                                                        presidentIdeology,
+                                                        president.fame - UnityEngine.Random.Range(10, 30),
+                                                        president.corruption - UnityEngine.Random.Range(10, 30),
+                                                        true),
+                                            Country.ChangeableStats.baseMilitary
+                                        )
+                                );
+        government.cabinet.Add
+                                (
+                                new government.Ministry
+                                        (
+                                            "Ministry of External Affairs",
+                                            new Person(
+                                                        RandomName("names.txt"),
+                                                        RandomName("names.txt"),
+                                                        presidentIdeology,
+                                                        president.fame - UnityEngine.Random.Range(10, 30),
+                                                        president.corruption - UnityEngine.Random.Range(10, 30),
+                                                        true),
+                                            Country.ChangeableStats.baseDiplomacy
                                         )
                                 );
 
