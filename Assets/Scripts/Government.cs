@@ -20,9 +20,9 @@ public class government
     {
         public string name;
         public Person minister;
-        public FieldInfo areaOfInterest;
+        public Country.ChangeableStats areaOfInterest;
 
-        public Ministry(string name, Person minister, FieldInfo areaOfInterest)
+        public Ministry(string name, Person minister,Country.ChangeableStats areaOfInterest)
         {
             this.name = name;
             this.minister = minister;

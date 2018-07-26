@@ -38,7 +38,21 @@ public class TestInitializer : MonoBehaviour
         Party partyA = new Party(RandomName("partynames.txt"), "", president, presidentIdeology);
         government government = new government(partyA, president, vicePresident);
 
-        
+        government.cabinet.Add
+                                (
+                                new government.Ministry
+                                        (
+                                            "Ministry of Culture", 
+                                            new Person(
+                                                        RandomName("names.txt"), 
+                                                        RandomName("names.txt"), 
+                                                        presidentIdeology, 
+                                                        president.fame - UnityEngine.Random.Range(10, 30), 
+                                                        president.corruption - UnityEngine.Random.Range(10, 30), 
+                                                        true),
+                                            Country.ChangeableStats.baseCulture
+                                        )
+                                );
 
         Country.RandomizeAll();
         GameObject.FindGameObjectWithTag("uicontroller").SetActive(true);
