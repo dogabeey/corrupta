@@ -1,20 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Eppy;
 namespace Corruptor
 {
     public class Team
     {
-
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        enum AdvisorType { MediaAdvisor, Intelligence, CampaignManager, SpeechWriter, PrincipalClerk }
+        Tuple<Person, AdvisorType, int>[] TeamMembers;
     }
 }
