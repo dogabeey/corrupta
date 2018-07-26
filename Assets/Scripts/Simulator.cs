@@ -35,20 +35,4 @@ public class Simulator: MonoBehaviour
         monthText.text = Month.ToString();
         Country.Instance.UpdateAll();
     }
-
-    void Update()
-    {
-        if (Time.time >= nextUpdate)
-        {
-            // Change the next update (current second+1)
-            nextUpdate = Mathf.FloorToInt(Time.time) + 5 - simSpeed;
-            // Call your fonction
-            UpdateEverySecond();
-        }
-    }
-
-    void UpdateEverySecond()
-    {
-        NextTurn();
-    }
 }

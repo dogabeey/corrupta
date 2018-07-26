@@ -38,8 +38,9 @@ public class TestInitializer : MonoBehaviour
         Party partyA = new Party(RandomName("partynames.txt"), "", president, presidentIdeology);
         government government = new government(partyA, president, vicePresident);
 
-        Country.RandomizeAll();
+        
 
+        Country.RandomizeAll();
         GameObject.FindGameObjectWithTag("uicontroller").SetActive(true);
 	}
 

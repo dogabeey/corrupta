@@ -14,8 +14,8 @@ public class government
     public DateTime date;
     bool isActive;
     
-    float lastElectionVotes;
-    Ministry[] cabinet;
+    public float lastElectionVotes;
+    public List<Ministry> cabinet;
     public class Ministry
     {
         public string name;
