@@ -31,7 +31,7 @@ public class Simulator: MonoBehaviour
 
         // passing of day
         turn++;
-        yearText.text = Year.ToString();
+        yearText.text = (Year + DateTime.Now.Year).ToString();
         monthText.text = Month.ToString();
         Country.Instance.UpdateAll();
     }

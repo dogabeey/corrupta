@@ -11,19 +11,19 @@ public class UIControl : MonoBehaviour
     public Text party;
     public Image logo;
 
-    public Text wealth;
-    public Text prestige;
-    public Text stability;
-    public Text happiness;
+    public Slider wealth;
+    public Slider prestige;
+    public Slider stability;
+    public Slider happiness;
 
     string randomlogo;
 
     // Use this for initialization
     void Start ()
     {
-        randomlogo = Mathf.RoundToInt((Random.value * 2) + 1).ToString();
-        Texture2D tex = Resources.Load<Texture2D>("logo/" + randomlogo);
-        logo.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+    //    randomlogo = Mathf.RoundToInt((Random.value * 2) + 1).ToString();
+    //    Texture2D tex = Resources.Load<Texture2D>("logo/" + randomlogo);
+    //    logo.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
     }
 	
 	// Update is called once per frame
@@ -31,14 +31,14 @@ public class UIControl : MonoBehaviour
     {
         government currentGov = government.governmentList[government.governmentList.Count - 1];
 
-        governmentName.text = government.governmentList.Count.ToString() + ". government";
-        president.text = "President: " + currentGov.president.firstName + " " + currentGov.president.lastName;
-        vicePresident.text = "Vice President: " + currentGov.vicePresident.firstName + " " + currentGov.vicePresident.lastName;
-        party.text = currentGov.majorityParty.name;
+        //governmentName.text = government.governmentList.Count.ToString() + ". government";
+        //president.text = "President: " + currentGov.president.firstName + " " + currentGov.president.lastName;
+        //vicePresident.text = "Vice President: " + currentGov.vicePresident.firstName + " " + currentGov.vicePresident.lastName;
+        //party.text = currentGov.majorityParty.name;
 
-        wealth.text = Country.Instance.GetWealth().ToString();
-        prestige.text = Country.Instance.GetPrestige().ToString();
-        stability.text = Country.Instance.GetStability().ToString();
-        happiness.text = Country.Instance.GetHappiness().ToString();
+        wealth.value = Country.Instance.GetWealth();
+        prestige.value = Country.Instance.GetPrestige();
+        stability.value = Country.Instance.GetStability();
+        happiness.value = Country.Instance.GetHappiness();
     }
 }

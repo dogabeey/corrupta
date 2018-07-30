@@ -15,7 +15,7 @@ public class government
     bool isActive;
     
     public float lastElectionVotes;
-    public List<Ministry> cabinet;
+    public List<Ministry> cabinet = new List<Ministry>();
     public class Ministry
     {
         public string name;
