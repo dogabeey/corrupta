@@ -13,8 +13,8 @@ public class Simulator: MonoBehaviour
     private int nextUpdate = 0;
     [Range(1,4)] public int simSpeed = 1;
 
-    int Year { get { return (int)(turn / 12f); } }
-    int Month { get { return (turn % 12) + 1; } }
+    public int Year { get { return (int)(turn / 12f); } }
+    public int Month { get { return (turn % 12) + 1; } }
 
     public Text yearText;
     public Text monthText;
