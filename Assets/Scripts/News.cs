@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class News
+public class News<Category>
 {
     public string headLine;
     public string description;

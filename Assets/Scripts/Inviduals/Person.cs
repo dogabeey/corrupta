@@ -9,7 +9,9 @@ public class Person : MonoBehaviour
 {
     public static List<Person> people = new List<Person>();
 
+    bool isPlayer;
     bool isPolitician;
+
     public string firstName, lastName;
     public DateTime birthDate;
     public float fame = 0;
@@ -33,5 +35,19 @@ public class Person : MonoBehaviour
         this.isPolitician = isPolitician;
 
         people.Add(this);
+
+        
+    }
+    /// <summary>
+    /// Tags this person as the player and clears player tag from all other Persons.
+    /// </summary>
+    public void SetPlayer()
+    {
+        foreach (Person p in people)
+        {
+            p.isPlayer = false;
+        }
+
+        this.isPlayer = true;
     }
 }

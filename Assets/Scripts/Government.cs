@@ -16,6 +16,9 @@ public class government
     
     public float lastElectionVotes;
     public List<Ministry> cabinet = new List<Ministry>();
+    /// <summary>
+    /// This sub-class represents ministries that connected to government.
+    /// </summary>
     public class Ministry
     {
         public string name;
