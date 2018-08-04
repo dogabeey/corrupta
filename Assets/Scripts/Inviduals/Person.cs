@@ -5,11 +5,11 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Person : MonoBehaviour
+public class Person
 {
     public static List<Person> people = new List<Person>();
+    public static Person player;
 
-    bool isPlayer;
     bool isPolitician;
 
     public string firstName, lastName;
@@ -37,17 +37,5 @@ public class Person : MonoBehaviour
         people.Add(this);
 
         
-    }
-    /// <summary>
-    /// Tags this person as the player and clears player tag from all other Persons.
-    /// </summary>
-    public void SetPlayer()
-    {
-        foreach (Person p in people)
-        {
-            p.isPlayer = false;
-        }
-
-        this.isPlayer = true;
     }
 }
