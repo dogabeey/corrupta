@@ -99,6 +99,8 @@ public class TestInitializer : MonoBehaviour
                                         )
                                 );
 
+
+
         Country.RandomizeAll();
         GameObject.FindGameObjectWithTag("uicontroller").SetActive(true);
 	}
