@@ -8,6 +8,7 @@ public class Country
 {
     public static Country Instance;
     public string name;
+    public City capital;
 
     public enum ChangeableStats
     {
@@ -292,14 +293,15 @@ public class Country
     public float corruption = 0;
 
 
-    private Country(string name)
+    private Country(string name,City capital)
     {
         this.name = name;
+        this.capital = capital;
     }
 
-    public static void InitCountry(string name)
+    public static void InitCountry(string name,City capital)
     {
-        Instance = new Country(name);
+        Instance = new Country(name,capital);
 
     }
 
@@ -324,7 +326,6 @@ public class Country
         foreach (string stat in Enum.GetNames(typeof(ChangeableStats)))
         {
             float val = UnityEngine.Random.value * 50;
-            Debug.Log("Attemping to change " + stat + " to " + val);
             Instance.ChangeValue(stat, val);
         }
     }

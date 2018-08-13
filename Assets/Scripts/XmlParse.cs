@@ -75,13 +75,14 @@ public class XmlParse
             }
 
         }
-
+        /*
         foreach (City c in City.cityList)
         {
 
             Debug.Log(c.cityName + ": " + c.description + ". ");
             Debug.Log(c.ideologyRates[0].Item2.ToString() + " percent of this city is " + c.ideologyRates[0].Item1.ideologyName + ".");
         }
+        */
     }
 
 }

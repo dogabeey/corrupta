@@ -16,14 +16,32 @@ public class UIControl : MonoBehaviour
     public Slider stability;
     public Slider happiness;
 
+    public Dropdown ideology;
+    public Text idDescription;
+    public Dropdown city;
+    public Text cityDescription;
+
     string randomlogo;
 
     // Use this for initialization
     void Start ()
     {
-    //    randomlogo = Mathf.RoundToInt((Random.value * 2) + 1).ToString();
-    //    Texture2D tex = Resources.Load<Texture2D>("logo/" + randomlogo);
-    //    logo.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+        //    randomlogo = Mathf.RoundToInt((Random.value * 2) + 1).ToString();
+        //    Texture2D tex = Resources.Load<Texture2D>("logo/" + randomlogo);
+        //    logo.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+        List<string> idList = new List<string>();
+        foreach (Ideology i in Ideology.ideologyList)
+        {
+            idList.Add(i.ideologyName);
+        }
+        ideology.AddOptions(idList);
+
+        List<string> cList = new List<string>();
+        foreach (City i in City.cityList)
+        {
+            cList.Add(i.cityName);
+        }
+        city.AddOptions(cList);
     }
 	
 	// Update is called once per frame
@@ -40,5 +58,17 @@ public class UIControl : MonoBehaviour
         prestige.value = Country.Instance.GetPrestige();
         stability.value = Country.Instance.GetStability();
         happiness.value = Country.Instance.GetHappiness();
+    }
+
+    public void ShowIdeologyDescription()
+    {
+        Debug.Log(ideology.options[ideology.value].text);
+        idDescription.text = Ideology.ideologyList.Find(i => i.ideologyName == ideology.options[ideology.value].text).description;
+    }
+
+    public void ShowCityDescription()
+    {
+        Debug.Log(city.options[city.value].text);
+        cityDescription.text = City.cityList.Find(i => i.cityName == city.options[city.value].text).description;
     }
 }

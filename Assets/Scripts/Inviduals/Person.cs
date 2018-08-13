@@ -18,6 +18,7 @@ public class Person
     public float corruption = 0;
 
     public Ideology ideology;
+    public City homeland = Country.Instance.capital;
 
     public int Management = Mathf.RoundToInt(UnityEngine.Random.value * 10);
     public int Diplomacy = Mathf.RoundToInt(UnityEngine.Random.value * 10);

@@ -13,9 +13,9 @@ public class TestInitializer : MonoBehaviour
 
     void Start ()
     {
-        Country.InitCountry("Turkey");
         XmlParse.ParseIdeology("ideology.xml");
         XmlParse.ParseCity("city.xml");
+        Country.InitCountry("Turkey",City.cityList[0]);
 
         float presidentCorruption;
         Ideology presidentIdeology;
