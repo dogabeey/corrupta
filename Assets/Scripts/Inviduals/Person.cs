@@ -31,12 +31,12 @@ public class Person
         this.firstName = firstName;
         this.lastName = lastName;
         this.ideology = ideology;
-        this.fame = fame;
-        this.corruption = corruption;
+        this.fame = fame < 0 ? 0 : fame;
+        this.corruption = corruption < 0 ? 0 : corruption;
         this.isPolitician = isPolitician;
 
         people.Add(this);
 
-        
+        Debug.Log("Succesfully added a politican to the country named " + firstName + " " + lastName + ", who follows " + ideology.ideologyName + " ideology. Their fame is " + fame + " and they are " + this.corruption.ToString() + " percent corrupted.");
     }
 }

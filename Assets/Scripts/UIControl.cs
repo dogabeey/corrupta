@@ -16,6 +16,8 @@ public class UIControl : MonoBehaviour
     public Slider stability;
     public Slider happiness;
 
+    public InputField firstName;
+    public InputField lastName;
     public Dropdown ideology;
     public Text idDescription;
     public Dropdown city;
@@ -70,5 +72,10 @@ public class UIControl : MonoBehaviour
     {
         Debug.Log(city.options[city.value].text);
         cityDescription.text = City.cityList.Find(i => i.cityName == city.options[city.value].text).description;
+    }
+
+    public void CreateCharacter()
+    {
+        Person.player = new Person(firstName.text, lastName.text, Ideology.ideologyList.Find(i => i.ideologyName == ideology.options[ideology.value].text));
     }
 }
