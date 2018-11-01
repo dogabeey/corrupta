@@ -32,7 +32,7 @@ public class TestInitializer : MonoBehaviour
              (
                  RandomName("names.txt"), RandomName("names.txt"),
                  presidentIdeology, 90,
-                 UnityEngine.Random.Range(presidentCorruption-5, presidentCorruption)
+                 UnityEngine.Random.Range(presidentCorruption-10, presidentCorruption)
              );
         // Then we create their first party.
         Party partyA = new Party(RandomName("partynames.txt"), "", president, presidentIdeology);
