@@ -23,6 +23,8 @@ public class UIControl : MonoBehaviour
     public Dropdown city;
     public Text cityDescription;
 
+    public Animator animator;
+
     string randomlogo;
 
     // Use this for initialization
@@ -37,6 +39,7 @@ public class UIControl : MonoBehaviour
             idList.Add(i.ideologyName);
         }
         ideology.AddOptions(idList);
+        idDescription.text = Ideology.ideologyList.Find(i => i.ideologyName == ideology.options[ideology.value].text).description;
 
         List<string> cList = new List<string>();
         foreach (City i in City.cityList)
@@ -44,6 +47,7 @@ public class UIControl : MonoBehaviour
             cList.Add(i.cityName);
         }
         city.AddOptions(cList);
+        cityDescription.text = City.cityList.Find(i => i.cityName == city.options[city.value].text).description;
     }
 	
 	// Update is called once per frame
@@ -76,6 +80,8 @@ public class UIControl : MonoBehaviour
 
     public void CreateCharacter()
     {
-        Person.player = new Person(firstName.text, lastName.text, Ideology.ideologyList.Find(i => i.ideologyName == ideology.options[ideology.value].text));
+        if (firstName.text == "") firstName.animator.SetTrigger("error");
+        else if (lastName.text == "") lastName.animator.SetTrigger("error");
+        else Person.player = new Person(firstName.text, lastName.text, Ideology.ideologyList.Find(i => i.ideologyName == ideology.options[ideology.value].text));
     }
 }
