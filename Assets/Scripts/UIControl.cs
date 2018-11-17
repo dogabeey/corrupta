@@ -39,7 +39,7 @@ public class UIControl : MonoBehaviour
             idList.Add(i.ideologyName);
         }
         ideology.AddOptions(idList);
-        idDescription.text = Ideology.ideologyList.Find(i => i.ideologyName == ideology.options[ideology.value].text).description;
+        if(idDescription != null) idDescription.text = Ideology.ideologyList.Find(i => i.ideologyName == ideology.options[ideology.value].text).description;
 
         List<string> cList = new List<string>();
         foreach (City i in City.cityList)
@@ -47,7 +47,7 @@ public class UIControl : MonoBehaviour
             cList.Add(i.cityName);
         }
         city.AddOptions(cList);
-        cityDescription.text = City.cityList.Find(i => i.cityName == city.options[city.value].text).description;
+        if (cityDescription != null) cityDescription.text = City.cityList.Find(i => i.cityName == city.options[city.value].text).description;
     }
 	
 	// Update is called once per frame
