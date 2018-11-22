@@ -11,10 +11,10 @@ public class UIControl : MonoBehaviour
     public Text party;
     public Image logo;
 
-    public Slider wealth;
-    public Slider prestige;
-    public Slider stability;
-    public Slider happiness;
+    public Text wealth;
+    public Text prestige;
+    public Text stability;
+    public Text happiness;
 
     public InputField firstName;
     public InputField lastName;
@@ -60,10 +60,10 @@ public class UIControl : MonoBehaviour
         //vicePresident.text = "Vice President: " + currentGov.vicePresident.firstName + " " + currentGov.vicePresident.lastName;
         //party.text = currentGov.majorityParty.name;
 
-        wealth.value = Country.Instance.GetWealth();
-        prestige.value = Country.Instance.GetPrestige();
-        stability.value = Country.Instance.GetStability();
-        happiness.value = Country.Instance.GetHappiness();
+        wealth.text = Mathf.FloorToInt(Country.Instance.GetWealth()).ToString();
+        prestige.text = Mathf.FloorToInt(Country.Instance.GetPrestige()).ToString();
+        stability.text = Mathf.FloorToInt(Country.Instance.GetStability()).ToString();
+        happiness.text = Mathf.FloorToInt(Country.Instance.GetHappiness()).ToString();
     }
 
     public void ShowIdeologyDescription()

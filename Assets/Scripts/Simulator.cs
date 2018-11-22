@@ -19,6 +19,15 @@ public class Simulator: MonoBehaviour
 
     public Text yearText;
     public Text monthText;
+
+    public void Start()
+    {
+        // first few months stats are adjusted.
+        for (int i = 0; i < 12; i++)
+        {
+            NextTurn();
+        }
+    }
     
     public void SetSpeed(Slider value)
     {
