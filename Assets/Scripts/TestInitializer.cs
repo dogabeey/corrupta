@@ -98,8 +98,16 @@ public class TestInitializer : MonoBehaviour
                                             Country.ChangeableStats.baseDiplomacy
                                         )
                                 );
-
-
+        // main opposition leader
+        Person oppositeLeader =
+            new Person
+             (
+                 RandomName("names.txt"), RandomName("names.txt"),
+                 RandomIdeology(), 70,
+                 UnityEngine.Random.Range(0, presidentCorruption)
+             );
+        // main opposition party
+        Party partyOpposition = new Party(RandomName("partynames.txt"), "",oppositeLeader,oppositeLeader.ideology);
 
         Country.RandomizeAll();
         GameObject.FindGameObjectWithTag("uicontroller").SetActive(true);

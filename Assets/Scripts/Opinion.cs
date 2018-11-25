@@ -23,13 +23,25 @@ using UnityEngine;
             opinions.Add(this);
         }
 
-        static void SetOpinion(T i, T t, float val)
+        public static void SetOpinion(T i, T t, float val)
         {
             opinions.Find(o => o.invidual.ToString() == i.ToString() && o.target.ToString() == t.ToString()).opinionValue = val;
         }
 
-        static Opinion<T> GetOpinion(T i, T t)
+        public static Opinion<T> GetOpinion(T i, T t)
         {
             return opinions.Find(o => o.invidual.ToString() == i.ToString() && o.target.ToString() == t.ToString());
         }
+
+        public static T GetOpposite(T i)
+        {
+            List<Opinion<T>> ops = opinions.FindAll(o => o.invidual.ToString() == i.ToString());
+            List<float> opValues = new List<float>();
+            foreach (Opinion<T> o in ops)
+            { 
+                opValues.Add(o.opinionValue);
+            }
+
+            return opinions.Find(o2 => o2.opinionValue == opValues.Min()).target;
+    }
     }

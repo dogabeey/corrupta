@@ -13,8 +13,8 @@ public class Party : MonoBehaviour
     public Person founder;
     public Person chairPerson;
     public Person viceChairPerson;
-    public List<Person> deputyList;
-    public List<Person> informalMembers;
+    public List<Person> deputyList = new List<Person>();
+    public List<Person> informalMembers = new List<Person>();
     public Ideology ideology;
 
     public Party(string name, string logo, Person founder,Ideology ideology)

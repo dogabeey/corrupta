@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
         public string ideologyName;
         public string description;
-        public Opinion<Ideology>[] opinionList;
+        public List<Opinion<Ideology>> opinionList = new List<Opinion<Ideology>>();
 
         public Ideology(string ideology, string desc)
         {
