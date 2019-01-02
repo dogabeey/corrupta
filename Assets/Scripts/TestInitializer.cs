@@ -108,7 +108,27 @@ public class TestInitializer : MonoBehaviour
              );
         // main opposition party
         Party partyOpposition = new Party(RandomName("partynames.txt"), "",oppositeLeader,oppositeLeader.ideology);
-
+        // parliament deputies
+        for (int i = 0; i < 60; i++)
+        {
+            Person instance = new Person
+             (
+                 RandomName("names.txt"), RandomName("names.txt"),
+                 partyA.ideology, UnityEngine.Random.Range(0, 100),
+                 UnityEngine.Random.Range(0, presidentCorruption)
+             );
+            partyA.deputyList.Add(instance);
+        }
+        for (int i = 0; i < 30; i++)
+        {
+            Person instance = new Person
+             (
+                 RandomName("names.txt"), RandomName("names.txt"),
+                 partyOpposition.ideology, UnityEngine.Random.Range(0, 100),
+                 UnityEngine.Random.Range(0, presidentCorruption)
+             );
+            partyOpposition.deputyList.Add(instance);
+        }
         Country.RandomizeAll();
         GameObject.FindGameObjectWithTag("uicontroller").SetActive(true);
 	}

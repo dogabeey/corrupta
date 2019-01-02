@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Parliament
+public static class Parliament
 {
-    Person admin;
-    Person[] deputyList;
+    public static Person admin;
+    public static int maxDeputy = 100;
 }

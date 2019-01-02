@@ -7,8 +7,9 @@ public class ParliamentUI : MonoBehaviour
 {
     public GameObject chairPrefab;
 
-    private void Start()
+    public void Start()
     {
+        Debug.Log("Parliament UI started");
         //nameText = GetComponentsInChildren<Text>()[0];
         //partyText = GetComponentsInChildren<Text>()[1];
 
@@ -16,11 +17,12 @@ public class ParliamentUI : MonoBehaviour
         //partyText.text = Party.parties.Find(pt => pt.deputyList.Find(pr => pr == deputy) == deputy).name; // wtf
         foreach (Party party in Party.parties)
         {
+            Debug.Log("Generating deputies of " + party.partyName + ".");
             foreach (Person person in party.deputyList)
             {
                 GameObject instance = Instantiate(chairPrefab, chairPrefab.transform.parent);
-                instance.GetComponentsInChildren<Text>()[0].text = "Name: " + person.firstName + " " + person.lastName;
-                instance.GetComponentsInChildren<Text>()[1].text = "Party: " + party.partyName;
+                instance.transform.GetChild(0).GetComponentsInChildren<Text>()[0].text = "Name: " + person.firstName + " " + person.lastName;
+                instance.transform.GetChild(0).GetComponentsInChildren<Text>()[1].text = "Party: " + party.partyName;
             }
         }
     }

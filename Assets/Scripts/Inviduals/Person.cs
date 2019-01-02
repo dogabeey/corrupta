@@ -37,6 +37,6 @@ public class Person
 
         people.Add(this);
 
-        Debug.Log("Succesfully added a politican to the country named " + firstName + " " + lastName + ", who follows " + ideology.ideologyName + " ideology. Their fame is " + fame + " and they are " + this.corruption.ToString() + " percent corrupted.");
+        //Debug.Log("Succesfully added a politican to the country named " + firstName + " " + lastName + ", who follows " + ideology.ideologyName + " ideology. Their fame is " + fame + " and they are " + this.corruption.ToString() + " percent corrupted.");
     }
 }
