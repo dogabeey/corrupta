@@ -35,7 +35,7 @@ public class TestInitializer : MonoBehaviour
                  UnityEngine.Random.Range(presidentCorruption-10, presidentCorruption)
              );
         // Then we create their first party.
-        Party partyA = new Party(RandomName("partynames.txt"), "", president, presidentIdeology);
+        Party partyA = new Party(RandomName("partynames.txt"), Color.yellow, president, presidentIdeology);
         government government = new government(partyA, president, vicePresident);
 
         government.cabinet.Add
@@ -107,7 +107,7 @@ public class TestInitializer : MonoBehaviour
                  UnityEngine.Random.Range(0, presidentCorruption)
              );
         // main opposition party
-        Party partyOpposition = new Party(RandomName("partynames.txt"), "",oppositeLeader,oppositeLeader.ideology);
+        Party partyOpposition = new Party(RandomName("partynames.txt"), Color.red,oppositeLeader,oppositeLeader.ideology);
         // parliament deputies
         for (int i = 0; i < 60; i++)
         {

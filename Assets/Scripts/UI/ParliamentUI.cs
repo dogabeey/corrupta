@@ -23,7 +23,9 @@ public class ParliamentUI : MonoBehaviour
                 GameObject instance = Instantiate(chairPrefab, chairPrefab.transform.parent);
                 instance.transform.GetChild(0).GetComponentsInChildren<Text>()[0].text = "Name: " + person.firstName + " " + person.lastName;
                 instance.transform.GetChild(0).GetComponentsInChildren<Text>()[1].text = "Party: " + party.partyName;
+                instance.GetComponent<Image>().color = party.color;
             }
         }
+        GameObject.Destroy(chairPrefab);
     }
 }
