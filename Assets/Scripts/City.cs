@@ -6,18 +6,39 @@ using Eppy;
 
 public class City
 {
+    public static List<City> cityList = new List<City>();
+    public class IdeologyRate
+    {
+        public string ideology;
+        public float rate;
+        public IdeologyRate()
+        {
+
+        }
+        public IdeologyRate(string ideology, float rate)
+        {
+            this.ideology = ideology;
+            this.rate = rate;
+        }
+        
+        public Ideology GetIdeology()
+        {
+            return Ideology.ideologyList.Find(i => i.ideologyName == ideology);
+        }
+    }
     public string cityName;
     public string description;
-    public static List<City> cityList = new List<City>();
+    public List<IdeologyRate> ideologyRates;
 
-    public Tuple<Ideology, float>[] ideologyRates;
+    public City()
+    {
 
-    public City(string name, string description)
+    }
+    public City(string name, string description,List<IdeologyRate> ideologyRates)
     {
         this.cityName = name;
         this.description = description;
-        ideologyRates = new Tuple<Ideology, float>[30];
-
+        this.ideologyRates = ideologyRates;
         cityList.Add(this);
     }
 }

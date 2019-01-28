@@ -53,7 +53,8 @@ public class UIControl : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        government currentGov = government.governmentList[government.governmentList.Count - 1];
+        government currentGov;
+        if(government.governmentList.Count > 0) currentGov = government.governmentList[government.governmentList.Count - 1];
 
         //governmentName.text = government.governmentList.Count.ToString() + ". government";
         //president.text = "President: " + currentGov.president.firstName + " " + currentGov.president.lastName;
@@ -82,6 +83,6 @@ public class UIControl : MonoBehaviour
     {
         if (firstName.text == "") firstName.animator.SetTrigger("error");
         else if (lastName.text == "") lastName.animator.SetTrigger("error");
-        else Person.player = new Person(firstName.text, lastName.text, Ideology.ideologyList.Find(i => i.ideologyName == ideology.options[ideology.value].text));
+        else Person.player = new Person(firstName.text, lastName.text, ideology.options[ideology.value].text);
     }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <firstName>Template</firstName>
+  <lastName>de Person</lastName>
+  <fame>0</fame>
+  <corruption>0</corruption>
+  <ideology>religionism</ideology>
+  <Management>4</Management>
+  <Diplomacy>4</Diplomacy>
+  <Wisdom>4</Wisdom>
+  <Speech>8</Speech>
+  <Intrigue>8</Intrigue>
+</Person>

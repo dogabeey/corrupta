@@ -293,13 +293,13 @@ public class Country
     public float corruption = 0;
 
 
-    private Country(string name,City capital)
+    private Country(string name,string capital)
     {
         this.name = name;
-        this.capital = capital;
+        this.capital = City.cityList.Find(c => c.cityName == capital);
     }
 
-    public static void InitCountry(string name,City capital)
+    public static void InitCountry(string name,string capital)
     {
         Instance = new Country(name,capital);
 

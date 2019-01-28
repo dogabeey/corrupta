@@ -3,38 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Party : MonoBehaviour
+public class Party
 {
     public static List<Party> parties = new List<Party>();
 
     public string partyName;
     public string logo;
-    public Color32 color;
+    public string color;
 
     public Person founder;
     public Person chairPerson;
     public Person viceChairPerson;
+    public string ideology;
     public List<Person> deputyList = new List<Person>();
     public List<Person> informalMembers = new List<Person>();
-    public Ideology ideology;
 
-    public Party(string name, string logo, Person founder, Ideology ideology)
+    public Party()
     {
-        this.partyName = name;
+
+    }
+
+    public Party(string partyName, string logo, string color, Person founder, Person chairPerson, Person viceChairPerson, string ideology)
+    {
+        this.partyName = partyName;
         this.logo = logo;
+        this.color = color;
         this.founder = founder;
+        this.chairPerson = chairPerson;
+        this.viceChairPerson = viceChairPerson;
         this.ideology = ideology;
 
         parties.Add(this);
     }
-    public Party(string name, Color32 color, Person founder, Ideology ideology)
-    {
-        this.partyName = name;
-        this.color = color;
-        this.founder = founder;
-        this.ideology = ideology;
 
-        parties.Add(this);
+    public Ideology GetIdeology()
+    {
+        return Ideology.ideologyList.Find(i => i.ideologyName == ideology);
     }
 }
 

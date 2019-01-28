@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <firstName>Recep Tayyip</firstName>
+  <lastName>Erdoğan</lastName>
+  <fame>100</fame>
+  <corruption>100</corruption>
+  <ideology>religionism</ideology>
+  <Management>10</Management>
+  <Diplomacy>9</Diplomacy>
+  <Wisdom>4</Wisdom>
+  <Speech>1</Speech>
+  <Intrigue>3</Intrigue>
+</Person>

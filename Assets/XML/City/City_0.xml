@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-16"?>
+<City xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <cityName>stormwind</cityName>
+  <description>capital of human kingdom</description>
+  <ideologyRates>
+    <IdeologyRate>
+      <ideology>religionism</ideology>
+      <rate>55</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <ideology>liberalism</ideology>
+      <rate>45</rate>
+    </IdeologyRate>
+  </ideologyRates>
+</City>
