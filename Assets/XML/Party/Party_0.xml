@@ -9,11 +9,11 @@
     <fame>0</fame>
     <corruption>0</corruption>
     <ideology>religionism</ideology>
-    <Management>4</Management>
-    <Diplomacy>4</Diplomacy>
-    <Wisdom>4</Wisdom>
-    <Speech>8</Speech>
-    <Intrigue>8</Intrigue>
+    <Management>7</Management>
+    <Diplomacy>1</Diplomacy>
+    <Wisdom>7</Wisdom>
+    <Speech>9</Speech>
+    <Intrigue>9</Intrigue>
   </founder>
   <chairPerson>
     <firstName>Temp</firstName>
@@ -22,10 +22,10 @@
     <corruption>0</corruption>
     <ideology>religionism</ideology>
     <Management>1</Management>
-    <Diplomacy>3</Diplomacy>
+    <Diplomacy>10</Diplomacy>
     <Wisdom>4</Wisdom>
-    <Speech>9</Speech>
-    <Intrigue>8</Intrigue>
+    <Speech>7</Speech>
+    <Intrigue>7</Intrigue>
   </chairPerson>
   <viceChairPerson>
     <firstName>Vice</firstName>
@@ -33,10 +33,10 @@
     <fame>0</fame>
     <corruption>0</corruption>
     <ideology>religionism</ideology>
-    <Management>2</Management>
-    <Diplomacy>4</Diplomacy>
-    <Wisdom>1</Wisdom>
-    <Speech>6</Speech>
+    <Management>1</Management>
+    <Diplomacy>2</Diplomacy>
+    <Wisdom>7</Wisdom>
+    <Speech>3</Speech>
     <Intrigue>7</Intrigue>
   </viceChairPerson>
   <ideology>religionism</ideology>
