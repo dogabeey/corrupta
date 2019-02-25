@@ -25,16 +25,18 @@ public class City
     }
     public string cityName;
     public string description;
+    public Vector2 coordinates;
     public List<IdeologyRate> ideologyRates;
 
     public City()
     {
 
     }
-    public City(string name, string description,List<IdeologyRate> ideologyRates)
+    public City(string name, string description,Vector2 coordinates,List<IdeologyRate> ideologyRates)
     {
         this.cityName = name;
         this.description = description;
+        this.coordinates = coordinates;
         this.ideologyRates = ideologyRates;
         cityList.Add(this);
     }

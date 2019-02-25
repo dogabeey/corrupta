@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-16"?>
 <City xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <cityName>Istanbul</cityName>
-  <description>A city with long history and longer line of awaiting immigrants who wants to enter.</description>
+  <cityName>Izmir</cityName>
+  <description>Very laik, no akp here.</description>
   <coordinates>
-    <x>-210</x>
-    <y>134</y>
+    <x>-297</x>
+    <y>15</y>
   </coordinates>
   <ideologyRates>
     <IdeologyRate>

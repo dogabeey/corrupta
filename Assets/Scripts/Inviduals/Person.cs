@@ -50,7 +50,7 @@ public class Person
         autoNumber++;
         people.Add(this);
 
-        Debug.Log("[" + this.uuid + "] Succesfully added a politican to the country named " + firstName + " " + lastName + ", who follows " + ideology + " ideology. Their fame is " + fame + " and they are " + this.corruption.ToString() + " percent corrupted.");
+        //Debug.Log("[" + this.uuid + "] Succesfully added a politican to the country named " + firstName + " " + lastName + ", who follows " + ideology + " ideology. Their fame is " + fame + " and they are " + this.corruption.ToString() + " percent corrupted.");
     }
 
     public Ideology GetIdeology()

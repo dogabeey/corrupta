@@ -17,6 +17,7 @@ public class TestInitializer : MonoBehaviour
         XmlParse.ParseIdeology("ideology.xml");
 
         new City("Istanbul", "A city with long history and longer line of awaiting immigrants who wants to enter.",
+            new Vector2(-210, 134),
             new List<City.IdeologyRate>()
             {
                 new City.IdeologyRate("antiauthoritarianism",5),
@@ -30,6 +31,36 @@ public class TestInitializer : MonoBehaviour
                 new City.IdeologyRate("republicanism",25)
             }
         );
+        new City("Izmir", "Very laik, no akp here.",
+                    new Vector2(-297, 15),
+                    new List<City.IdeologyRate>()
+                    {
+                new City.IdeologyRate("antiauthoritarianism",5),
+                new City.IdeologyRate("conservatism",35),
+                new City.IdeologyRate("religionism",45),
+                new City.IdeologyRate("liberalism",10),
+                new City.IdeologyRate("enviromentalism",4),
+                new City.IdeologyRate("socialism",2),
+                new City.IdeologyRate("centrism",22),
+                new City.IdeologyRate("nationalism",15),
+                new City.IdeologyRate("republicanism",25)
+                    }
+                );
+        new City("Ankara", "A capital in desert.",
+                    new Vector2(-70, 35),
+                    new List<City.IdeologyRate>()
+                    {
+                new City.IdeologyRate("antiauthoritarianism",5),
+                new City.IdeologyRate("conservatism",35),
+                new City.IdeologyRate("religionism",45),
+                new City.IdeologyRate("liberalism",10),
+                new City.IdeologyRate("enviromentalism",4),
+                new City.IdeologyRate("socialism",2),
+                new City.IdeologyRate("centrism",22),
+                new City.IdeologyRate("nationalism",15),
+                new City.IdeologyRate("republicanism",25)
+                    }
+                );
 
         new Person("Rejeep Tealip", "Manborn", "religionism", 100, 100, true,31);
         new Person("Binary", "Thunder", "religionism", 90, 90, true,32);
