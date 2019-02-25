@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <uuid>31</uuid>
-  <firstName>Rejeep Tealip</firstName>
-  <lastName>Manborn</lastName>
-  <fame>100</fame>
+  <uuid>35</uuid>
+  <firstName>Nonfetö</firstName>
+  <lastName>Götgılı</lastName>
+  <fame>80</fame>
   <corruption>100</corruption>
   <ideology>religionism</ideology>
   <management>3</management>
-  <diplomacy>9</diplomacy>
-  <wisdom>6</wisdom>
-  <speech>7</speech>
-  <intrigue>4</intrigue>
+  <diplomacy>8</diplomacy>
+  <wisdom>4</wisdom>
+  <speech>1</speech>
+  <intrigue>9</intrigue>
 </Person>

@@ -1,45 +1,15 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Party xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <partyName>Template Party</partyName>
-  <logo />
-  <color>cyan</color>
-  <founder>
-    <firstName>Template</firstName>
-    <lastName>de Person</lastName>
-    <fame>0</fame>
-    <corruption>0</corruption>
-    <ideology>religionism</ideology>
-    <Management>7</Management>
-    <Diplomacy>1</Diplomacy>
-    <Wisdom>7</Wisdom>
-    <Speech>9</Speech>
-    <Intrigue>9</Intrigue>
-  </founder>
-  <chairPerson>
-    <firstName>Temp</firstName>
-    <lastName>von Chairman</lastName>
-    <fame>0</fame>
-    <corruption>0</corruption>
-    <ideology>religionism</ideology>
-    <Management>1</Management>
-    <Diplomacy>10</Diplomacy>
-    <Wisdom>4</Wisdom>
-    <Speech>7</Speech>
-    <Intrigue>7</Intrigue>
-  </chairPerson>
-  <viceChairPerson>
-    <firstName>Vice</firstName>
-    <lastName>McPrincipal</lastName>
-    <fame>0</fame>
-    <corruption>0</corruption>
-    <ideology>religionism</ideology>
-    <Management>1</Management>
-    <Diplomacy>2</Diplomacy>
-    <Wisdom>7</Wisdom>
-    <Speech>3</Speech>
-    <Intrigue>7</Intrigue>
-  </viceChairPerson>
-  <ideology>religionism</ideology>
-  <deputyList />
-  <informalMembers />
+  <partyName>Justice and Develoshsjhdjkz</partyName>
+  <logo>AKP</logo>
+  <color>Yellow</color>
+  <founderId>31</founderId>
+  <chairPersonId>31</chairPersonId>
+  <viceChairPersonId>33</viceChairPersonId>
+  <deputyListId>
+    <int>34</int>
+    <int>35</int>
+    <int>36</int>
+  </deputyListId>
+  <informalMembersId />
 </Party>

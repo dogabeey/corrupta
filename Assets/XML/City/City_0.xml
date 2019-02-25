@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-16"?>
 <City xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <cityName>stormwind</cityName>
-  <description>capital of human kingdom</description>
+  <cityName>Istanbul</cityName>
+  <description>A city with long history and longer line of awaiting immigrants who wants to enter.</description>
   <ideologyRates>
     <IdeologyRate>
-      <ideology>religionism</ideology>
-      <rate>55</rate>
+      <rate>5</rate>
     </IdeologyRate>
     <IdeologyRate>
-      <ideology>liberalism</ideology>
+      <rate>35</rate>
+    </IdeologyRate>
+    <IdeologyRate>
       <rate>45</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>10</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>4</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>2</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>22</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>15</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>25</rate>
     </IdeologyRate>
   </ideologyRates>
 </City>

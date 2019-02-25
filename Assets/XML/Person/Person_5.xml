@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <uuid>33</uuid>
-  <firstName>Suleiman</firstName>
-  <lastName>Totallynotfetöcü</lastName>
+  <uuid>36</uuid>
+  <firstName>Strata</firstName>
+  <lastName>Derinli</lastName>
   <fame>80</fame>
   <corruption>100</corruption>
   <ideology>religionism</ideology>
-  <management>1</management>
-  <diplomacy>3</diplomacy>
-  <wisdom>4</wisdom>
-  <speech>1</speech>
-  <intrigue>5</intrigue>
+  <management>8</management>
+  <diplomacy>7</diplomacy>
+  <wisdom>2</wisdom>
+  <speech>0</speech>
+  <intrigue>9</intrigue>
 </Person>

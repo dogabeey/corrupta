@@ -18,7 +18,7 @@ public class ParliamentUI : MonoBehaviour
         foreach (Party party in Party.parties)
         {
             Debug.Log("Generating deputies of " + party.partyName + ".");
-            foreach (Person person in party.deputyList)
+            foreach (Person person in party.GetDeputies())
             {
                 GameObject instance = Instantiate(chairPrefab, chairPrefab.transform.parent);
                 instance.transform.GetChild(0).GetComponentsInChildren<Text>()[0].text = "Name: " + person.firstName + " " + person.lastName;

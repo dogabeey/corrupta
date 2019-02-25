@@ -9,21 +9,18 @@ public class City
     public static List<City> cityList = new List<City>();
     public class IdeologyRate
     {
-        public string ideology;
+        public string ideologyString;
         public float rate;
+
+        Ideology ideology;
         public IdeologyRate()
         {
 
         }
-        public IdeologyRate(string ideology, float rate)
+        public IdeologyRate(string ideologyString, float rate)
         {
-            this.ideology = ideology;
+            ideology = Ideology.ideologyList.Find(i => i.ideologyName == ideologyString);
             this.rate = rate;
-        }
-        
-        public Ideology GetIdeology()
-        {
-            return Ideology.ideologyList.Find(i => i.ideologyName == ideology);
         }
     }
     public string cityName;

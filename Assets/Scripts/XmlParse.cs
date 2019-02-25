@@ -6,7 +6,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XmlParse
+public class XmlParse : MonoBehaviour
 {
 
     static XmlDocument xml = new XmlDocument();
@@ -128,7 +128,6 @@ public class XmlParse
             {
                 string fileContent = File.ReadAllText(file);
                 T content = Deserialize<T>(fileContent);
-                Debug.Log(content);
                 retVal.Add(content);
             }
             return retVal;
@@ -145,9 +144,7 @@ public class XmlParse
                 Directory.CreateDirectory("Assets\\XML\\" + typeof(T).ToString());
             }
             string directory = Directory.GetDirectories("Assets/XML", typeof(T).ToString())[0];
-            Debug.Log(directory);
             string xmlText = Serialize(item);
-            Debug.Log(xmlText);
             File.Create(directory + "/" + typeof(T).ToString() + "_" + list.FindIndex(t => t.GetHashCode() == item.GetHashCode()) + ".xml").Dispose();
             File.WriteAllText(directory + "/" + typeof(T).ToString() + "_" + list.FindIndex(t => t.GetHashCode() == item.GetHashCode()) + ".xml", xmlText);
         }
