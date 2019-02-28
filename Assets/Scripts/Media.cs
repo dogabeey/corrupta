@@ -19,7 +19,7 @@ public class Media
         this.name = name;
         this.founder = founder;
         boss = founder;
-        ideology = boss.ideology;
+        ideology = boss.GetIdeology().ToString();
     }
 
     public Ideology GetIdeology()

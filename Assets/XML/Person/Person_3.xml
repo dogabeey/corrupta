@@ -6,9 +6,9 @@
   <fame>80</fame>
   <corruption>100</corruption>
   <ideology>religionism</ideology>
-  <management>6</management>
-  <diplomacy>4</diplomacy>
-  <wisdom>10</wisdom>
-  <speech>10</speech>
-  <intrigue>9</intrigue>
+  <management>3</management>
+  <diplomacy>1</diplomacy>
+  <wisdom>3</wisdom>
+  <speech>5</speech>
+  <intrigue>5</intrigue>
 </Person>

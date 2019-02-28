@@ -17,8 +17,7 @@ public class Person
     public string firstName, lastName;
     public float fame = 0;
     public float corruption = 0;
-
-    public string ideology;
+    string ideology;
 
     public int management = Mathf.RoundToInt(UnityEngine.Random.value * 10);
     public int diplomacy = Mathf.RoundToInt(UnityEngine.Random.value * 10);
