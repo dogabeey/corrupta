@@ -14,6 +14,10 @@ public class OpinionModifier
     public List<Condition> conditions;
     public List<Effect> effects;
 
+    public OpinionModifier()
+    {
+
+    }
     public OpinionModifier(string name, float value, int maxStack, float decayRate, bool isAuto, List<Condition> conditions, List<Effect> effects)
     {
         if (!opinions.Exists(p => p.name == name))

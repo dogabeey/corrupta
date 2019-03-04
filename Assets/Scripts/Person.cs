@@ -7,6 +7,20 @@ using System.Collections.Generic;
 
 public class Person
 {
+    public enum Title
+    {
+        President,
+        VicePresident,
+        ParliamentAdmin,
+        Deputy,
+        PartyLeader,
+        PartyViceLeader,
+        Mayor,
+        Councilor,
+        Advisor,
+        Freelance,
+    }
+
     public static List<Person> people = new List<Person>();
     public static Person player;
     public static int autoNumber = 0;
@@ -52,8 +66,42 @@ public class Person
         //Debug.Log("[" + this.uuid + "] Succesfully added a politican to the country named " + firstName + " " + lastName + ", who follows " + ideology + " ideology. Their fame is " + fame + " and they are " + this.corruption.ToString() + " percent corrupted.");
     }
 
+    public string GetTitleString()
+    {
+        if (GetTitle() == Title.Advisor) return "Advisor";
+        if (GetTitle() == Title.Councilor) return "City Councilor";
+        if (GetTitle() == Title.Deputy) return "Deputy";
+        if (GetTitle() == Title.Freelance) return "Freelance Politician";
+        if (GetTitle() == Title.Mayor) return "Mayor";
+        if (GetTitle() == Title.ParliamentAdmin) return "Admin of Parliament";
+        if (GetTitle() == Title.PartyLeader) return "Party Leader";
+        if (GetTitle() == Title.PartyViceLeader) return "Party Vice Leader";
+        if (GetTitle() == Title.VicePresident) return "President of " + Country.Instance.name;
+        if (GetTitle() == Title.President) return "President of " + Country.Instance.name;
+        else return "absolutely nothing";
+    }
+
     public Ideology GetIdeology()
     {
         return Ideology.ideologyList.Find(i => i.ideologyName == ideology);
+    }
+    public Title GetTitle()
+    {
+        if (Government.governmentList.FindLast(g => g.isActive == true).president == this) return Title.President;
+        if (Government.governmentList.FindLast(g => g.isActive == true).vicePresident == this) return Title.VicePresident;
+        if (Parliament.admin == this) return Title.ParliamentAdmin;
+        foreach (Party p in Party.parties)
+        {
+            if (p.GetChairPerson() == this) return Title.PartyLeader;
+        }
+        foreach (Party p in Party.parties)
+        {
+            if (p.GetViceChairPerson() == this) return Title.PartyViceLeader;
+        }
+        foreach (City c in City.cityList)
+        {
+            if (c.GetMayor() == this) return Title.Mayor;
+        }
+        return Title.Freelance;
     }
 }

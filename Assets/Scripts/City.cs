@@ -22,11 +22,20 @@ public class City
             ideology = Ideology.ideologyList.Find(i => i.ideologyName == ideologyString);
             this.rate = rate;
         }
+
+        public Ideology GetIdeology()
+        {
+            return Ideology.ideologyList.Find(i => i.ideologyName == ideologyString);
+        }
     }
+
     public string cityName;
     public string description;
     public Vector2 coordinates;
     public List<IdeologyRate> ideologyRates;
+
+    Person mayor;
+    public int mayorId;
 
     public City()
     {
@@ -39,5 +48,10 @@ public class City
         this.coordinates = coordinates;
         this.ideologyRates = ideologyRates;
         cityList.Add(this);
+    }
+
+    public Person GetMayor()
+    {
+        return Person.people.Find(p => p.uuid == mayorId);
     }
 }

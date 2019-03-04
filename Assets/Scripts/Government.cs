@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class government
+public class Government
 {
-    public static List<government> governmentList = new List<government>();
+    public static List<Government> governmentList = new List<Government>();
 
     public Party majorityParty;
     public Person president;
     public Person vicePresident;
     public DateTime date;
-    bool isActive;
+    public bool isActive;
     
     public float lastElectionVotes;
     public List<Ministry> cabinet = new List<Ministry>();
@@ -33,13 +33,13 @@ public class government
         }
     }
 
-    public government(Party majorityParty, Person president, Person vicePresident)
+    public Government(Party majorityParty, Person president, Person vicePresident)
     {
         this.majorityParty = majorityParty;
         this.president = president;
         this.vicePresident = vicePresident;
         isActive = true;
-        foreach (government gov in governmentList)
+        foreach (Government gov in governmentList)
         {
             gov.isActive = false;
         }

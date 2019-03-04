@@ -5,10 +5,9 @@
   <lastName>Thunder</lastName>
   <fame>90</fame>
   <corruption>90</corruption>
-  <ideology>religionism</ideology>
-  <management>3</management>
-  <diplomacy>6</diplomacy>
-  <wisdom>4</wisdom>
-  <speech>1</speech>
-  <intrigue>3</intrigue>
+  <management>7</management>
+  <diplomacy>2</diplomacy>
+  <wisdom>3</wisdom>
+  <speech>7</speech>
+  <intrigue>5</intrigue>
 </Person>

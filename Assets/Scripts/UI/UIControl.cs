@@ -53,8 +53,8 @@ public class UIControl : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        government currentGov;
-        if(government.governmentList.Count > 0) currentGov = government.governmentList[government.governmentList.Count - 1];
+        Government currentGov;
+        if(Government.governmentList.Count > 0) currentGov = Government.governmentList[Government.governmentList.Count - 1];
 
         //governmentName.text = government.governmentList.Count.ToString() + ". government";
         //president.text = "President: " + currentGov.president.firstName + " " + currentGov.president.lastName;

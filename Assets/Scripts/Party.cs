@@ -54,6 +54,14 @@ public class Party
         }
         return retVal;
     }
+    public Person GetChairPerson()
+    {
+        return Person.people.Find(p => p.uuid == chairPersonId);
+    }
+    public Person GetViceChairPerson()
+    {
+        return Person.people.Find(p => p.uuid == viceChairPersonId);
+    }
     public List<Person> GetInformalMembers()
     {
         List<Person> retVal = new List<Person>();

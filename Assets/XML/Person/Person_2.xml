@@ -5,10 +5,9 @@
   <lastName>Totallynotfetöcü</lastName>
   <fame>80</fame>
   <corruption>100</corruption>
-  <ideology>religionism</ideology>
-  <management>6</management>
-  <diplomacy>5</diplomacy>
-  <wisdom>5</wisdom>
-  <speech>2</speech>
-  <intrigue>8</intrigue>
+  <management>9</management>
+  <diplomacy>6</diplomacy>
+  <wisdom>7</wisdom>
+  <speech>5</speech>
+  <intrigue>5</intrigue>
 </Person>

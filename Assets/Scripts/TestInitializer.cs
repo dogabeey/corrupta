@@ -74,6 +74,26 @@ public class TestInitializer : MonoBehaviour
         akp.deputyListId.Add(35);
         akp.deputyListId.Add(36);
 
+        new Event(
+                "burocracy_chaos_event",
+                "Low Education Hits Back!",
+                "Bad decisions over and over on education system caused education level drop to rockbottom. In result, the government couldn't find capable employees and the ones we had to hire caused a burocratic crisis. Country's stability will suffer.",
+                new List<Condition>()
+                {
+
+                },
+                new List<Effect>()
+                {
+
+                },
+                new List<EventOption>()
+                {
+
+                },
+                12
+            );
+           
+
         XmlParse.ExportAll(City.cityList);
         XmlParse.ExportAll(Person.people);
         XmlParse.ExportAll(Party.parties);
