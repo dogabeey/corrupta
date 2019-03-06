@@ -35,13 +35,15 @@ public class HasCountryStat : Condition
     public override bool IsTrue()
     {
         FieldInfo field = typeof(Country).GetField(stat.ToString());
-        float value = (float)field.GetValue(this);
-        return minValue > value;
+        float value = (float)field.GetValue(Country.Instance);
+        return minValue <= value;
     }
 
     public override string ToString()
     {
-        return stat.ToString() + " value of the country must greater than " + minValue + ".";
+        FieldInfo field = typeof(Country).GetField(stat.ToString());
+        float value = (float)field.GetValue(Country.Instance);
+        return stat.ToString() + " value of the country must be equal or greater than " + minValue + ". (Currently " + value + ").";
     }
 }
 

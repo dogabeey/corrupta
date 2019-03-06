@@ -5,9 +5,9 @@
   <lastName>Derinli</lastName>
   <fame>80</fame>
   <corruption>100</corruption>
-  <management>0</management>
-  <diplomacy>5</diplomacy>
-  <wisdom>7</wisdom>
-  <speech>10</speech>
-  <intrigue>9</intrigue>
+  <management>1</management>
+  <diplomacy>3</diplomacy>
+  <wisdom>10</wisdom>
+  <speech>0</speech>
+  <intrigue>4</intrigue>
 </Person>

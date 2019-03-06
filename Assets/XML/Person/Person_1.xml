@@ -5,9 +5,9 @@
   <lastName>Thunder</lastName>
   <fame>90</fame>
   <corruption>90</corruption>
-  <management>7</management>
+  <management>4</management>
   <diplomacy>2</diplomacy>
-  <wisdom>3</wisdom>
-  <speech>7</speech>
-  <intrigue>5</intrigue>
+  <wisdom>2</wisdom>
+  <speech>5</speech>
+  <intrigue>3</intrigue>
 </Person>

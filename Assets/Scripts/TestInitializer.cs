@@ -80,23 +80,25 @@ public class TestInitializer : MonoBehaviour
                 "Bad decisions over and over on education system caused education level drop to rockbottom. In result, the government couldn't find capable employees and the ones we had to hire caused a burocratic crisis. Country's stability will suffer.",
                 new List<Condition>()
                 {
-
+                    new HasCountryStat(Country.ChangeableStats.corruption,0)
                 },
                 new List<Effect>()
                 {
-
+                    new SetCountryStat(Country.ChangeableStats.baseCulture,-1)
                 },
                 new List<EventOption>()
                 {
-
+                    new EventOption("Oh well..."),
+                    new EventOption("I will not allow this")
                 },
-                12
+                0.1
             );
            
 
         XmlParse.ExportAll(City.cityList);
         XmlParse.ExportAll(Person.people);
         XmlParse.ExportAll(Party.parties);
+        XmlParse.ExportAll(Event.gameEvents);
 
         //XmlParse.ImportAll<Person>();
         //XmlParse.ImportAll<City>();

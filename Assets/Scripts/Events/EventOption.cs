@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class EventOption
 {
-    string description;
-    Effect effect;
+    public string description;
+    public Effect effect;
+    public EventOption()
+    {
+
+    }
+    public EventOption(string description, Effect effect = null)
+    {
+        this.description = description;
+        this.effect = effect;
+    }
 }

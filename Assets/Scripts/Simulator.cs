@@ -25,7 +25,7 @@ public class Simulator: MonoBehaviour
         // first few months stats are adjusted.
         for (int i = 0; i < 12; i++)
         {
-            NextTurn();
+            NextTurn(false);
         }
     }
     
@@ -35,7 +35,7 @@ public class Simulator: MonoBehaviour
         simSpeed = (int)value.value;
     }
 
-    public void NextTurn()
+    public void NextTurn(bool invokeEvents = true)
     {
         // event affects right before new day.
 
@@ -43,6 +43,10 @@ public class Simulator: MonoBehaviour
         turn++;
         yearText.text = (Year + DateTime.Now.Year).ToString();
         monthText.text = Month.ToString();
+        if(invokeEvents) foreach (Event e in Event.gameEvents)
+        {
+            e.Invoke();
+        }
         Country.Instance.UpdateAll();
     }
 

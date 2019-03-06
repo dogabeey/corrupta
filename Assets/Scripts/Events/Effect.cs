@@ -22,7 +22,10 @@ public abstract class Effect
 public class ExecuteEventByName : Effect
 {
     public string eventName;
+    public ExecuteEventByName()
+    {
 
+    }
     public ExecuteEventByName(string eventName)
     {
         this.eventName = eventName;
@@ -47,7 +50,10 @@ public class SetCountryStat : Effect
 {
     Country.ChangeableStats stat;
     float value;
+    public SetCountryStat()
+    {
 
+    }
     public SetCountryStat(Country.ChangeableStats stat, float value)
     {
         this.stat = stat;
@@ -70,7 +76,10 @@ public class AddCountryStat : Effect
 {
     Country.ChangeableStats stat;
     float value;
+    public AddCountryStat()
+    {
 
+    }
     public AddCountryStat(Country.ChangeableStats stat, float value)
     {
         this.stat = stat;
@@ -80,11 +89,11 @@ public class AddCountryStat : Effect
     public override void Execute()
     {
         FieldInfo field = typeof(Country).GetField(stat.ToString());
-        field.SetValue(Country.Instance, (float)field.GetValue(this) + value);
+        field.SetValue(Country.Instance, (float)field.GetValue(Country.Instance) + value);
     }
 
     public override string ToString()
     {
-        return stat.ToString() + " Value of " + stat.ToString() + (value >= 0 ? "increased" : "decreased" ) + " by " + value + ".";
+        return stat.ToString() + " Value of " + stat.ToString() + (value >= 0 ? "is increased" : "is decreased" ) + " by " + value + ".";
     }
 }
