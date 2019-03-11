@@ -8,7 +8,7 @@ public class CityUI : MonoBehaviour
     [Tooltip("The image gameobject that contains game map, parented by a scrollview's content")] public GameObject bgImage;
     public GameObject cityMarkerPrefab;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         Debug.Log("Started popping " + City.cityList.Count + " city.");
         foreach (City city in City.cityList)

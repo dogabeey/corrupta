@@ -6,8 +6,8 @@
   <fame>90</fame>
   <corruption>90</corruption>
   <management>4</management>
-  <diplomacy>2</diplomacy>
-  <wisdom>2</wisdom>
+  <diplomacy>4</diplomacy>
+  <wisdom>5</wisdom>
   <speech>5</speech>
-  <intrigue>3</intrigue>
+  <intrigue>9</intrigue>
 </Person>

@@ -1,17 +1,11 @@
 ﻿using System;
-using UnityEngine.SceneManagement;
-using System.Reflection;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Text;
+using UnityEngine.SceneManagement;
 
 public class Simulator: MonoBehaviour
 {
     public int turn = 0;
-    private int nextUpdate = 0;
     [Range(1,4)] public int simSpeed = 1;
 
     public int Year { get { return (int)(turn / 12f); } }
@@ -19,6 +13,7 @@ public class Simulator: MonoBehaviour
 
     public Text yearText;
     public Text monthText;
+    public GameObject gameCanvas;
 
     public void Start()
     {
@@ -48,6 +43,8 @@ public class Simulator: MonoBehaviour
             e.Invoke();
         }
         Country.Instance.UpdateAll();
+        gameCanvas.SetActive(false);
+        gameCanvas.SetActive(true);
     }
 
 }

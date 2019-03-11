@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Xml.Serialization;
 
 public class Event
 {
@@ -17,6 +18,7 @@ public class Event
     }
 
     public static List<Event> gameEvents = new List<Event>();
+    public static List<Event> invokedEvents = new List<Event>();
 
     public List<Condition> conditions;
     public List<Effect> effects;
@@ -27,7 +29,7 @@ public class Event
     double defProbability;
     EventCategory eventCategory = EventCategory.General;
     int importance = 1; // 0: Don't notify player. 1: Show in up in reports. 2: Notify warning if unread. 3: Don't let player advance turn if not read.
-
+    [XmlIgnore]public bool isRead = false;
 
     public Event()
     {
@@ -74,6 +76,8 @@ public class Event
             Debug.Log("Executing '" + e.ToString() + "' effect of " + name + ".");
             e.Execute();
         }
+
         probability = defProbability;
+        invokedEvents.Add(this);
     }
 }

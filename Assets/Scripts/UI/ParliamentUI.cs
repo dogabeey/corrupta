@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class ParliamentUI : MonoBehaviour
 {
+    public GameObject chairGroup;
     public GameObject chairPrefab;
 
-    public void Start()
+    public void Awake()
     {
+        for (int i = 0; i < chairGroup.transform.childCount; i++)
+        {
+            Destroy(chairGroup.transform.GetChild(i));
+        }
         Debug.Log("Parliament UI started");
         //nameText = GetComponentsInChildren<Text>()[0];
         //partyText = GetComponentsInChildren<Text>()[1];
@@ -20,11 +25,10 @@ public class ParliamentUI : MonoBehaviour
             Debug.Log("Generating deputies of " + party.partyName + ".");
             foreach (Person person in party.GetDeputies())
             {
-                GameObject instance = Instantiate(chairPrefab, chairPrefab.transform.parent);
+                GameObject instance = Instantiate(chairPrefab, chairGroup.transform);
                 instance.transform.GetChild(0).GetComponentsInChildren<Text>()[0].text = "Name: " + person.firstName + " " + person.lastName;
                 instance.transform.GetChild(0).GetComponentsInChildren<Text>()[1].text = "Party: " + party.partyName;
             }
         }
-        GameObject.Destroy(chairPrefab);
     }
 }

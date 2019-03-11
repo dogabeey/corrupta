@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-16"?>
+<City xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <cityName>Ankara</cityName>
+  <description>A capital in desert.</description>
+  <coordinates>
+    <x>-70</x>
+    <y>35</y>
+  </coordinates>
+  <ideologyRates>
+    <IdeologyRate>
+      <rate>5</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>35</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>45</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>10</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>4</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>2</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>22</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>15</rate>
+    </IdeologyRate>
+    <IdeologyRate>
+      <rate>25</rate>
+    </IdeologyRate>
+  </ideologyRates>
+  <mayorId>0</mayorId>
+</City>

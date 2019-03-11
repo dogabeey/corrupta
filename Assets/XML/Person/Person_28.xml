@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <uuid>28</uuid>
+  <firstName>Nonfetö</firstName>
+  <lastName>Götgılı</lastName>
+  <fame>80</fame>
+  <corruption>100</corruption>
+  <management>1</management>
+  <diplomacy>8</diplomacy>
+  <wisdom>5</wisdom>
+  <speech>2</speech>
+  <intrigue>3</intrigue>
+</Person>

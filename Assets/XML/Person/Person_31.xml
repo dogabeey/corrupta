@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <uuid>31</uuid>
+  <firstName>Binary</firstName>
+  <lastName>Thunder</lastName>
+  <fame>90</fame>
+  <corruption>90</corruption>
+  <management>5</management>
+  <diplomacy>1</diplomacy>
+  <wisdom>7</wisdom>
+  <speech>6</speech>
+  <intrigue>2</intrigue>
+</Person>

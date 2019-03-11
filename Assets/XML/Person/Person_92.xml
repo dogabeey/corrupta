@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <uuid>92</uuid>
+  <firstName>Suleiman</firstName>
+  <lastName>Totallynotfetöcü</lastName>
+  <fame>80</fame>
+  <corruption>100</corruption>
+  <management>5</management>
+  <diplomacy>6</diplomacy>
+  <wisdom>9</wisdom>
+  <speech>10</speech>
+  <intrigue>5</intrigue>
+</Person>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <uuid>81</uuid>
+  <firstName>Hülo</firstName>
+  <lastName>Something</lastName>
+  <fame>80</fame>
+  <corruption>100</corruption>
+  <management>6</management>
+  <diplomacy>5</diplomacy>
+  <wisdom>6</wisdom>
+  <speech>9</speech>
+  <intrigue>1</intrigue>
+</Person>

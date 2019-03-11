@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Party xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <partyName>Justice and Develoshsjhdjkz</partyName>
+  <logo>AKP</logo>
+  <color>Yellow</color>
+  <founderId>31</founderId>
+  <chairPersonId>31</chairPersonId>
+  <viceChairPersonId>33</viceChairPersonId>
+  <deputyListId>
+    <int>34</int>
+    <int>35</int>
+    <int>36</int>
+  </deputyListId>
+  <informalMembersId />
+</Party>
