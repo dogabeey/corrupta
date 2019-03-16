@@ -74,13 +74,13 @@ public class TestInitializer : MonoBehaviour
         akp.deputyListId.Add(35);
         akp.deputyListId.Add(36);
 
-        new Event(
+        new RandomEvent(
                 "burocracy_chaos_event",
                 "Low Education Hits Back!",
                 "Bad decisions over and over on education system caused education level drop to rockbottom. In result, the government couldn't find capable employees and the ones we had to hire caused a burocratic crisis. Country's stability will suffer.",
                 new List<Condition>()
                 {
-                    new HasCountryStat(Country.ChangeableStats.corruption,0)
+                    new HasCountryStat(Country.ChangeableStats.baseEducation,10)
                 },
                 new List<Effect>()
                 {
@@ -98,7 +98,7 @@ public class TestInitializer : MonoBehaviour
         XmlParse.ExportAll(City.cityList);
         XmlParse.ExportAll(Person.people);
         XmlParse.ExportAll(Party.parties);
-        XmlParse.ExportAll(Event.gameEvents);
+        XmlParse.ExportAll(RandomEvent.gameEvents);
 
         //XmlParse.ImportAll<Person>();
         //XmlParse.ImportAll<City>();

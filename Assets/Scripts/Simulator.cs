@@ -38,7 +38,7 @@ public class Simulator: MonoBehaviour
         turn++;
         yearText.text = (Year + DateTime.Now.Year).ToString();
         monthText.text = Month.ToString();
-        if(invokeEvents) foreach (Event e in Event.gameEvents)
+        if(invokeEvents) foreach (RandomEvent e in RandomEvent.gameEvents)
         {
             e.Invoke();
         }

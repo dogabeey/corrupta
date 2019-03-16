@@ -1,24 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml.Serialization;
 
-public class Event
+public class RandomEvent
 {
     public enum EventCategory
     {
-        General,
         People,
-        Team,
         Party,
         Government,
         Parliament,
         City,
         Country,
     }
-
-    public static List<Event> gameEvents = new List<Event>();
-    public static List<Event> invokedEvents = new List<Event>();
+    public static List<RandomEvent> gameEvents = new List<RandomEvent>();
+    public static List<RandomEvent> invokedEvents = new List<RandomEvent>();
 
     public List<Condition> conditions;
     public List<Effect> effects;
@@ -27,15 +26,15 @@ public class Event
     public string name, header, description;
     public double probability;
     double defProbability;
-    EventCategory eventCategory = EventCategory.General;
+    EventCategory eventCategory = EventCategory.Country;
     int importance = 1; // 0: Don't notify player. 1: Show in up in reports. 2: Notify warning if unread. 3: Don't let player advance turn if not read.
     [XmlIgnore]public bool isRead = false;
 
-    public Event()
+    public RandomEvent()
     {
 
     }
-    public Event(string name, string header, string description, List<Condition> conditions, List<Effect> effects, List<EventOption> options, double probability, EventCategory eventCategory = EventCategory.General, int importance = 1)
+    public RandomEvent(string name, string header, string description, List<Condition> conditions, List<Effect> effects, List<EventOption> options, double probability, EventCategory eventCategory = EventCategory.Country, int importance = 1)
     {
         this.conditions = conditions;
         this.effects = effects;
@@ -53,10 +52,10 @@ public class Event
     public void Invoke()
     {
         float diceRoll;
-        if ((diceRoll = Random.Range(0f, 1.0f)) > System.Math.Tanh(probability))
+        if ((diceRoll = UnityEngine.Random.Range(0f, 1.0f)) > probability)
         {
             Debug.Log("Rolled " + diceRoll + " for " + name + " event and It will not invoke since It's higher than probability, " + probability);
-            probability *= 2;
+            probability *= 1.5f;
             return;
         }
 
@@ -64,7 +63,7 @@ public class Event
 
         foreach (Condition c in conditions)
         {
-            if (!c.IsTrue())
+            if (c.IsTrue())
             {
                 Debug.Log("The condition of '" + c.ToString() + "' is not true, " + name + " will not invoke.");
                 return;

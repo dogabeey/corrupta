@@ -104,4 +104,57 @@ public class Person
         }
         return Title.Freelance;
     }
+    public bool HasTitle(object[] args)
+    {
+        Title arg1 = (Title)args[0];
+        return GetTitle() == arg1;
+    }
+    public bool IsCorruptedMoreThan(float value)
+    {
+        return corruption > value;
+    }
+    public bool IsCorruptedLessThan(float value)
+    {
+        return corruption < value;
+    }
+    public bool IsManagementMoreThan(int value)
+    {
+        return management > value;
+    }
+    public bool IsDiplomacyMoreThan(int value)
+    {
+        return diplomacy > value;
+    }
+    public bool IsWisdomMoreThan(int value)
+    {
+        return wisdom > value;
+    }
+    public bool IsSpeechMoreThan(int value)
+    {
+        return speech > value;
+    }
+    public bool IsIntrigueMoreThan(int value)
+    {
+        return intrigue > value;
+    }
+    public bool IsManagementLessThan(int value)
+    {
+        return management < value;
+    }
+    public bool IsDiplomacyLessThan(int value)
+    {
+        return diplomacy < value;
+    }
+    public bool IsWisdomLessThan(int value)
+    {
+        return wisdom < value;
+    }
+    public bool IsSpeechLessThan(int value)
+    {
+        return speech < value;
+    }
+    public bool IsIntrigueLessThan(int value)
+    {
+        return intrigue < value;
+    }
 }
