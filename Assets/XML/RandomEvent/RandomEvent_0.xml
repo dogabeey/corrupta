@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-16"?>
+<RandomEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <conditions>
+    <Condition xsi:type="HasCountryStat">
+      <stat>baseEducation</stat>
+      <minValue>10</minValue>
+    </Condition>
+  </conditions>
+  <effects>
+    <Effect xsi:type="SetCountryStat" />
+  </effects>
+  <options>
+    <EventOption>
+      <description>Oh well...</description>
+    </EventOption>
+    <EventOption>
+      <description>I will not allow this</description>
+    </EventOption>
+  </options>
+  <name>burocracy_chaos_event</name>
+  <header>Low Education Hits Back!</header>
+  <description>Bad decisions over and over on education system caused education level drop to rockbottom. In result, the government couldn't find capable employees and the ones we had to hire caused a burocratic crisis. Country's stability will suffer.</description>
+  <probability>0.1</probability>
+  <eventCategory>Country</eventCategory>
+</RandomEvent>

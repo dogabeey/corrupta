@@ -36,7 +36,7 @@ public class HasCountryStat : Condition
     {
         FieldInfo field = typeof(Country).GetField(stat.ToString());
         float value = (float)field.GetValue(Country.Instance);
-        return minValue <= value;
+        return minValue >= value;
     }
 
     public override string ToString()

@@ -20,7 +20,7 @@ public class ReportUI : MonoBehaviour
         {
             Destroy(eventLog.transform.GetChild(i).gameObject);
         }
-        foreach (RandomEvent e in RandomEvent.invokedEvents)
+        foreach (CountryEvent e in CountryEvent.invokedEvents)
         {
             GameObject instance = Instantiate(eventNameTextPrefab.gameObject, eventLog.transform);
             instance.GetComponentInChildren<Text>().text = e.header;
@@ -38,13 +38,13 @@ public class ReportUI : MonoBehaviour
     {
         GameObject activeToggle = eventLog.GetComponent<ToggleGroup>().ActiveToggles().FirstOrDefault().gameObject;
         string activeHeader = activeToggle.GetComponentInChildren<Text>().text.ToString();
-        RandomEvent activeEvent = RandomEvent.invokedEvents.Find(e => e.header == activeHeader);
+        CountryEvent activeEvent = CountryEvent.invokedEvents.Find(e => e.header == activeHeader);
         eventDescriptionText.text = activeEvent.description;
         foreach (Effect e in activeEvent.effects)
         {
             eventDescriptionText.text += "\n\n" + e.ToString();
         }
-        RandomEvent.gameEvents.Find(e => e.header == activeHeader).isRead = true;
+        CountryEvent.gameEvents.Find(e => e.header == activeHeader).isRead = true;
         FindObjectOfType<Simulator>().gameCanvas.SetActive(false);
         FindObjectOfType<Simulator>().gameCanvas.SetActive(true);
     }

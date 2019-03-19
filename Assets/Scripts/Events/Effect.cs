@@ -33,7 +33,7 @@ public class ExecuteEventByName : Effect
 
     public override void Execute()
     {
-        List<Effect> effects = RandomEvent.gameEvents.Find(e => e.name == eventName).effects;
+        List<Effect> effects = CountryEvent.gameEvents.Find(e => e.name == eventName).effects;
         foreach (Effect e in effects)
         {
             e.Execute();
