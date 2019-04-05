@@ -5,12 +5,12 @@ using UnityEngine;
 public class EventOption
 {
     public string description;
-    public Effect effect;
+    public PersonEffect effect;
     public EventOption()
     {
 
     }
-    public EventOption(string description, Effect effect = null)
+    public EventOption(string description, PersonEffect effect = null)
     {
         this.description = description;
         this.effect = effect;

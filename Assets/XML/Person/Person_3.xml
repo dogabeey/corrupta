@@ -5,9 +5,9 @@
   <lastName>Something</lastName>
   <fame>80</fame>
   <corruption>100</corruption>
-  <management>3</management>
-  <diplomacy>6</diplomacy>
-  <wisdom>4</wisdom>
-  <speech>2</speech>
-  <intrigue>6</intrigue>
+  <management>7</management>
+  <diplomacy>1</diplomacy>
+  <wisdom>8</wisdom>
+  <speech>5</speech>
+  <intrigue>9</intrigue>
 </Person>

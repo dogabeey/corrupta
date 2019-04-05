@@ -5,9 +5,9 @@
   <lastName>Manborn</lastName>
   <fame>100</fame>
   <corruption>100</corruption>
-  <management>1</management>
-  <diplomacy>4</diplomacy>
-  <wisdom>4</wisdom>
-  <speech>2</speech>
-  <intrigue>8</intrigue>
+  <management>9</management>
+  <diplomacy>7</diplomacy>
+  <wisdom>9</wisdom>
+  <speech>8</speech>
+  <intrigue>9</intrigue>
 </Person>

@@ -42,7 +42,7 @@ public class Opinion<T>
         {
             if (!o.isAuto) continue;
             bool allTrue = true;
-            foreach (Condition c in o.conditions) // Checks every condition and determines if all of them meets criteras.
+            foreach (PersonCondition c in o.conditions) // Checks every condition and determines if all of them meets criteras.
             {
                 if (!c.IsTrue())
                 { 

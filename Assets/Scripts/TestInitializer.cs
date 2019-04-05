@@ -74,22 +74,22 @@ public class TestInitializer : MonoBehaviour
         akp.deputyListId.Add(35);
         akp.deputyListId.Add(36);
 
-        new CountryEvent(
-                "burocracy_chaos_event",
-                "Low Education Hits Back!",
-                "Bad decisions over and over on education system caused education level drop to rockbottom. In result, the government couldn't find capable employees and the ones we had to hire caused a burocratic crisis. Country's stability will suffer.",
-                new List<Condition>()
+        Government gov = new Government(akp, Person.people.Find(p => p.uuid == 31), Person.people.Find(p => p.uuid == 32));
+
+        new PersonEvent(
+                "presidental_experience_event",
+                "Being a president has its benefits!",
+                "Since you are a president, you're talking to many people as your job. Thus, your diplomacy skills are improved.",
+                new List<PersonCondition>()
                 {
-                    new HasCountryStat(Country.ChangeableStats.baseEducation,10)
+                    new HasTitle(0,Person.Title.Freelance)
                 },
-                new List<Effect>()
+                new List<PersonEffect>()
                 {
-                    new SetCountryStat(Country.ChangeableStats.baseCulture,-1)
+                    new AddDiplomacy(0,1)
                 },
                 new List<EventOption>()
                 {
-                    new EventOption("Oh well..."),
-                    new EventOption("I will not allow this")
                 },
                 0.1
             );
@@ -98,7 +98,7 @@ public class TestInitializer : MonoBehaviour
         XmlParse.ExportAll(City.cityList);
         XmlParse.ExportAll(Person.people);
         XmlParse.ExportAll(Party.parties);
-        XmlParse.ExportAll(CountryEvent.gameEvents);
+        XmlParse.ExportAll(PersonEvent.gameEvents);
 
         //XmlParse.ImportAll<Person>();
         //XmlParse.ImportAll<City>();

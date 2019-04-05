@@ -5,12 +5,13 @@ using System.Reflection;
 using System.Xml.Serialization;
 
 // Her yeni efekt için bunları eklemek gerekiyor yoksa xmle dönüştürülemiyor
-[XmlInclude(typeof(ExecuteEventByName))]
-[XmlInclude(typeof(SetCountryStat))]
-[XmlInclude(typeof(AddCountryStat))]
-public abstract class Effect
+[XmlInclude(typeof(AddDiplomacy))]
+public abstract class PersonEffect
 {
-    public Effect()
+    public int defPersonId;
+    internal Person person;
+
+    public PersonEffect()
     {
 
     }
@@ -19,81 +20,73 @@ public abstract class Effect
 
     }
 }
-public class ExecuteEventByName : Effect
+
+public class AddDiplomacy : PersonEffect
 {
-    public string eventName;
-    public ExecuteEventByName()
+    public int personId;
+    public int value;
+
+    public AddDiplomacy()
     {
 
     }
-    public ExecuteEventByName(string eventName)
+    public AddDiplomacy(int personId, int value)
     {
-        this.eventName = eventName;
+        this.personId = personId;
+        this.value = value;
     }
 
     public override void Execute()
     {
-        List<Effect> effects = CountryEvent.gameEvents.Find(e => e.name == eventName).effects;
-        foreach (Effect e in effects)
+        if (personId == 0)
         {
-            e.Execute();
+            person = Person.people.Find(p => p.uuid == defPersonId);
+            person.diplomacy += value;
+        }
+        else
+        {
+            person = Person.people.Find(p => p.uuid == personId);
+            person.diplomacy += value;
         }
     }
 
     public override string ToString()
     {
-        return eventName + " event happens.";
+        return "Diplomacy skill of " + person + " is increased by " + value + "."; 
     }
 }
 
-public class SetCountryStat : Effect
+public class AddSpeech : PersonEffect
 {
-    Country.ChangeableStats stat;
-    float value;
-    public SetCountryStat()
+    public int personId;
+    public int value;
+
+    public AddSpeech()
     {
 
     }
-    public SetCountryStat(Country.ChangeableStats stat, float value)
+    public AddSpeech(int personId, int value)
     {
-        this.stat = stat;
+        this.personId = personId;
         this.value = value;
     }
 
     public override void Execute()
     {
-        FieldInfo field = typeof(Country).GetField(stat.ToString());
-        field.SetValue(Country.Instance, value);
+        if (personId == 0)
+        {
+            person = Person.people.Find(p => p.uuid == defPersonId);
+            person.speech += value;
+        }
+        else
+        {
+            person = Person.people.Find(p => p.uuid == personId);
+            person.speech += value;
+        }
     }
 
     public override string ToString()
     {
-        return "Set " + stat.ToString() + " value to " + value + ".";
-    }
-}
-
-public class AddCountryStat : Effect
-{
-    Country.ChangeableStats stat;
-    float value;
-    public AddCountryStat()
-    {
-
-    }
-    public AddCountryStat(Country.ChangeableStats stat, float value)
-    {
-        this.stat = stat;
-        this.value = value;
-    }
-
-    public override void Execute()
-    {
-        FieldInfo field = typeof(Country).GetField(stat.ToString());
-        field.SetValue(Country.Instance, (float)field.GetValue(Country.Instance) + value);
-    }
-
-    public override string ToString()
-    {
-        return stat.ToString() + " Value of " + stat.ToString() + (value >= 0 ? "is increased" : "is decreased" ) + " by " + value + ".";
+        return "Diplomacy skill of " + person + " is increased by " + value + "."; 
     }
 }

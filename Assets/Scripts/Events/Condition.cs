@@ -5,10 +5,12 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 using UnityEngine;
 
-[XmlInclude(typeof(HasCountryStat))]
-public abstract class Condition
+[XmlInclude(typeof(HasTitle))]
+public abstract class PersonCondition
 {
-    public Condition()
+    public int defPersonId;
+
+    public PersonCondition()
     {
     }
     public virtual bool IsTrue()
@@ -17,37 +19,7 @@ public abstract class Condition
     }
 }
 
-public class HasCountryStat : Condition
-{
-    public Country.ChangeableStats stat;
-    public float minValue;
-
-    public HasCountryStat()
-    {
-
-    }
-    public HasCountryStat(Country.ChangeableStats stat, float minValue)
-    {
-        this.stat = stat;
-        this.minValue = minValue;
-    }
-
-    public override bool IsTrue()
-    {
-        FieldInfo field = typeof(Country).GetField(stat.ToString());
-        float value = (float)field.GetValue(Country.Instance);
-        return minValue >= value;
-    }
-
-    public override string ToString()
-    {
-        FieldInfo field = typeof(Country).GetField(stat.ToString());
-        float value = (float)field.GetValue(Country.Instance);
-        return stat.ToString() + " value of the country must be equal or greater than " + minValue + ". (Currently " + value + ").";
-    }
-}
-
-public class HasTitle : Condition
+public class HasTitle : PersonCondition
 {
     public int personId;
     public Person.Title title;
@@ -64,12 +36,19 @@ public class HasTitle : Condition
 
     public override bool IsTrue()
     {
-        return Person.people.Find(p => p.uuid == personId).GetTitle() == title;
+        if (personId == 0)
+        {
+            return Person.people.Find(p => p.uuid == defPersonId).GetTitle() == title;
+        }
+        else
+        {
+            return Person.people.Find(p => p.uuid == personId).GetTitle() == title;
+        }
     }
 
-    public override string ToString()
-    {
-        Person person = Person.people.Find(p => p.uuid == personId);
-        return person.ToString() + " must be " + person.GetTitleString() +".";
-    }
+    //public override string ToString()
+    //{
+    //    Person person = Person.people.Find(p => p.uuid == personId);
+    //    return person.ToString() + " must be " + person.GetTitleString() +".";
+    //}
 }

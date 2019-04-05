@@ -5,9 +5,9 @@
   <lastName>Götgılı</lastName>
   <fame>80</fame>
   <corruption>100</corruption>
-  <management>5</management>
-  <diplomacy>2</diplomacy>
+  <management>8</management>
+  <diplomacy>7</diplomacy>
   <wisdom>5</wisdom>
-  <speech>8</speech>
-  <intrigue>2</intrigue>
+  <speech>9</speech>
+  <intrigue>10</intrigue>
 </Person>

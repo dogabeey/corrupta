@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml.Serialization;
 
-public class CountryEvent
+public class PersonEvent
 {
-    public static List<CountryEvent> gameEvents = new List<CountryEvent>();
-    public static List<CountryEvent> invokedEvents = new List<CountryEvent>();
+    public static List<PersonEvent> gameEvents = new List<PersonEvent>();
+    public static List<PersonEvent> invokedEvents = new List<PersonEvent>();
 
-    public List<Condition> conditions;
-    public List<Effect> effects;
+    public Person person;
+    public List<PersonCondition> conditions;
+    public List<PersonEffect> effects;
     public List<EventOption> options;
 
     public string name, header, description;
@@ -20,11 +21,11 @@ public class CountryEvent
     int importance = 1; // 0: Don't notify player. 1: Show in up in reports. 2: Notify warning if unread. 3: Don't let player advance turn if not read.
     [XmlIgnore] public bool isRead = false;
 
-    public CountryEvent()
+    public PersonEvent()
     {
 
     }
-    public CountryEvent(string name, string header, string description, List<Condition> conditions, List<Effect> effects, List<EventOption> options, double probability, int importance = 1)
+    public PersonEvent(string name, string header, string description, List<PersonCondition> conditions, List<PersonEffect> effects, List<EventOption> options, double probability, int importance = 1)
     {
         this.conditions = conditions;
         this.effects = effects;
@@ -50,7 +51,7 @@ public class CountryEvent
 
         Debug.Log("Rolled " + diceRoll + " for " + name + " event and It will invoke since It's lower than probability, " + probability);
 
-        foreach (Condition c in conditions)
+        foreach (PersonCondition c in conditions)
         {
             if (c.IsTrue())
             {
@@ -59,7 +60,7 @@ public class CountryEvent
             }
         }
 
-        foreach (Effect e in effects)
+        foreach (PersonEffect e in effects)
         {
             Debug.Log("Executing '" + e.ToString() + "' effect of " + name + ".");
             e.Execute();
@@ -74,8 +75,8 @@ public class CityEvent
     public static List<CityEvent> gameEvents = new List<CityEvent>();
     public static List<CityEvent> invokedEvents = new List<CityEvent>();
 
-    public List<Condition> conditions;
-    public List<Effect> effects;
+    public List<PersonCondition> conditions;
+    public List<PersonEffect> effects;
     public List<EventOption> options;
 
     public string name, header, description;
@@ -88,7 +89,7 @@ public class CityEvent
     {
 
     }
-    public CityEvent(string name, string header, string description, List<Condition> conditions, List<Effect> effects, List<EventOption> options, double probability, int importance = 1)
+    public CityEvent(string name, string header, string description, List<PersonCondition> conditions, List<PersonEffect> effects, List<EventOption> options, double probability, int importance = 1)
     {
         this.conditions = conditions;
         this.effects = effects;
@@ -114,7 +115,7 @@ public class CityEvent
 
         Debug.Log("Rolled " + diceRoll + " for " + name + " event and It will invoke since It's lower than probability, " + probability);
 
-        foreach (Condition c in conditions)
+        foreach (PersonCondition c in conditions)
         {
             if (c.IsTrue())
             {
@@ -123,7 +124,7 @@ public class CityEvent
             }
         }
 
-        foreach (Effect e in effects)
+        foreach (PersonEffect e in effects)
         {
             Debug.Log("Executing '" + e.ToString() + "' effect of " + name + ".");
             e.Execute();

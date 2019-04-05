@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-16"?>
+<PersonEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <conditions>
+    <PersonCondition xsi:type="HasTitle">
+      <defPersonId>0</defPersonId>
+      <personId>0</personId>
+      <title>Freelance</title>
+    </PersonCondition>
+  </conditions>
+  <effects>
+    <PersonEffect xsi:type="AddDiplomacy">
+      <defPersonId>0</defPersonId>
+      <personId>0</personId>
+      <value>1</value>
+    </PersonEffect>
+  </effects>
+  <options />
+  <name>presidental_experience_event</name>
+  <header>Being a president has its benefits!</header>
+  <description>Since you are a president, you're talking to many people as your job. Thus, your diplomacy skills are improved.</description>
+  <probability>0.1</probability>
+</PersonEvent>
