@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-16"?>
+<OpinionOfIdeology xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <individual>
+    <id>1</id>
+    <ideologyName>antiauthoritarianism</ideologyName>
+    <description>A radical philisopy that advocates self-governed societies based on voluntary institutions which denies authority of law and lawmakers.</description>
+  </individual>
+  <target>
+    <id>2</id>
+    <ideologyName>conservatism</ideologyName>
+    <description>A political belief that favors conservation of cultural and/or religious values and praises traditional view in lawmaking.</description>
+  </target>
+  <opinionValue>-65</opinionValue>
+</OpinionOfIdeology>

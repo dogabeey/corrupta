@@ -9,6 +9,7 @@ public class City
     public static List<City> cityList = new List<City>();
     public class IdeologyRate
     {
+        public int cityId;
         public string ideologyString;
         public float rate;
 
@@ -21,6 +22,7 @@ public class City
         {
             ideology = Ideology.ideologyList.Find(i => i.ideologyName == ideologyString);
             this.rate = rate;
+            this.ideologyString = ideologyString;
         }
 
         public Ideology GetIdeology()
@@ -29,6 +31,7 @@ public class City
         }
     }
 
+    public int id;
     public string cityName;
     public string description;
     public Vector2 coordinates;
@@ -41,8 +44,9 @@ public class City
     {
 
     }
-    public City(string name, string description,Vector2 coordinates,List<IdeologyRate> ideologyRates)
+    public City(int id,string name, string description,Vector2 coordinates,List<IdeologyRate> ideologyRates)
     {
+        this.id = id;
         this.cityName = name;
         this.description = description;
         this.coordinates = coordinates;

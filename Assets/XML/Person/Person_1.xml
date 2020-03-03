@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<Person xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <uuid>32</uuid>
   <firstName>Binary</firstName>
   <lastName>Thunder</lastName>
   <fame>90</fame>
   <corruption>90</corruption>
-  <management>1</management>
-  <diplomacy>4</diplomacy>
+  <management>3</management>
+  <diplomacy>9</diplomacy>
   <wisdom>9</wisdom>
-  <speech>9</speech>
-  <intrigue>3</intrigue>
+  <speech>10</speech>
+  <intrigue>8</intrigue>
 </Person>

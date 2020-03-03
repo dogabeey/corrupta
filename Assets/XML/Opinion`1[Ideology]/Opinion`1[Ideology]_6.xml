@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-16"?>
+<OpinionOfIdeology xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <individual>
+    <id>1</id>
+    <ideologyName>antiauthoritarianism</ideologyName>
+    <description>A radical philisopy that advocates self-governed societies based on voluntary institutions which denies authority of law and lawmakers.</description>
+  </individual>
+  <target>
+    <id>8</id>
+    <ideologyName>republicanism</ideologyName>
+    <description>An ideology centered on citizenship in a state organized as a republic under which the people hold popular sovereignty, which upholds that majority's favor is always the best.</description>
+  </target>
+  <opinionValue>2</opinionValue>
+</OpinionOfIdeology>

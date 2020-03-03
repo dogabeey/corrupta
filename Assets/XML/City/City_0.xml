@@ -1,37 +1,56 @@
 <?xml version="1.0" encoding="utf-16"?>
-<City xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<City xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <id>34</id>
   <cityName>Istanbul</cityName>
-  <description>A city with long history and longer line of awaiting immigrants who wants to enter.</description>
+  <description>A city with long history.</description>
   <coordinates>
     <x>-210</x>
     <y>134</y>
   </coordinates>
   <ideologyRates>
     <IdeologyRate>
+      <cityId>0</cityId>
+      <ideologyString>antiauthoritarianism</ideologyString>
       <rate>5</rate>
     </IdeologyRate>
     <IdeologyRate>
+      <cityId>0</cityId>
+      <ideologyString>conservatism</ideologyString>
       <rate>35</rate>
     </IdeologyRate>
     <IdeologyRate>
+      <cityId>0</cityId>
+      <ideologyString>religionism</ideologyString>
       <rate>45</rate>
     </IdeologyRate>
     <IdeologyRate>
+      <cityId>0</cityId>
+      <ideologyString>liberalism</ideologyString>
       <rate>10</rate>
     </IdeologyRate>
     <IdeologyRate>
+      <cityId>0</cityId>
+      <ideologyString>enviromentalism</ideologyString>
       <rate>4</rate>
     </IdeologyRate>
     <IdeologyRate>
+      <cityId>0</cityId>
+      <ideologyString>socialism</ideologyString>
       <rate>2</rate>
     </IdeologyRate>
     <IdeologyRate>
+      <cityId>0</cityId>
+      <ideologyString>centrism</ideologyString>
       <rate>22</rate>
     </IdeologyRate>
     <IdeologyRate>
+      <cityId>0</cityId>
+      <ideologyString>nationalism</ideologyString>
       <rate>15</rate>
     </IdeologyRate>
     <IdeologyRate>
+      <cityId>0</cityId>
+      <ideologyString>republicanism</ideologyString>
       <rate>25</rate>
     </IdeologyRate>
   </ideologyRates>

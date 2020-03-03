@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Ideology xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <id>8</id>
+  <ideologyName>republicanism</ideologyName>
+  <description>An ideology centered on citizenship in a state organized as a republic under which the people hold popular sovereignty, which upholds that majority's favor is always the best.</description>
+</Ideology>

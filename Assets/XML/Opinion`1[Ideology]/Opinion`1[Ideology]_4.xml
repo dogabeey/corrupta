@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-16"?>
+<OpinionOfIdeology xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <individual>
+    <id>1</id>
+    <ideologyName>antiauthoritarianism</ideologyName>
+    <description>A radical philisopy that advocates self-governed societies based on voluntary institutions which denies authority of law and lawmakers.</description>
+  </individual>
+  <target>
+    <id>6</id>
+    <ideologyName>enviromentalism</ideologyName>
+    <description>An ideology regarding concerns for environmental protection and improvement of the health of the environment, particularly as the measure for this health seeks to incorporate the impact of changes to the environment on the planet.</description>
+  </target>
+  <opinionValue>1</opinionValue>
+</OpinionOfIdeology>

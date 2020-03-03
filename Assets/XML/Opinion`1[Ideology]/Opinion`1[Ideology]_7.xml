@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-16"?>
+<OpinionOfIdeology xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <individual>
+    <id>1</id>
+    <ideologyName>antiauthoritarianism</ideologyName>
+    <description>A radical philisopy that advocates self-governed societies based on voluntary institutions which denies authority of law and lawmakers.</description>
+  </individual>
+  <target>
+    <id>9</id>
+    <ideologyName>centrism</ideologyName>
+    <description>A political view that involves acceptance or support of a balance of a degree of social equality and a degree of social hierarchy.</description>
+  </target>
+  <opinionValue>0</opinionValue>
+</OpinionOfIdeology>

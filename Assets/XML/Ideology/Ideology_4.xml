@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Ideology xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <id>5</id>
+  <ideologyName>nationalism</ideologyName>
+  <description>A political system characterized by promoting the interests of a particular nation particularly with the aim of gaining and maintaining full sovereignty over the group's homeland.</description>
+</Ideology>

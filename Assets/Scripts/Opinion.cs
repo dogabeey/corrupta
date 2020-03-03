@@ -9,13 +9,18 @@ public class Opinion<T>
 {
     public static List<Opinion<T>> opinions = new List<Opinion<T>>();
 
-    public T invidual;
-    public T target;
+    public string individual;
+    public string target;
     public float opinionValue;
 
-    public Opinion(T i, T t, float val = 0)
+    public Opinion()
     {
-        invidual = i;
+
+    }
+
+    public Opinion(T individual, T target, float val = 0)
+    {
+        individual = opinions.Find(o = > individual);
         target = t;
         opinionValue = val;
 
@@ -25,7 +30,7 @@ public class Opinion<T>
 
     public static void SetOpinion(T i, T t, float val)
     {
-        opinions.Find(o => o.invidual.ToString() == i.ToString() && o.target.ToString() == t.ToString()).opinionValue = val;
+        opinions.Find(o => o.individual.ToString() == i.ToString() && o.target.ToString() == t.ToString()).opinionValue = val;
     }
 
     public static float GetOpinion(Person i, Person t)
@@ -37,7 +42,7 @@ public class Opinion<T>
             Debug.LogError("Only person classes have dynamic opinions to each other");
             return 0;
         }
-        finalValue = i.GetIdeology().opinionList.Find(o => t.GetIdeology() == o.target).opinionValue; // First we add opinion value based on invidual's ideology vs target's ideology.
+
         foreach (OpinionModifier o in OpinionModifier.opinions)
         {
             if (!o.isAuto) continue;
@@ -62,7 +67,7 @@ public class Opinion<T>
 
     public static T GetOpposite(T i)
     {
-        List<Opinion<T>> ops = opinions.FindAll(o => o.invidual.ToString() == i.ToString());
+        List<Opinion<T>> ops = opinions.FindAll(o => o.individual.ToString() == i.ToString());
         List<float> opValues = new List<float>();
         foreach (Opinion<T> o in ops)
         { 

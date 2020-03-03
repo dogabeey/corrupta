@@ -55,8 +55,6 @@ public class Simulator: MonoBehaviour
                 }
             }
         Country.Instance.UpdateAll();
-        gameCanvas.SetActive(false);
-        gameCanvas.SetActive(true);
     }
 
 }

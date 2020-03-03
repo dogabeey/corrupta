@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Ideology xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <id>4</id>
+  <ideologyName>liberalism</ideologyName>
+  <description>A political view based on liberty and equality which supports civil rights, democracy, secularism, gender equality, internationalism and the freedoms of speech, the press, religion and markets.</description>
+</Ideology>

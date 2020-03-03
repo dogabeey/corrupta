@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Ideology xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <id>2</id>
+  <ideologyName>conservatism</ideologyName>
+  <description>A political belief that favors conservation of cultural and/or religious values and praises traditional view in lawmaking.</description>
+</Ideology>

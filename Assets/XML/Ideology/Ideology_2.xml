@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Ideology xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <id>3</id>
+  <ideologyName>religionism</ideologyName>
+  <description>A view that upholds religious laws and determining a state's laws by majority religion in that state.</description>
+</Ideology>

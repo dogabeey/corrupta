@@ -43,8 +43,8 @@ public class Government
         {
             gov.isActive = false;
         }
-        string yt = GameObject.FindGameObjectWithTag("simulation").GetComponent<Simulator>().yearText.text;
-        string mt = GameObject.FindGameObjectWithTag("simulation").GetComponent<Simulator>().monthText.text;
+        //string yt = GameObject.FindGameObjectWithTag("simulation").GetComponent<Simulator>().yearText.text;
+        //string mt = GameObject.FindGameObjectWithTag("simulation").GetComponent<Simulator>().monthText.text;
 
         governmentList.Add(this);
     }

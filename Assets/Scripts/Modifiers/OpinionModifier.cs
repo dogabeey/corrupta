@@ -12,13 +12,12 @@ public class OpinionModifier
     public float decayRate;
     public bool isAuto;
     public List<PersonCondition> conditions;
-    public List<PersonEffect> effects;
 
     public OpinionModifier()
     {
 
     }
-    public OpinionModifier(string name, float value, int maxStack, float decayRate, bool isAuto, List<PersonCondition> conditions, List<PersonEffect> effects)
+    public OpinionModifier(string name, float value, int maxStack, float decayRate, bool isAuto, List<PersonCondition> conditions)
     {
         if (!opinions.Exists(p => p.name == name))
         {
@@ -34,6 +33,5 @@ public class OpinionModifier
         this.decayRate = decayRate;
         this.isAuto = isAuto;
         this.conditions = conditions;
-        this.effects = effects;
     }
 }

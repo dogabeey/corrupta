@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Ideology xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <id>9</id>
+  <ideologyName>centrism</ideologyName>
+  <description>A political view that involves acceptance or support of a balance of a degree of social equality and a degree of social hierarchy.</description>
+</Ideology>

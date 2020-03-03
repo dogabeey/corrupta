@@ -11,43 +11,43 @@ public class XmlParse : MonoBehaviour
 
     static XmlDocument xml = new XmlDocument();
 
-    public static void ParseIdeology(string fileName)
-    {
-        xml.Load("Assets\\XML\\" + fileName);
+    //public static void ParseIdeology(string fileName)
+    //{
+    //    xml.Load("Assets\\XML\\" + fileName);
 
-        XmlNodeList ideologies = xml.SelectNodes("/ideologies/ideology");
-        foreach (XmlNode ideology in ideologies)
-        {
-            string idName = ideology["name"].InnerText;
-            string idDesc = ideology["description"].InnerText;
+    //    XmlNodeList ideologies = xml.SelectNodes("/ideologies/ideology");
+    //    foreach (XmlNode ideology in ideologies)
+    //    {
+    //        string idName = ideology["name"].InnerText;
+    //        string idDesc = ideology["description"].InnerText;
 
-            new Ideology(idName, idDesc);
+    //        new Ideology(idName, idDesc);
 
 
 
-        }
-        foreach (XmlNode ideology in ideologies)
-        {
-            string idName = ideology["name"].InnerText;
-            XmlNodeList idOpinions = ideology["opinions"].ChildNodes;
-            for (int j = 0; j < idOpinions.Count; j++)
-            {
-                string tarName = idOpinions[j].Attributes["name"].Value;
-                string tarOp = idOpinions[j].InnerText;
+    //    }
+    //    foreach (XmlNode ideology in ideologies)
+    //    {
+    //        string idName = ideology["name"].InnerText;
+    //        XmlNodeList idOpinions = ideology["opinions"].ChildNodes;
+    //        for (int j = 0; j < idOpinions.Count; j++)
+    //        {
+    //            string tarName = idOpinions[j].Attributes["name"].Value;
+    //            string tarOp = idOpinions[j].InnerText;
 
-                Ideology inv = Ideology.ideologyList.Find(i => i.ideologyName.ToString() == idName);
-                Ideology tar = Ideology.ideologyList.Find(t => t.ideologyName.ToString() == tarName);
-                /* Problem aranan tarName, yani ideolojinin kod çalıştırma esnasında henüz yaratılmamş olmasından
-                    * kaynaklanıyor. start() içinde başka bir foreach açıp bu for u oraya eklemek gerek. */
-                new Opinion<Ideology>(inv, tar, (float)Convert.ToDouble(tarOp));
-            }
-        }
+    //            Ideology inv = Ideology.ideologyList.Find(i => i.ideologyName.ToString() == idName);
+    //            Ideology tar = Ideology.ideologyList.Find(t => t.ideologyName.ToString() == tarName);
+    //            /* Problem aranan tarName, yani ideolojinin kod çalıştırma esnasında henüz yaratılmamş olmasından
+    //                * kaynaklanıyor. start() içinde başka bir foreach açıp bu for u oraya eklemek gerek. */
+    //            new Opinion<Ideology>(inv, tar, (float)Convert.ToDouble(tarOp));
+    //        }
+    //    }
 
-        /*foreach (Opinion<Ideology> i in Opinion<Ideology>.opinions)
-        {
-            Debug.Log("As the followers of " + i.invidual.ideologyName + ", we think around " + i.opinionValue + " against " + i.target.ideologyName);
-        }*/
-    }
+    //    /*foreach (Opinion<Ideology> i in Opinion<Ideology>.opinions)
+    //    {
+    //        Debug.Log("As the followers of " + i.invidual.ideologyName + ", we think around " + i.opinionValue + " against " + i.target.ideologyName);
+    //    }*/
+    //}
     //public static void ParseCity(string fileName)
     //{
     //    xml.Load("Assets\\XML\\" + fileName);
