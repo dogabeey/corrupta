@@ -5,9 +5,9 @@
   <lastName>Derinli K.</lastName>
   <fame>80</fame>
   <corruption>100</corruption>
-  <management>3</management>
-  <diplomacy>5</diplomacy>
-  <wisdom>4</wisdom>
-  <speech>5</speech>
-  <intrigue>0</intrigue>
+  <management>8</management>
+  <diplomacy>2</diplomacy>
+  <wisdom>6</wisdom>
+  <speech>10</speech>
+  <intrigue>1</intrigue>
 </Person>

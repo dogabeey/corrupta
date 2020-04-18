@@ -20,12 +20,12 @@ public class Opinion<T>
 
     public Opinion(T individual, T target, float val = 0)
     {
-        individual = opinions.Find(o = > individual);
-        target = t;
-        opinionValue = val;
+        //individual = opinions.Find(o => individual);
+        //target = t;
+        //opinionValue = val;
 
         // new Opinion<T>(t, i, val); // bir opinion oluşturulduğunda karşıdaki insanın da diğerine opinionu oluşuyor.
-        opinions.Add(this);
+        //opinions.Add(this);
     }
 
     public static void SetOpinion(T i, T t, float val)
@@ -65,15 +65,15 @@ public class Opinion<T>
         return finalValue;
     }
 
-    public static T GetOpposite(T i)
-    {
-        List<Opinion<T>> ops = opinions.FindAll(o => o.individual.ToString() == i.ToString());
-        List<float> opValues = new List<float>();
-        foreach (Opinion<T> o in ops)
-        { 
-            opValues.Add(o.opinionValue);
-        }
+    //public static T GetOpposite(T i)
+    //{
+    //    List<Opinion<T>> ops = opinions.FindAll(o => o.individual.ToString() == i.ToString());
+    //    List<float> opValues = new List<float>();
+    //    foreach (Opinion<T> o in ops)
+    //    { 
+    //        opValues.Add(o.opinionValue);
+    //    }
 
-        return opinions.Find(o2 => o2.opinionValue == opValues.Min()).target;
-    }
+    //    return opinions.Find(o2 => o2.opinionValue == opValues.Min()).target;
+    //}
 }

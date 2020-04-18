@@ -34,7 +34,6 @@ public class City
     public int id;
     public string cityName;
     public string description;
-    public Vector2 coordinates;
     public List<IdeologyRate> ideologyRates;
 
     Person mayor;
@@ -44,12 +43,11 @@ public class City
     {
 
     }
-    public City(int id,string name, string description,Vector2 coordinates,List<IdeologyRate> ideologyRates)
+    public City(int id,string name, string description,List<IdeologyRate> ideologyRates)
     {
         this.id = id;
         this.cityName = name;
         this.description = description;
-        this.coordinates = coordinates;
         this.ideologyRates = ideologyRates;
         cityList.Add(this);
     }

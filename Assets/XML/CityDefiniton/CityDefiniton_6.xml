@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-16"?>
+<CityDefiniton xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <cityId>82</cityId>
+  <r>255</r>
+  <g>217</g>
+  <b>47</b>
+</CityDefiniton>
