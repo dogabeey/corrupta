@@ -2,30 +2,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 public class MapDrawer : MonoBehaviour
 {
-    Material provinceMap, mat;
-    float mapWidth, mapHeight;
+    public string textureName = "_MainTex";
+    [NonSerialized] public Color selectedColor;
+
+    Texture2D tex, originalTex;
+    Material material;
+    float mapHeight, mapWidth;
 
     void Start()
     {
-        provinceMap = GetComponent<Renderer>().material;
-        //provinceMap.enabled = false;
-        mapWidth = provinceMap.mainTexture.width;
-        mapHeight = provinceMap.mainTexture.height;
+        selectedColor = Color.black;
+        material = GetComponent<Renderer>().material;
+        originalTex = (Texture2D)material.GetTexture(textureName);
+        mapHeight = originalTex.height;
+        mapWidth = originalTex.width;
+        tex = new Texture2D(originalTex.width, originalTex.height, originalTex.format, false);
+        tex.SetPixels(originalTex.GetPixels());
     }
 
     void Update()
     {
-        
     }
 
     void OnMouseDown()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        Texture2D tex = (Texture2D)provinceMap.mainTexture;
         if (Physics.Raycast(ray, out hit,256))
         {
             Debug.Log("Hit point: " + hit.textureCoord.x * mapWidth + " " + hit.textureCoord.y * mapHeight);
@@ -36,18 +42,18 @@ public class MapDrawer : MonoBehaviour
 
     void SelectColor(Color color)
     {
+        selectedColor = color;
         Destroy(GameObject.FindGameObjectWithTag("province"));
-
-        Texture2D tmpTexture2;
         GameObject selectionMask = Instantiate(gameObject);
         selectionMask.layer = 9; // mask map layer
         selectionMask.GetComponent<MeshCollider>().enabled = false; // Prevent rays collide masks
         selectionMask.GetComponent<Animator>().enabled = true;
         selectionMask.tag = "province";
-        Texture2D tmpTexture = (Texture2D)Instantiate(provinceMap.mainTexture, gameObject.transform.position, gameObject.transform.rotation);
-        tmpTexture2 = (Texture2D)Instantiate(provinceMap.mainTexture);
-        selectionMask.GetComponent<Renderer>().material.mainTexture = tmpTexture2;
-        Color[] pixels = tmpTexture2.GetPixels();
+        Texture2D tex2 = new Texture2D(originalTex.width, originalTex.height, originalTex.format, false);
+        tex2.SetPixels(originalTex.GetPixels());
+        selectionMask.GetComponent<Renderer>().material.mainTexture = tex2;
+        selectionMask.GetComponent<Renderer>().material.SetFloat("_BumpScale", 0);
+        Color[] pixels = tex2.GetPixels();
         for (int i = 0; i < pixels.Length; i++)
         {
             if(pixels[i] != color)
@@ -55,9 +61,7 @@ public class MapDrawer : MonoBehaviour
                 pixels[i].a = 0;
             }
         }
-        tmpTexture2.SetPixels(pixels);
-        tmpTexture2.Apply();
-
-        provinceMap.mainTexture = tmpTexture;
+        tex2.SetPixels(pixels);
+        tex2.Apply();
     }
 }

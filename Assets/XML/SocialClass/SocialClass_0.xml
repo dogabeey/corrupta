@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<SocialClass xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Occupation">
+  <className>Management</className>
+  <avgWealth>70</avgWealth>
+  <avgEducation>60</avgEducation>
+  <avgPartizanship>20</avgPartizanship>
+  <avgCorruptability>55</avgCorruptability>
+  <avgRebelliousness>15</avgRebelliousness>
+</SocialClass>
