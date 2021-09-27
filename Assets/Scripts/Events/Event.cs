@@ -53,7 +53,7 @@ public class PersonEvent
 
         foreach (PersonCondition c in conditions)
         {
-            if (c.IsTrue())
+            if (!c.IsTrue())
             {
                 Debug.Log("The condition of '" + c.ToString() + "' is not true, " + name + " will not invoke.");
                 return;
@@ -117,7 +117,7 @@ public class CityEvent
 
         foreach (PersonCondition c in conditions)
         {
-            if (c.IsTrue())
+            if (!c.IsTrue())
             {
                 Debug.Log("The condition of '" + c.ToString() + "' is not true, " + name + " will not invoke.");
                 return;
