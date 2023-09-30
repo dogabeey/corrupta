@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting;
+using DG.Tweening;
 
 public class MapDrawer : MonoBehaviour
 {
@@ -11,13 +12,14 @@ public class MapDrawer : MonoBehaviour
     public string provinceColorString = "_ProvinceColor";
     [HideInInspector] public Color selectedColor;
 
-    Texture2D tex, originalTex;
+    Texture2D texture;
     float mapHeight, mapWidth;
 
     void Start()
     {
-        mapHeight = originalTex.height;
-        mapWidth = originalTex.width;
+        texture = (Texture2D) meshRenderer.material.mainTexture;
+        mapHeight = texture.height;
+        mapWidth = texture.width;
     }
 
     void Update()
@@ -31,7 +33,7 @@ public class MapDrawer : MonoBehaviour
         if (Physics.Raycast(ray, out hit,256))
         {
             Debug.Log("Hit point: " + hit.textureCoord.x * mapWidth + " " + hit.textureCoord.y * mapHeight);
-            SelectColor(tex.GetPixel((int)(hit.textureCoord.x * mapWidth), (int)(hit.textureCoord.y * mapHeight)));
+            SelectColor(texture.GetPixel((int)(hit.textureCoord.x * mapWidth), (int)(hit.textureCoord.y * mapHeight)));
         }
 
     }
