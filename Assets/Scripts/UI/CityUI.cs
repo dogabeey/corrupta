@@ -5,30 +5,38 @@ using UnityEngine.UI;
 
 public class CityUI : MonoBehaviour
 {
-    MapDrawer mapDrawer;
+    public MapDrawer mapDrawer;
+
     Toggle toggle;
-    ToggleGroup tg;
+
     // Start is called before the first frame update
     void Start()
     {
-        mapDrawer = FindObjectOfType<MapDrawer>();
         toggle = GetComponent<Toggle>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(mapDrawer.selectedColor != Color.black) ShowCityInfo();
+        if(mapDrawer.selectedColor != Color.black)
+            ShowCityInfo();
     }
 
     public void ShowCityInfo()
     {
         toggle.isOn = true;
+
+
         CityDefiniton cd = CityDefiniton.cityDefs.Find(
-            x => x.r == mapDrawer.selectedColor.r 
-            && x.g == mapDrawer.selectedColor.g 
-            && x.b == mapDrawer.selectedColor.b
+            x => x.r == Mathf.FloorToInt(mapDrawer.selectedColor.r * 255)
+            && x.g == Mathf.FloorToInt(mapDrawer.selectedColor.g * 255)
+            && x.b == Mathf.FloorToInt(mapDrawer.selectedColor.b * 255)
         );
-        City.cityList.Find(x => x.id == cd.cityId);
+
+        if(City.cityList.Exists(x => x.id == cd.cityId))
+        {
+            City city = City.cityList.Find(x => x.id == cd.cityId);
+            Debug.Log("Selected " + city.cityName);
+        }
     }
 }

@@ -17,8 +17,8 @@ public class TestInitializer : MonoBehaviour
 
         new Occupation("Management",70,60,20,55,15,1);
 
-        XmlParse.ImportAll<City>();
-        XmlParse.ImportAll<CityDefiniton>();
+        City.cityList = XmlParse.ImportAll<City>();
+        CityDefiniton.cityDefs = XmlParse.ImportAll<CityDefiniton>();
 
         Country.RandomizeAll();
         
