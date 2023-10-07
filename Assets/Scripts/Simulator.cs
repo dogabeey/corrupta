@@ -38,22 +38,7 @@ public class Simulator: MonoBehaviour
         turn++;
         yearText.text = (Year + DateTime.Now.Year).ToString();
         monthText.text = Month.ToString();
-        if(invokeEvents)
-            foreach (PersonEvent e in PersonEvent.gameEvents)
-            {
-                foreach (Person person in Person.people)
-                {
-                    foreach (PersonCondition condition in e.conditions)
-                    {
-                        condition.defPersonId = person.uuid;
-                    }
-                    foreach (PersonEffect effect in e.effects)
-                    {
-                        effect.defPersonId = person.uuid;
-                    }
-                    e.Invoke();
-                }
-            }
+
         Country.Instance.UpdateAll();
     }
 

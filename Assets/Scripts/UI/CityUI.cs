@@ -27,15 +27,16 @@ public class CityUI : MonoBehaviour
         toggle.isOn = true;
 
 
-        CityDefiniton cd = CityDefiniton.cityDefs.Find(
+        CityDefiniton cd = CityDefiniton.GetInstances().Find(
             x => x.r == Mathf.FloorToInt(mapDrawer.selectedColor.r * 255)
             && x.g == Mathf.FloorToInt(mapDrawer.selectedColor.g * 255)
             && x.b == Mathf.FloorToInt(mapDrawer.selectedColor.b * 255)
         );
 
-        if(City.cityList.Exists(x => x.id == cd.cityId))
+
+        if(City.cityList.Exists(c => c == cd.city))
         {
-            City city = City.cityList.Find(x => x.id == cd.cityId);
+            City city = City.cityList.Find(c => c == cd.city);
             Debug.Log("Selected " + city.cityName);
         }
     }

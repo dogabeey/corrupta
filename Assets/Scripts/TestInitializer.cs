@@ -15,8 +15,7 @@ public class TestInitializer : MonoBehaviour
     {
         Country.InitCountry("Turkey", "stormwind");
 
-        City.cityList = XmlParse.ImportAll<City>();
-        CityDefiniton.cityDefs = XmlParse.ImportAll<CityDefiniton>();
+        XmlParse.ExportAll(City.cityList);
 
         Country.RandomizeAll();
         
@@ -24,14 +23,20 @@ public class TestInitializer : MonoBehaviour
 
     public Ideology RandomIdeology()
     {
-        int index = UnityEngine.Random.Range(0,Ideology.ideologyList.Count);
-        return Ideology.ideologyList[index];
+        int index = UnityEngine.Random.Range(0,Ideology.GetInstances().Count);
+        return Ideology.GetInstances()[index];
     }
 
     public City RandomCity()
     {
         int index = UnityEngine.Random.Range(0,City.cityList.Count);
         return City.cityList[index];
+    }
+
+    public Party RandomParty()
+    {
+        int index = UnityEngine.Random.Range(0,City.cityList.Count);
+        return Party.parties[index];
     }
 
     public string RandomName(string fileName)
