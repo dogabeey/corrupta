@@ -11,15 +11,16 @@ public class Party
     public string logo;
     public string color;
 
+    public int id;
     public int founderId;
     public int chairPersonId;
     public int viceChairPersonId;
     public string ideologyString;
 
-    Person founder;
-    Person chairPerson;
-    Person viceChairPerson;
-    Ideology ideology;
+    public Person Founder { get => Person.people.Find(p => p.uuid == founderId); }
+    public Person ChairPerson { get => Person.people.Find(p => p.uuid == chairPersonId); }
+    public Person ViceChairPerson { get => Person.people.Find(p => p.uuid == viceChairPersonId); }
+    public Ideology Ideology { get => Ideology.ideologyList.Find(i => i.ideologyName == ideologyString); }
 
     public List<int> deputyListId = new List<int>();
     public List<int> informalMembersId = new List<int>();
@@ -34,13 +35,12 @@ public class Party
         this.partyName = partyName;
         this.logo = logo;
         this.color = color;
-        founder = Person.people.Find(p => p.uuid == founderId);
         this.founderId = founderId;
-        chairPerson = Person.people.Find(p => p.uuid == chairPersonId);
+        chairPerson = 
         this.chairPersonId = chairPersonId;
-        viceChairPerson = Person.people.Find(p => p.uuid == viceChairPersonId);
+        viceChairPerson = 
         this.viceChairPersonId = viceChairPersonId;
-        this.ideology = Ideology.ideologyList.Find(i => i.ideologyName == ideology);
+        this.ideology = 
 
         parties.Add(this);
     }

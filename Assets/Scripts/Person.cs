@@ -100,7 +100,7 @@ public class Person
         }
         foreach (City c in City.cityList)
         {
-            if (c.GetMayor() == this) return Title.Mayor;
+            if (c.Mayor == this) return Title.Mayor;
         }
         return Title.Freelance;
     }

@@ -15,8 +15,6 @@ public class TestInitializer : MonoBehaviour
     {
         Country.InitCountry("Turkey", "stormwind");
 
-        new Occupation("Management",70,60,20,55,15,1);
-
         City.cityList = XmlParse.ImportAll<City>();
         CityDefiniton.cityDefs = XmlParse.ImportAll<CityDefiniton>();
 
