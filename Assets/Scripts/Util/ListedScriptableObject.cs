@@ -2,6 +2,12 @@
 using UnityEngine;
 public class ListedScriptableObject<T> : ScriptableObject
 {
+    public T GetRandomInstance()
+    {
+        int randomIndex = Random.Range(0, GetInstances().Count - 1);
+        return GetInstances()[randomIndex];
+    }
+
     public static List<T> GetInstances()
     {
         UnityEngine.Object[] loadedObjects = Resources.LoadAll("", typeof(T));

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [System.Serializable]
 public class CitizenGroup
@@ -14,4 +15,14 @@ public class CitizenGroup
     public float wealth;
     public float happiness;
     public float education;
+
+    public CitizenGroup(Party party, Ideology ideology, Occupation occupation, float wealth, float happiness, float education)
+    {
+        this.party = party;
+        this.ideology = ideology;
+        this.occupation = occupation;
+        this.wealth = wealth;
+        this.happiness = happiness;
+        this.education = education;
+    }
 }

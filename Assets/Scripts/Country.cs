@@ -296,7 +296,7 @@ public class Country
     private Country(string name,string capital)
     {
         this.name = name;
-        this.capital = City.cityList.Find(c => c.cityName == capital);
+        this.capital = City.GetInstances().Find(c => c.cityName == capital);
     }
 
     public static void InitCountry(string name,string capital)

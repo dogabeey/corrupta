@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CityUI : MonoBehaviour
+public class CityUI : ToggleUIBehaviour
 {
     public MapDrawer mapDrawer;
 
-    Toggle toggle;
+    protected override string UpdateEventString { get => GameConstants.GameEvents.SELECTED_CITY; }
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +19,10 @@ public class CityUI : MonoBehaviour
     void Update()
     {
         if(mapDrawer.selectedColor != Color.black)
-            ShowCityInfo();
+            DrawUI();
     }
 
-    public void ShowCityInfo()
+    public override void DrawUI()
     {
         toggle.isOn = true;
 
@@ -33,10 +33,10 @@ public class CityUI : MonoBehaviour
             && x.b == Mathf.FloorToInt(mapDrawer.selectedColor.b * 255)
         );
 
-
-        if(City.cityList.Exists(c => c == cd.city))
+        List<City> instances = City.GetInstances();
+        if (instances.Exists(c => c == cd.city))
         {
-            City city = City.cityList.Find(c => c == cd.city);
+            City city = instances.Find(c => c == cd.city);
             Debug.Log("Selected " + city.cityName);
         }
     }

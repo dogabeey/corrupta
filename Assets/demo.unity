@@ -274,7 +274,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &141498751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,7 +1074,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &371407073
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1916,6 +1916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf38f94f280b2346b84a66b360fbff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggle: {fileID: 673871441}
   mapDrawer: {fileID: 338030104}
 --- !u!1 &728585636
 GameObject:
