@@ -16,6 +16,11 @@ public class CitizenGroup
     public float happiness;
     public float education;
 
+    public CitizenGroup()
+    {
+        
+    }
+
     public CitizenGroup(Party party, Ideology ideology, Occupation occupation, float wealth, float happiness, float education)
     {
         this.party = party;

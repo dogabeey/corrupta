@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Sirenix.OdinInspector;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "New City", menuName = "Corrupta/New City...")]
 public class City : ListedScriptableObject<City>
@@ -12,12 +14,11 @@ public class City : ListedScriptableObject<City>
     public string description;
     public Person mayor;
     [Header("Generation Settings")]
-    List<IdeologyRate> ideologyRates;
-    List<PartyRate> partyRates;
-
+    public List<PartyRate> partyRates;
     public List<CitizenGroup> citizens;
 
     public int Population => citizens.Count * CitizenGroup.POP_PER_GROUP;
+
 
 
     [Button("Add Random Citizens")]
@@ -30,10 +31,7 @@ public class City : ListedScriptableObject<City>
         List<Ideology> ideologies = new List<Ideology>();
         List<Party> parties = new List<Party>();
 
-        ideologyRates.ForEach(i => ideologyWeights.Add(i.rate));
         partyRates.ForEach(p => partyWeights.Add(p.rate));
-
-        ideologyRates.ForEach(i => ideologies.Add(i.ideology));
         partyRates.ForEach(p => parties.Add(p.party));
 
         for (int i = 0; i < count; i++)
@@ -61,5 +59,26 @@ public class City : ListedScriptableObject<City>
     {
         public Party party;
         [Range(1,10)] public int rate;
+    }
+
+    public static City GetCity(int id)
+    {
+        return GetInstances().Find(c => c.id == id);
+    }
+    public static CityDefiniton GetCityDefinition(int id)
+    {
+        return CityDefiniton.GetInstances().Find(c => c.city.id == id);
+    }
+
+    public static City GetCityByColor(Color color)
+    {
+        // Get the city with the closest color to given color.
+        CityDefiniton cityDefiniton = CityDefiniton.GetInstances().OrderBy(c => ColorUtil.Distance(c.Color, color)).First();
+        return cityDefiniton.city;
+    }
+
+    private Color GetColor()
+    {
+        return GetCityDefinition(id).Color;
     }
 }

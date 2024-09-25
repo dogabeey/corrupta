@@ -15,7 +15,11 @@ public class TestInitializer : MonoBehaviour
     {
         Country.InitCountry("Turkey", "stormwind");
 
-        XmlParse.ExportAll(City.GetInstances());
+        XmlParse.ImportAll<CityDefiniton>();
+        XmlParse.ImportAll<City>();
+        XmlParse.ImportAll<Ideology>();
+        XmlParse.ImportAll<Party>();
+        XmlParse.ImportAll<Country>();
 
         Country.RandomizeAll();
         
