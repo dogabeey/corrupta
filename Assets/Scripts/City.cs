@@ -24,7 +24,6 @@ public class City : ListedScriptableObject<City>
     [Button("Add Random Citizens")]
     public void GenerateCitizens(int count)
     {
-        //Separating
         List<int> ideologyWeights = new List<int>();
         List<int> partyWeights = new List<int>();
 
