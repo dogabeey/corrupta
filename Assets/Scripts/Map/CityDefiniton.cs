@@ -6,7 +6,8 @@ using UnityEngine;
 public class CityDefiniton : ListedScriptableObject<CityDefiniton>
 {
     public City city;
-    public int r, g, b;
+    [ColorUsage(false, false)]
+    public Color mapColor;
 
-    public Color Color => new Color(r / 255f, g / 255f, b / 255f);
+    public Color Color => new Color(mapColor.r / 255f, mapColor.g / 255f, mapColor.b / 255f);
 }

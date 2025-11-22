@@ -28,9 +28,9 @@ public class CityUI : ToggleUIBehaviour
 
 
         CityDefiniton cd = CityDefiniton.GetInstances().Find(
-            x => x.r == Mathf.FloorToInt(mapDrawer.selectedColor.r * 255)
-            && x.g == Mathf.FloorToInt(mapDrawer.selectedColor.g * 255)
-            && x.b == Mathf.FloorToInt(mapDrawer.selectedColor.b * 255)
+            x => x.mapColor.r == Mathf.FloorToInt(mapDrawer.selectedColor.r * 255)
+            && x.mapColor.g == Mathf.FloorToInt(mapDrawer.selectedColor.g * 255)
+            && x.mapColor.b == Mathf.FloorToInt(mapDrawer.selectedColor.b * 255)
         );
 
         List<City> instances = City.GetInstances();
