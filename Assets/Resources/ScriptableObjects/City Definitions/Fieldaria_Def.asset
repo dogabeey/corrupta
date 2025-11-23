@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41e65bbd52d99ff43850e95859a87b40, type: 3}
-  m_Name: Halsworth_Def
+  m_Name: Fieldaria_Def
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -22,4 +22,4 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   city: {fileID: 11400000, guid: 62b7d6dd30918f24993cba375f6086e8, type: 2}
-  mapColor: {r: 0.60784316, g: 0.39607847, b: 0.3137255, a: 0}
+  mapColor: {r: 0.6784314, g: 0.7019608, b: 0.3019608, a: 0}

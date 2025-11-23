@@ -1,7 +1,13 @@
 ﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
-public class ListedScriptableObject<T> : SerializedScriptableObject
+
+public abstract class  ManageableScriptableObject : SerializedScriptableObject
+{
+    
+}
+
+public class ListedScriptableObject<T> : ManageableScriptableObject
 {
     public T GetRandomInstance()
     {
