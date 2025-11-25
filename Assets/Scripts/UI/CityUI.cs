@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,12 +27,18 @@ public class CityUI : ToggleUIBehaviour
     {
         toggle.isOn = true;
 
+        float searchedRed = Mathf.FloorToInt(mapDrawer.selectedColor.r * 255);
+        float searchedGreen = Mathf.FloorToInt(mapDrawer.selectedColor.g * 255);
+        float searchedBlue = Mathf.FloorToInt(mapDrawer.selectedColor.b * 255);
 
-        CityDefiniton cd = CityDefiniton.GetInstances().Find(
-            x => x.mapColor.r == Mathf.FloorToInt(mapDrawer.selectedColor.r * 255)
-            && x.mapColor.g == Mathf.FloorToInt(mapDrawer.selectedColor.g * 255)
-            && x.mapColor.b == Mathf.FloorToInt(mapDrawer.selectedColor.b * 255)
-        );
+        var cityDefs = CityDefiniton.GetInstances();
+        // Find the city definition that is closest to the selected color
+        CityDefiniton cd = cityDefs.OrderBy(c =>
+        {
+            float distance = c.Color.Distance(mapDrawer.selectedColor);
+            return distance;
+        }
+        ).First();
 
         List<City> instances = City.GetInstances();
         if (instances.Exists(c => c == cd.city))

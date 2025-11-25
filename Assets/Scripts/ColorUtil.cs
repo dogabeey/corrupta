@@ -7,8 +7,10 @@ using Sirenix.OdinInspector;
 using System.Linq;
 internal static class ColorUtil
 {
-    public static float Distance(Color a, Color b)
+    public static float Distance(this Color a, Color b)
     {
-        return Mathf.Sqrt(Mathf.Pow(a.r - b.r, 2) + Mathf.Pow(a.g - b.g, 2) + Mathf.Pow(a.b - b.b, 2));
+        return Mathf.Sqrt((a.linear.r - b.linear.r) * (a.linear.r - b.linear.r) +
+                          (a.linear.g - b.linear.g) * (a.linear.g - b.linear.g) +
+                          (a.linear.b - b.linear.b) * (a.linear.b - b.linear.b));
     }
 }

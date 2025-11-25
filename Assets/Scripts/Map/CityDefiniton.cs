@@ -9,5 +9,5 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>
     [ColorUsage(false, false)]
     public Color mapColor;
 
-    public Color Color => new Color(mapColor.r / 255f, mapColor.g / 255f, mapColor.b / 255f);
+    public Color Color => new Color(mapColor.r, mapColor.g, mapColor.b);
 }

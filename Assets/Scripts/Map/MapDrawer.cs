@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 public class MapDrawer : MonoBehaviour
 {
     public MeshRenderer meshRenderer;
     public string provinceSelectString = "_ProvinceSelect";
     public string provinceColorString = "_ProvinceColor";
-    [HideInInspector] public Color selectedColor;
+    [ReadOnly] public Color selectedColor;
 
     Texture2D texture;
     float mapHeight, mapWidth;
@@ -40,8 +41,9 @@ public class MapDrawer : MonoBehaviour
 
     void SelectColor(Color color)
     {
-        meshRenderer.material.SetInt(provinceSelectString, color == Color.black ? 0 : 1);
-        meshRenderer.material.SetColor(provinceColorString, color);
+        Color srgb = color.linear == color ? color.gamma : color;  // Convert back to gamma
+        meshRenderer.material.SetInt(provinceSelectString, srgb == Color.black ? 0 : 1);
+        meshRenderer.material.SetColor(provinceColorString, srgb);
 
         selectedColor = color;
     }
