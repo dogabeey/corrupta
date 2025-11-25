@@ -39,8 +39,7 @@ public class ScriptableObjectBrowser : OdinMenuEditorWindow
 
             if (guids.Length == 0)
             {
-                // Still create a “tab” so you see the type
-                tree.Add($"{typeName}/(No assets found)", new EmptyTypePage(type));
+                tree.Add($"Add new {typeName}", new EmptyTypePage(type));
                 continue;
             }
 
@@ -51,7 +50,7 @@ public class ScriptableObjectBrowser : OdinMenuEditorWindow
                 if (asset == null) continue;
                 var item = tree.AddObjectAtPath($"{typeName}/{asset.name}", asset);
                 item.AddIcon(AssetPreview.GetMiniThumbnail(asset));
-
+                
             }
         }
 
