@@ -21,5 +21,5 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  city: {fileID: 11400000, guid: 62b7d6dd30918f24993cba375f6086e8, type: 2}
-  mapColor: {r: 0.7254902, g: 0.54509807, b: 0.7372549, a: 0}
+  city: {fileID: 11400000, guid: 5fe44148d4b647349870fe86f9d00045, type: 2}
+  mapColor: {r: 0.73333335, g: 0.8000001, b: 0.10980393, a: 0}

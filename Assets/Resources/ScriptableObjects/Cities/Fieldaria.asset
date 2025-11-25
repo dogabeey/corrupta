@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41e65bbd52d99ff43850e95859a87b40, type: 3}
-  m_Name: Fieldaria_Def
+  m_Script: {fileID: 11500000, guid: 3d51c2f862ba2fd4183142cd71f241c9, type: 3}
+  m_Name: Fieldaria
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,5 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  city: {fileID: 11400000, guid: 2086af3fe4170be48a689238f8341c44, type: 2}
-  mapColor: {r: 0.882353, g: 0.09019608, b: 0.3529412, a: 0}
+  id: 0
+  cityName: Fieldaria
+  description: 
+  mayor: {fileID: 0}
+  partyRates: []
+  citizens: []
