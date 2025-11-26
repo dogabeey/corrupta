@@ -18,8 +18,13 @@ public class City : ListedScriptableObject<City>
     public List<CitizenGroup> citizens;
 
     public int Population => citizens.Count * CitizenGroup.POP_PER_GROUP;
+    public float SurfaceAreaInKm2 => surfaceSizeByPixel;
+    public string SurfaceAreaInKm2String => (SurfaceAreaInKm2 / 1000).ToString("N1") + " km²";
 
-
+    internal int surfaceSizeByPixel;
+    internal Vector2 farthestPlanePoint1, farthestPlanePoint2;
+    internal Vector3 farthestPoint1, farthestPoint2;
+    internal Color color;
 
     [Button("Add Random Citizens")]
     public void GenerateCitizens(int count)

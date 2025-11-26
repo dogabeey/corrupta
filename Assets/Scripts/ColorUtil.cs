@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Sirenix.OdinInspector;
@@ -14,3 +12,4 @@ internal static class ColorUtil
                           (a.linear.b - b.linear.b) * (a.linear.b - b.linear.b));
     }
 }
+

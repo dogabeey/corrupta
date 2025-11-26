@@ -22,6 +22,10 @@ public class CityNameText : MonoBehaviour
         }
         cityText.text = cityName;
 
+        // Get reverse of the color
+        Color reverseColor = new Color(1 - cityColor.r, 1 - cityColor.g, 1 - cityColor.b);
+        cityText.color = reverseColor;
+
     }
 
     private void Start()
