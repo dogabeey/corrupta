@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d51c2f862ba2fd4183142cd71f241c9, type: 3}
-  m_Name: Uppergreen
+  m_Script: {fileID: 11500000, guid: 6ffb8db568907924d915f9267f165ec2, type: 3}
+  m_Name: GameConstants
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,9 +21,6 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 10
-  cityName: Uppergreen
-  description: 
-  mayor: {fileID: 0}
-  partyRates: []
-  citizens: []
+  mapTextScaleFactor: 1
+  mapShaderProvinceColorString: _ProvinceColor
+  mapShaderProvinceSelectString: _ProvinceSelect

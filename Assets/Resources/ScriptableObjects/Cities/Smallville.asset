@@ -21,7 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 0
+  id: 9
   cityName: Smallville
   description: 
   mayor: {fileID: 0}

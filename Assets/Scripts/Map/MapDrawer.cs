@@ -6,18 +6,17 @@ using UnityEngine.Scripting;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Linq;
+using TMPro;
 
 public class MapDrawer : MonoBehaviour
 {
     public MeshRenderer meshRenderer;
-    public string provinceSelectString = "_ProvinceSelect";
-    public string provinceColorString = "_ProvinceColor";
+    public Transform cityTextParent;
+    public TMP_Text cityTextPrefab;
     [ReadOnly] private Color selectedColor;
 
-    private List<City> _drawnCities = new List<City>();
     private Texture2D _texture;
     private float _mapHeight, _mapWidth;
-    private Vector3 _worldPoint1 = Vector3.zero, _worldPoint2 = Vector3.zero;
 
 
     public Color SelectedColor { 
@@ -30,8 +29,6 @@ public class MapDrawer : MonoBehaviour
         _texture = (Texture2D) meshRenderer.material.mainTexture;
         _mapHeight = _texture.height;
         _mapWidth = _texture.width;
-        Vector2 point1 = Vector2.zero;
-        Vector2 point2 = Vector2.zero;
 
         var uniqueColors = FindAllUniqueColorsInTexture();
         foreach ( var color in uniqueColors)
@@ -41,43 +38,20 @@ public class MapDrawer : MonoBehaviour
             if(city)
             {
                 city.surfaceSizeByPixel = pixels.Count;
-                city.color = color;
 
-                _drawnCities.Add(city);
-                ( point1, point2 ) = pixels.GetFarthestPoints();
-                _worldPoint1 = GetWorldPointFromMeshTexture(meshRenderer, point1);
-                _worldPoint2 = GetWorldPointFromMeshTexture(meshRenderer, point2);
+                Vector2 point1 = pixels.GetPointWithSmallestY();
+                Vector2 point2 = pixels.GetPointWithLargestY();
+                Vector3 worldPoint1 = GetWorldPointFromMeshTexture(meshRenderer, point1);
+                Vector3 worldPoint2 = GetWorldPointFromMeshTexture(meshRenderer, point2);
 
-                city.farthestPoint1 = _worldPoint1;
-                city.farthestPoint2 = _worldPoint2;
-                city.farthestPlanePoint1 = point1;
-                city.farthestPlanePoint2 = point2;
+                Vector3 angle1 = pixels.GetPointWithSmallestX();
+                Vector3 angle2 = pixels.GetPointWithLargestX();
+                Vector3 worldAngle1 = GetWorldPointFromMeshTexture(meshRenderer, angle1);
+                Vector3 worldAngle2 = GetWorldPointFromMeshTexture(meshRenderer, angle2);
+
+                CreateCityNameText(city, worldPoint1, worldPoint2, worldAngle1, worldAngle2);
             }
         }
-    }
-
-    private void Update()
-    {
-    }
-
-    private void OnDrawGizmos()
-    {
-        foreach (var city in _drawnCities)
-        {
-            Gizmos.color = city.color;
-            DrawThickLine(city.farthestPoint1, city.farthestPoint2, 0.1f);
-        }
-    }
-    private void DrawThickLine(Vector3 a, Vector3 b, float thickness)
-    {
-        // thickness world units cinsinden
-        Vector3 dir = (b - a).normalized;
-        Vector3 side = Vector3.Cross(dir, Camera.current.transform.forward).normalized * (thickness / 2f);
-
-        // 3 paralel çizgi → kalın görünüm
-        Gizmos.DrawLine(a - side, b - side);
-        Gizmos.DrawLine(a, b);
-        Gizmos.DrawLine(a + side, b + side);
     }
 
     private void OnMouseDown()
@@ -95,8 +69,8 @@ public class MapDrawer : MonoBehaviour
     private void SelectColor(Color color)
     {
         Color srgb = color.linear == color ? color.gamma : color;  // Convert back to gamma
-        meshRenderer.material.SetInt(provinceSelectString, srgb == Color.black ? 0 : 1);
-        meshRenderer.material.SetColor(provinceColorString, srgb);
+        meshRenderer.material.SetInt(GameConstants.Instance.mapShaderProvinceSelectString, srgb == Color.black ? 0 : 1);
+        meshRenderer.material.SetColor(GameConstants.Instance.mapShaderProvinceColorString, srgb);
 
         SelectedColor = color;
     }
@@ -173,4 +147,21 @@ public class MapDrawer : MonoBehaviour
         return pixels;
     }
 
+    // Create a tmp text for cit name and place it between pos1 and pos2
+    private void CreateCityNameText(City city, Vector3 pos1, Vector3 pos2, Vector3 angle1, Vector3 angle2)
+    {
+        TMP_Text cityText = Instantiate(cityTextPrefab, cityTextParent);
+        cityText.text = city.cityName;
+        Vector3 midPoint = (pos1 + pos2 + angle1 + angle2) / 4f;
+        midPoint.y = transform.position.y;
+        cityText.transform.position = midPoint + Vector3.up * 0.1f; // Slightly above the map
+        // Set x bounds of the text box to fit between angle1 and angle2
+        cityText.rectTransform.sizeDelta = new Vector2(Vector3.Distance(angle1, angle2) * 10f, cityText.rectTransform.sizeDelta.y);
+        // Set its rotation to angle between pos1 and pos2
+        Vector3 direction = (angle2 - angle1).normalized;
+        float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
+        cityText.transform.rotation = Quaternion.Euler(90f, -angle, 0f);
+        cityText.transform.localScale *= 0.85f;
+        cityText.transform.localScale *= GameConstants.Instance.mapTextScaleFactor;
+    }
 }

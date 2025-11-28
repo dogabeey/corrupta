@@ -4,6 +4,55 @@ using UnityEngine;
 
 public static class GeometryUtils
 {
+    public static Vector2 GetPointWithSmallestX(this List<Vector2> points)
+    {
+        if (points == null || points.Count == 0)
+            throw new ArgumentException("Point list is empty");
+        Vector2 bestPoint = points[0];
+        foreach (var pt in points)
+        {
+            if (pt.x < bestPoint.x)
+                bestPoint = pt;
+        }
+        return bestPoint;
+    }
+    public static Vector2 GetPointWithLargestX(this List<Vector2> points)
+    {
+        if (points == null || points.Count == 0)
+            throw new ArgumentException("Point list is empty");
+        Vector2 bestPoint = points[0];
+        foreach (var pt in points)
+        {
+            if (pt.x > bestPoint.x)
+                bestPoint = pt;
+        }
+        return bestPoint;
+    }
+    public static Vector2 GetPointWithSmallestY(this List<Vector2> points)
+    {
+        if (points == null || points.Count == 0)
+            throw new ArgumentException("Point list is empty");
+        Vector2 bestPoint = points[0];
+        foreach (var pt in points)
+        {
+            if (pt.y < bestPoint.y)
+                bestPoint = pt;
+        }
+        return bestPoint;
+    }
+    public static Vector2 GetPointWithLargestY(this List<Vector2> points)
+    {
+        if (points == null || points.Count == 0)
+            throw new ArgumentException("Point list is empty");
+        Vector2 bestPoint = points[0];
+        foreach (var pt in points)
+        {
+            if (pt.y > bestPoint.y)
+                bestPoint = pt;
+        }
+        return bestPoint;
+    }
+
     public static (Vector2, Vector2) GetFarthestPoints(this List<Vector2> allPoints)
     {
         if (allPoints == null || allPoints.Count < 2)
