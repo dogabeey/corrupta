@@ -21,6 +21,6 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  mapTextScaleFactor: 1
+  mapTextScaleFactor: 0.8
   mapShaderProvinceColorString: _ProvinceColor
   mapShaderProvinceSelectString: _ProvinceSelect

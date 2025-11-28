@@ -77,15 +77,12 @@ public class MapDrawer : MonoBehaviour
 
     public City GetSelectedCityFromColor(Color selectedColor)
     {
-        float searchedRed = Mathf.FloorToInt(selectedColor.r * 255);
-        float searchedGreen = Mathf.FloorToInt(selectedColor.g * 255);
-        float searchedBlue = Mathf.FloorToInt(selectedColor.b * 255);
-
         var cityDefs = CityDefiniton.GetInstances();
         // Find the city definition that is closest to the selected color
         CityDefiniton cd = cityDefs.OrderBy(c =>
         {
             float distance = c.Color.Distance(selectedColor);
+            Debug.Log($"Color distance between selected color and {c.city.cityName} is {distance}");
             return distance;
         }
         ).First();

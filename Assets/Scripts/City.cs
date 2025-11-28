@@ -71,12 +71,6 @@ public class City : ListedScriptableObject<City>
         return CityDefiniton.GetInstances().Find(c => c.city.id == id);
     }
 
-    public static City GetCityByColor(Color color)
-    {
-        // Get the city with the closest color to given color.
-        CityDefiniton cityDefiniton = CityDefiniton.GetInstances().OrderBy(c => ColorUtil.Distance(c.Color, color)).First();
-        return cityDefiniton.city;
-    }
 
     private Color GetColor()
     {
