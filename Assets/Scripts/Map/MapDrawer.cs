@@ -83,15 +83,19 @@ public class MapDrawer : MonoBehaviour
         {
             float distance = c.Color.Distance(selectedColor);
             Debug.Log($"Color distance between selected color and {c.city.cityName} is {distance}");
+
             return distance;
         }
-        ).First();
+        ).Where(c => c.Color.Distance(selectedColor) < GameConstants.Instance.mapMaxColorDistanceDetection).FirstOrDefault();
 
         List<City> instances = City.GetInstances();
         City city = null;
-        if (instances.Exists(c => c == cd.city))
+        if(cd)
         {
-            city = instances.Find(c => c == cd.city);
+            if (instances.Exists(c => c == cd.city))
+            {
+                city = instances.Find(c => c == cd.city);
+            }
         }
         return city;
     }

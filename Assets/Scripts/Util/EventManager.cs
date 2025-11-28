@@ -12,7 +12,7 @@ public class EventManager : MonoBehaviour
 
     public static EventManager instance => GameManager.Instance.eventManager;
 
-    void Init()
+    public void Init()
     {
         if (eventDictionary == null)
         {

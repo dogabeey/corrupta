@@ -5,6 +5,7 @@ public class GameConstants : ListedScriptableObject<GameConstants>
 {
     [Header("MAP DRAWER SETTINGS")]
     public float mapTextScaleFactor = 1.0f;
+    public float mapMaxColorDistanceDetection = 0.1f;
     public string mapShaderProvinceColorString = "_ProvinceColor";
     public string mapShaderProvinceSelectString = "_ProvinceSelect";
 

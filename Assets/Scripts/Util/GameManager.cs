@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     private static void InitGame()
     {
+        EventManager.instance.Init();
+
         Country.InitCountry("Turkey", "stormwind");
 
         Country.RandomizeAll();
