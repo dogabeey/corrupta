@@ -9,12 +9,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-    
-    void Start()
-    {
         InitGame();
     }
+    
 
     private static void InitGame()
     {

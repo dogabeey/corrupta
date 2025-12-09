@@ -73,6 +73,7 @@ public class MapDrawer : MonoBehaviour
         meshRenderer.material.SetColor(GameConstants.Instance.mapShaderProvinceColorString, srgb);
 
         SelectedColor = color;
+        EventManager.TriggerEvent(GameConstants.GameEvents.SELECTED_CITY, new EventParam());
     }
 
     public City GetSelectedCityFromColor(Color selectedColor)
@@ -82,7 +83,6 @@ public class MapDrawer : MonoBehaviour
         CityDefiniton cd = cityDefs.OrderBy(c =>
         {
             float distance = c.Color.Distance(selectedColor);
-            Debug.Log($"Color distance between selected color and {c.city.cityName} is {distance}");
 
             return distance;
         }

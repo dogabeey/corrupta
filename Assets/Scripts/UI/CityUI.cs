@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CityUI : ToggleUIBehaviour
 {
     public MapDrawer mapDrawer;
+    public TMP_Text cityNameText;
+    public TMP_Text populationText;
+    public TMP_Text descriptionText;
 
     protected override string UpdateEventString { get => GameConstants.GameEvents.SELECTED_CITY; }
 
@@ -29,7 +33,9 @@ public class CityUI : ToggleUIBehaviour
         City city = mapDrawer.GetSelectedCityFromColor(mapDrawer.SelectedColor);
         if(city)
         {
-             // Blah blah blah
+            cityNameText.text = city.cityName;
+            populationText.text = "Population: " + city.Population.ToString("N0");
+            descriptionText.text = city.description;
         }
     }
 
