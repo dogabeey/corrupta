@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7c0eb108efa20546a0db9c511681d0a, type: 3}
-  m_Name: Buroucrat
+  m_Name: Burouecrat
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -22,7 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   id: 26
-  className: Buroucrat
-  wealthRange: {x: 39.43571, y: 72.106445}
-  educationRange: {x: 22.090416, y: 100}
+  className: Burouecrat
+  wealthRange: {x: 47.41905, y: 82.36614}
+  educationRange: {x: 22.090416, y: 74.35075}
   partizanshipRange: {x: 72.74768, y: 100}

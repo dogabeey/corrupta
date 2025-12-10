@@ -24,5 +24,5 @@ MonoBehaviour:
   id: 21
   className: Forestry
   wealthRange: {x: 0, y: 24.975956}
-  educationRange: {x: 0, y: 18.563644}
-  partizanshipRange: {x: 62.167366, y: 100}
+  educationRange: {x: 0, y: 15.036874}
+  partizanshipRange: {x: 50.304585, y: 100}

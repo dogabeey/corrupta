@@ -23,6 +23,6 @@ MonoBehaviour:
     SerializationNodes: []
   id: 8
   className: White Collar
-  wealthRange: {x: 19.846107, y: 72.106445}
-  educationRange: {x: 23.052263, y: 63.449825}
-  partizanshipRange: {x: 12.151333, y: 61.52613}
+  wealthRange: {x: 31.099707, y: 57.99936}
+  educationRange: {x: 22.7637, y: 66.65598}
+  partizanshipRange: {x: 16.99262, y: 74.99198}
