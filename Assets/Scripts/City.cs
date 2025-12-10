@@ -13,9 +13,11 @@ public class City : ListedScriptableObject<City>
     public string cityName;
     public string description;
     public Person mayor;
+    public List<CitizenGroup> citizens;
     [Header("Generation Settings")]
     public List<PartyRate> partyRates;
-    public List<CitizenGroup> citizens;
+    public List<IdeologyRate> ideologyRates;
+    public List<OccupationRate> occuptionRates;
 
     public int Population => citizens.Count * CitizenGroup.POP_PER_GROUP;
     public float SurfaceAreaInKm2 => surfaceSizeByPixel;
@@ -28,24 +30,57 @@ public class City : ListedScriptableObject<City>
     {
         List<int> ideologyWeights = new List<int>();
         List<int> partyWeights = new List<int>();
+        List<int> occupationWeights = new List<int>();
 
-        List<Ideology> ideologies = new List<Ideology>();
-        List<Party> parties = new List<Party>();
+        List<Ideology> ideologies = Ideology.GetInstances();
+        List<Party> parties = Party.GetInstances();
+        List<Occupation> occupations = Occupation.GetInstances();
 
+        ideologyRates.ForEach(p => ideologyWeights.Add(p.rate));
         partyRates.ForEach(p => partyWeights.Add(p.rate));
-        partyRates.ForEach(p => parties.Add(p.party));
+        occuptionRates.ForEach(p => occupationWeights.Add(p.rate));
 
         for (int i = 0; i < count; i++)
         {
             Ideology ideology = ideologies.GetWeightedRandomElement(ideologyWeights);
-            Party party = parties.GetWeightedRandomElement(ideologyWeights);
-
-            Occupation occupation = Occupation.GetInstances().GetRandomElement();
+            Party party = parties.GetWeightedRandomElement(partyWeights);
+            Occupation occupation = occupations.GetWeightedRandomElement(occupationWeights);
 
             float wealth = UnityEngine.Random.Range(occupation.wealthRange.x, occupation.wealthRange.y);
             float education = UnityEngine.Random.Range(occupation.educationRange.x, occupation.educationRange.y);
             float partizanship = UnityEngine.Random.Range(occupation.partizanshipRange.x, occupation.partizanshipRange.y);
-            citizens.Add(new CitizenGroup(party, ideology, Occupation.GetInstances().GetRandomElement(), wealth, education, partizanship));
+            citizens.Add(new CitizenGroup(party, ideology, occupation, wealth, education, partizanship));
+        }
+    }
+
+    private void OnValidate()
+    {
+        // Add all ideologies that are missing in the ideology rates list
+        var allIdeologies = Ideology.GetInstances();
+        foreach (var ideology in allIdeologies)
+        {
+            if (!ideologyRates.Any(ir => ir.ideology == ideology))
+            {
+                ideologyRates.Add(new IdeologyRate { ideology = ideology, rate = 0 });
+            }
+        }
+        // Add all parties that are missing in the party rates list
+        var allParties = Party.GetInstances();
+        foreach (var party in allParties)
+        {
+            if (!partyRates.Any(pr => pr.party == party))
+            {
+                partyRates.Add(new PartyRate { party = party, rate = 0 });
+            }
+        }
+        // Add all occupations that are missing in the occupation rates list
+        var allOccupations = Occupation.GetInstances();
+        foreach (var occupation in allOccupations)
+        {
+            if (!occuptionRates.Any(or => or.occupation == occupation))
+            {
+                occuptionRates.Add(new OccupationRate { occupation = occupation, rate = 0 });
+            }
         }
     }
 
@@ -53,13 +88,18 @@ public class City : ListedScriptableObject<City>
     public class IdeologyRate
     {
         public Ideology ideology;
-        [Range(1,10)] public int rate;
+        [Range(0,10)] public int rate;
     }
     [System.Serializable]
     public class PartyRate
     {
         public Party party;
-        [Range(1,10)] public int rate;
+        [Range(0,10)] public int rate;
+    }
+    public class OccupationRate
+    {
+        public Occupation occupation;
+        [Range(0, 10)] public int rate;
     }
 
     public static City GetCity(int id)
