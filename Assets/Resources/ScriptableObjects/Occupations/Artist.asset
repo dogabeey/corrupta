@@ -21,8 +21,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 0
-  className: 
-  wealthRange: {x: 0, y: 0}
-  educationRange: {x: 0, y: 0}
-  partizanshipRange: {x: 0, y: 0}
+  id: 28
+  className: Artist
+  wealthRange: {x: 0, y: 100}
+  educationRange: {x: 11.542155, y: 54.151978}
+  partizanshipRange: {x: 18.916313, y: 66.97659}

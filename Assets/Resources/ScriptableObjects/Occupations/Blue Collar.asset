@@ -21,8 +21,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 0
-  className: 
-  wealthRange: {x: 0, y: 0}
-  educationRange: {x: 0, y: 0}
-  partizanshipRange: {x: 0, y: 0}
+  id: 27
+  className: Blue Collar
+  wealthRange: {x: 14.716257, y: 39.403656}
+  educationRange: {x: 18.24303, y: 39.724274}
+  partizanshipRange: {x: 60.564285, y: 100}

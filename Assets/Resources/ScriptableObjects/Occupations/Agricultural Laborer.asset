@@ -23,6 +23,6 @@ MonoBehaviour:
     SerializationNodes: []
   id: 29
   className: Agricultural Laborer
-  wealthRange: {x: 0, y: 10}
-  educationRange: {x: 0, y: 10}
+  wealthRange: {x: 0, y: 11.1894865}
+  educationRange: {x: 0, y: 12.792565}
   partizanshipRange: {x: 69.54152, y: 99.358765}

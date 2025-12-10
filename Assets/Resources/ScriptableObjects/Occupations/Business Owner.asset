@@ -21,8 +21,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 0
-  className: 
-  wealthRange: {x: 0, y: 0}
-  educationRange: {x: 0, y: 0}
-  partizanshipRange: {x: 0, y: 0}
+  id: 24
+  className: Business Owner
+  wealthRange: {x: 32.350113, y: 69.86214}
+  educationRange: {x: 16.960567, y: 61.52613}
+  partizanshipRange: {x: 38.76243, y: 93.267075}
