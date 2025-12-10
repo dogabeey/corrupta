@@ -25,5 +25,26 @@ MonoBehaviour:
   cityName: Pinkerton
   description: 
   mayor: {fileID: 0}
-  partyRates: []
   citizens: []
+  partyRates:
+  - party: {fileID: 11400000, guid: 1491e1ac70608934a864177aea7efa17, type: 2}
+    rate: 1
+  ideologyRates:
+  - ideology: {fileID: 11400000, guid: 912b3cd2f8823e442a0cec31ba04160a, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: c573308e7b9fa7f44909b7985c2a0256, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: bfc65de10e09d084ea7a7eebbc49cf35, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: 5ed1a81f875a6034680d1647c45b7d79, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: 8f52a44eade17f248aeed909ae1466a7, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: c6ef90f45fbeeb34b8459e1b35ec6986, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: c613a23e440cd3647b23dfa3a6cc7bed, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: 7a6db0a55024cad4097f33ed080984a9, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: af55ae4af6bc8604a8e4932d127232d1, type: 2}
+    rate: 1

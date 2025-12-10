@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -39,7 +40,7 @@ public class ScriptableObjectBrowser : OdinMenuEditorWindow
 
             if (guids.Length == 0)
             {
-                tree.Add($"Add new {typeName}", new EmptyTypePage(type));
+                tree.Add($"{typeName}", new EmptyTypePage(type));
                 continue;
             }
 
@@ -61,16 +62,58 @@ public class ScriptableObjectBrowser : OdinMenuEditorWindow
     private class EmptyTypePage
     {
         [ShowInInspector, ReadOnly]
-        public string TypeName { get; }
+        public Type Type { get; }
 
         [ShowInInspector, ReadOnly, MultiLineProperty]
-        public string Info => $"No ScriptableObject assets of type '{TypeName}' were found in the project.";
+        public string Info => $"No ScriptableObject assets of type '{Type.Name}' were found in the project.";
 
         public EmptyTypePage(Type type)
         {
-            TypeName = type.FullName;
+            Type = type;
+        }
+
+        [Button("Add New Instance", Icon = SdfIconType.Newspaper)]
+        public void AddNewInstance(string folderName, string objectName)
+        {
+            if (folderName.IsNullOrWhitespace())
+                folderName = Type.Name + "s";
+
+            var instance = ScriptableObject.CreateInstance(Type);
+
+            string rootFolder = "Assets/Resources/ScriptableObjects";
+
+            // Ensure root folder exists (optional safety)
+            if (!AssetDatabase.IsValidFolder(rootFolder))
+            {
+                AssetDatabase.CreateFolder("Assets/Resources", "ScriptableObjects");
+            }
+
+            // Create subfolder and get its actual path:
+            string guid = AssetDatabase.CreateFolder(rootFolder, folderName);
+            string folderPath = AssetDatabase.GUIDToAssetPath(guid);  // <- real path
+
+            // Build full asset path
+            string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(
+                $"{folderPath}/{objectName}.asset"
+            );
+
+            // Create asset
+            AssetDatabase.CreateAsset(instance, assetPathAndName);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+
+            EditorUtility.FocusProjectWindow();
+            Selection.activeObject = instance;
+
+            EditorUtility.DisplayDialog(
+                "Asset Created",
+                $"{objectName} has been created in {folderName}.",
+                "OK"
+            );
+
         }
     }
+
     protected override void OnBeginDrawEditors()
     {
         base.OnBeginDrawEditors();
