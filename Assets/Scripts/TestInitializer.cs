@@ -24,29 +24,4 @@ public class TestInitializer : MonoBehaviour
         Country.RandomizeAll();
         
 	}
-
-    public Ideology RandomIdeology()
-    {
-        int index = UnityEngine.Random.Range(0,Ideology.GetInstances().Count);
-        return Ideology.GetInstances()[index];
-    }
-
-    public City RandomCity()
-    {
-        int index = UnityEngine.Random.Range(0,City.GetInstances().Count);
-        return City.GetInstances()[index];
-    }
-
-    public Party RandomParty()
-    {
-        int index = UnityEngine.Random.Range(0,City.GetInstances().Count);
-        return Party.parties[index];
-    }
-
-    public string RandomName(string fileName)
-    {
-        string[] nameList = File.ReadAllLines("Assets\\XML\\" + fileName);
-        string retVal = nameList[UnityEngine.Random.Range(0,nameList.Length)];
-        return retVal;
-    }
 }

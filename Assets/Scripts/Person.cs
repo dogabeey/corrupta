@@ -66,7 +66,7 @@ public class Person : ListedScriptableObject<Person>
         {
             if (p.viceChairPerson == this) return Title.PartyViceLeader;
         }
-        foreach (City c in City.GetInstances())
+        foreach (City c in GameManager.Instance.cities)
         {
             if (c.mayor == this) return Title.Mayor;
         }

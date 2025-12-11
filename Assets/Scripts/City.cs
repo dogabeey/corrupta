@@ -9,7 +9,6 @@ using System.Linq;
 [CreateAssetMenu(fileName = "New City", menuName = "Corrupta/New City...")]
 public class City : ListedScriptableObject<City>
 {
-    public int id;
     public string cityName;
     public string description;
     public Person mayor;
@@ -32,9 +31,9 @@ public class City : ListedScriptableObject<City>
         List<int> partyWeights = new List<int>();
         List<int> occupationWeights = new List<int>();
 
-        List<Ideology> ideologies = Ideology.GetInstances();
-        List<Party> parties = Party.GetInstances();
-        List<Occupation> occupations = Occupation.GetInstances();
+        List<Ideology> ideologies = GameManager.Instance.ideologies;
+        List<Party> parties = GameManager.Instance.parties;
+        List<Occupation> occupations = GameManager.Instance.occupations;
 
         ideologyRates.ForEach(p => ideologyWeights.Add(p.rate));
         partyRates.ForEach(p => partyWeights.Add(p.rate));
@@ -101,19 +100,8 @@ public class City : ListedScriptableObject<City>
         public Occupation occupation;
         [Range(0, 10)] public int rate;
     }
-
-    public static City GetCity(int id)
-    {
-        return GetInstances().Find(c => c.id == id);
-    }
     public static CityDefiniton GetCityDefinition(int id)
     {
-        return CityDefiniton.GetInstances().Find(c => c.city.id == id);
-    }
-
-
-    private Color GetColor()
-    {
-        return GetCityDefinition(id).Color;
+        return GameManager.Instance.cityDefinitions.Find(c => c.city.id == id);
     }
 }

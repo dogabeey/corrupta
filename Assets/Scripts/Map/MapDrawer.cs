@@ -78,7 +78,7 @@ public class MapDrawer : MonoBehaviour
 
     public City GetSelectedCityFromColor(Color selectedColor)
     {
-        var cityDefs = CityDefiniton.GetInstances();
+        var cityDefs = GameManager.Instance.cityDefinitions;
         // Find the city definition that is closest to the selected color
         CityDefiniton cd = cityDefs.OrderBy(c =>
         {
@@ -88,13 +88,13 @@ public class MapDrawer : MonoBehaviour
         }
         ).Where(c => c.Color.Distance(selectedColor) < GameConstants.Instance.mapMaxColorDistanceDetection).FirstOrDefault();
 
-        List<City> instances = City.GetInstances();
+        List<City> instances = GameManager.Instance.cities;
         City city = null;
         if(cd)
         {
-            if (instances.Exists(c => c == cd.city))
+            if (instances.Exists(c => c.id == cd.city.id))
             {
-                city = instances.Find(c => c == cd.city);
+                city = instances.Find(c => c.id == cd.city.id);
             }
         }
         return city;

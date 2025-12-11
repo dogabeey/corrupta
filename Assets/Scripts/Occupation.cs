@@ -8,7 +8,6 @@ using Sirenix.Utilities;
 [CreateAssetMenu(fileName = "New Occupation", menuName = "Corrupta/Social Classes/New Occupation...")]
 public class Occupation : ListedScriptableObject<Occupation>
 {
-    public int id;
     public string className;
     [MinMaxSlider(0, 100)]
     public Vector2 wealthRange;

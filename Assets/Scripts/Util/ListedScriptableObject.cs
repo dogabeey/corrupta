@@ -8,6 +8,7 @@ public abstract class  ManageableScriptableObject : SerializedScriptableObject
 
 public class ListedScriptableObject<T> : ManageableScriptableObject where T : ListedScriptableObject<T>
 {
+    public int id;
     [Button("Add New Instance", Icon = SdfIconType.Newspaper)]
     // Add a new instance of this type's scriptable object to the same folder as this scriptable object
     public void AddNewInstance(string objectName)
@@ -22,12 +23,6 @@ public class ListedScriptableObject<T> : ManageableScriptableObject where T : Li
         UnityEditor.Selection.activeObject = instance;
     }
 
-    public T GetRandomInstance()
-    {
-        int randomIndex = Random.Range(0, GetInstances().Count - 1);
-        return GetInstances()[randomIndex];
-    }
-
     public static List<T> GetInstances()
     {
         UnityEngine.Object[] loadedObjects = Resources.LoadAll("", typeof(T));
@@ -39,6 +34,20 @@ public class ListedScriptableObject<T> : ManageableScriptableObject where T : Li
             {
                 instances.Add((T)(object) obj);
             }
+        }
+
+        return instances;
+    }
+    public static List<T> GetRuntimeInstances()
+    {
+        T[] loadedObjects = Resources.LoadAll<T>(""); // or your folder path
+        List<T> instances = new List<T>(loadedObjects.Length);
+
+        foreach (var obj in loadedObjects)
+        {
+            // Create a runtime clone so the original asset stays untouched
+            T runtimeInstance = Instantiate(obj);
+            instances.Add(runtimeInstance);
         }
 
         return instances;
