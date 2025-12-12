@@ -10,10 +10,10 @@ using Lionsfall.SimpleJSON;
 
 namespace Lionsfall
 {
-	[CreateAssetMenu(fileName = "SaveManager", menuName = "Scriptable Objects/Managers/Save Manager...")]
+	[CreateAssetMenu(fileName = "SaveManager", menuName = "Corrupta/Managers/Save Manager...")]
 	public class SaveManager : SerializedScriptableObject
 	{
-        public static string DATABASE_URL = "https://wordstones-users.firebaseio.com/";
+        public static string DATABASE_URL = "";
 		public static string userId;
 		public static SaveManager Instance => GameManager.Instance.saveManager;
 

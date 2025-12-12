@@ -1394,6 +1394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameConstants: {fileID: 11400000, guid: d6142786f03e4d54c8eaaaecf92376c6, type: 2}
   eventManager: {fileID: 396517673}
+  saveManager: {fileID: 11400000, guid: 9e293fbb95894f34dbaa71776b8e9e5f, type: 2}
 --- !u!4 &396517675
 Transform:
   m_ObjectHideFlags: 0
