@@ -1,3 +1,4 @@
+using Lionsfall;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,13 +6,15 @@ public class GameManager : MonoBehaviour
 {
     public GameConstants gameConstants;
     public EventManager eventManager;
-    public List<CityDefiniton> cityDefinitions;
-    public List<City> cities;
-    public List<Ideology> ideologies;
-    public List<Media> medias;
-    public List<Person> people;
-    public List<Occupation> occupations;
-    public List<Party> parties;
+    public SaveManager saveManager;
+
+    internal List<CityDefiniton> cityDefinitions;
+    internal List<City> cities;
+    internal List<Ideology> ideologies;
+    internal List<Media> medias;
+    internal List<Person> people;
+    internal List<Occupation> occupations;
+    internal List<Party> parties;
 
 
     public static GameManager Instance;
