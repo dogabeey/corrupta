@@ -65,7 +65,6 @@ public class EventManager : ScriptableObject
     }
 }
 
-//Re-usable structure/ Can be a class to. Add all parameters you need inside it
 public class EventParam
 {
     public GameObject paramObj;
