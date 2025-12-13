@@ -8,9 +8,7 @@ using System.Threading;
 using Sirenix.OdinInspector;
 using Lionsfall.SimpleJSON;
 
-namespace Lionsfall
-{
-	[CreateAssetMenu(fileName = "SaveManager", menuName = "Corrupta/Managers/Save Manager...")]
+[CreateAssetMenu(fileName = "SaveManager", menuName = "Corrupta/Managers/Save Manager...")]
 	public class SaveManager : SerializedScriptableObject
 	{
         public static string DATABASE_URL = "";
@@ -78,23 +76,6 @@ namespace Lionsfall
 				}
 			}
         }
-
-        public void Start()
-		{
-			Debug.Log("Save file path: " + $"{SaveFilePath}");
-        }
-		public void Update()
-		{
-
-		}
-		public void OnManagerDestroy()
-		{
-			if(saveOnQuit)
-			{
-				Save();
-			}
-			
-		}
 
 		#endregion
 
@@ -197,4 +178,3 @@ namespace Lionsfall
         Tutorial = 16,
 		Everything = MetaData | Settings | WorldProgression | LevelProgression | Tutorial
     }
-}

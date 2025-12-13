@@ -16,6 +16,15 @@ public class Occupation : ListedScriptableObject<Occupation>
     [MinMaxSlider(0, 100)]
     public Vector2 partizanshipRange;
 
+    public override void Start()
+    {
+    }
+    public override void Update()
+    {
+    }
+    public override void OnManagerDestroy()
+    {
+    }
     private void OnValidate()
     {
         if(id == 0)

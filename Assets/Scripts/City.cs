@@ -23,6 +23,18 @@ public class City : ListedScriptableObject<City>
     public string SurfaceAreaInKm2String => (SurfaceAreaInKm2 / 1000).ToString("N1") + " km²";
 
     internal int surfaceSizeByPixel;
+    public override void Start()
+    {
+
+    }
+    public override void Update()
+    {
+
+    }
+    public override void OnManagerDestroy()
+    {
+
+    }
 
     [Button("Add Random Citizens")]
     public void GenerateCitizens(int count)

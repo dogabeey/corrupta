@@ -51,6 +51,13 @@ public class GameManager : MonoBehaviour, ISaveable
         occupations = Occupation.GetRuntimeInstances();
         parties = Party.GetRuntimeInstances();
 
+        cityDefinitions.ForEach(cd => cd.Start());
+        cities.ForEach(c => c.Start());
+        ideologies.ForEach(i => i.Start());
+        medias.ForEach(m => m.Start());
+        people.ForEach(p => p.Start());
+        occupations.ForEach(o => o.Start());
+        parties.ForEach(p => p.Start());
 
         Country.InitCountry("Turkey", "Ankara");
 

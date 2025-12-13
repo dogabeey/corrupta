@@ -18,5 +18,14 @@ public class Party : ListedScriptableObject<Party>
     public Ideology ideology;
 
     public List<Person> deputyList = new List<Person>();
+    public override void Start()
+    {
+    }
+    public override void Update()
+    {
+    }
+    public override void OnManagerDestroy()
+    {
+    }
 }
 

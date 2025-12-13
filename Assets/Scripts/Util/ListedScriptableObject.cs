@@ -4,11 +4,16 @@ using UnityEngine;
 
 public abstract class  ManageableScriptableObject : SerializedScriptableObject
 {
+    public abstract void Start();
+    public abstract void Update();
+    public abstract void OnManagerDestroy();
 }
 
-public class ListedScriptableObject<T> : ManageableScriptableObject where T : ListedScriptableObject<T>
+public abstract class ListedScriptableObject<T> : ManageableScriptableObject where T : ListedScriptableObject<T>
 {
     public int id;
+
+
     [Button("Add New Instance", Icon = SdfIconType.Newspaper)]
     // Add a new instance of this type's scriptable object to the same folder as this scriptable object
     public void AddNewInstance(string objectName)

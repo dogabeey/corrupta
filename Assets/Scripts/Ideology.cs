@@ -14,6 +14,16 @@ public class Ideology  : ListedScriptableObject<Ideology>
     public string ideologyName;
     public string description;
 
+    public override void Start()
+    {
+    }
+    public override void Update()
+    {
+    }
+    public override void OnManagerDestroy()
+    {
+    }
+
     private void OnValidate()
     {
         string assetPath = AssetDatabase.GetAssetPath(this.GetInstanceID());

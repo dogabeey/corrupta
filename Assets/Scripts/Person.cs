@@ -37,6 +37,15 @@ public class Person : ListedScriptableObject<Person>
     {
 
     }
+    public override void Start()
+    {
+    }
+    public override void Update()
+    {
+    }
+    public override void OnManagerDestroy()
+    {
+    }
 
     public string GetTitleString()
     {
