@@ -62,7 +62,12 @@ namespace Lionsfall
 			foreach (SaveDataType sdt in saveDataTypes)
 			{
 				// Remove the save file
-				if (System.IO.Directory.Exists($"{SaveFilePath}/{saveDataStrings[sdt]}"))
+				if(saveDataStrings == null || !saveDataStrings.ContainsKey(sdt))
+				{
+					Debug.LogWarning("No save data string found for save data type: " + sdt);
+					continue;
+                }
+                if (System.IO.Directory.Exists($"{SaveFilePath}/{saveDataStrings[sdt]}"))
 				{
 					System.IO.Directory.Delete($"{SaveFilePath}/{saveDataStrings[sdt]}");
 					Debug.Log("Save file deleted");
@@ -190,5 +195,6 @@ namespace Lionsfall
         WorldProgression = 4,
         LevelProgression = 8,
         Tutorial = 16,
+		Everything = MetaData | Settings | WorldProgression | LevelProgression | Tutorial
     }
 }
