@@ -3,14 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventManager : MonoBehaviour
+[CreateAssetMenu(fileName = "EventManager", menuName = "Corrupta/Managers/Event Manager...", order = 1)]
+public class EventManager : ScriptableObject
 {
-
     private Dictionary<string, Action<EventParam>> eventDictionary;
 
-    private static EventManager eventManager;
-
-    public static EventManager instance => GameManager.Instance.eventManager;
+    public static EventManager Instance => GameManager.Instance.eventManager;
 
     public void Init()
     {
@@ -22,40 +20,43 @@ public class EventManager : MonoBehaviour
 
     public static void StartListening(string eventName, Action<EventParam> listener)
     {
+        if(Instance == null) return;
+
         Action<EventParam> thisEvent;
-        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+        if (Instance.eventDictionary.TryGetValue(eventName, out thisEvent))
         {
             //Add more event to the existing one
             thisEvent += listener;
 
             //Update the Dictionary
-            instance.eventDictionary[eventName] = thisEvent;
+            Instance.eventDictionary[eventName] = thisEvent;
         }
         else
         {
             //Add event to the Dictionary for the first time
             thisEvent += listener;
-            instance.eventDictionary.Add(eventName, thisEvent);
+            Instance.eventDictionary.Add(eventName, thisEvent);
         }
     }
 
     public static void StopListening(string eventName, Action<EventParam> listener)
     {
-        if (eventManager == null) return;
+        if(Instance == null) return;
+
         Action<EventParam> thisEvent;
-        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+        if (Instance.eventDictionary.TryGetValue(eventName, out thisEvent))
         {
             //Remove event from the existing one
             thisEvent -= listener;
 
             //Update the Dictionary
-            instance.eventDictionary[eventName] = thisEvent;
+            Instance.eventDictionary[eventName] = thisEvent;
         }
     }
 
     public static void TriggerEvent(string eventName, EventParam eventParam)
     {
-        Action<EventParam> thisEvent = instance.eventDictionary.GetValueOrDefault(eventName);
+        Action<EventParam> thisEvent = Instance.eventDictionary.GetValueOrDefault(eventName);
         if (thisEvent != null)
         {
             thisEvent.Invoke(eventParam);
