@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
 
 public static class ListExtensions
 {
@@ -55,6 +56,12 @@ public static class ListExtensions
 
         int randomIndex = rng.Next(list.Count);
         return weightedList[randomIndex];
+    }
+
+    public static async Task<T> FindAsync<T>(this List<T> list, Predicate<T> match)
+    {
+
+        return await Task.Run(() => list.Find(match));
     }
 
     public static List<T> GetRandomElements<T>(this List<T> list, int count, int? seed = null)

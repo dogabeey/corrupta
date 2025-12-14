@@ -29,5 +29,6 @@ public class Ideology  : ListedScriptableObject<Ideology>
         string assetPath = AssetDatabase.GetAssetPath(this.GetInstanceID());
         ideologyName = Path.GetFileNameWithoutExtension(assetPath);
     }
+
 }
  

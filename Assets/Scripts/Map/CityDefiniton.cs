@@ -18,6 +18,7 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
     public override void Start()
     {
         SaveManager.Instance.Register(this);
+        Load();
     }
     public override void Update()
     {
@@ -34,8 +35,8 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
     {
         Dictionary<string, object> saveData = new Dictionary<string, object>();
 
-        
-        saveData["city"] = city;
+
+        saveData["city_id"] = city.id;
         saveData["mapColor_r"] =(int)mapColor.r;
         saveData["mapColor_g"] = (int)mapColor.g;
         saveData["mapColor_b"] =(int)mapColor.b;
@@ -50,7 +51,8 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
         
         if (loadData != null)
         {
-            city.name = loadData["city"].AsObject;
+            int cityId = loadData["city_id"].AsInt;
+            city = GameManager.Instance.cities.Find(x => x.id == cityId);
             mapColor.r = loadData["mapColor_r"].AsFloat;
             mapColor.g = loadData["mapColor_g"].AsFloat;
             mapColor.b = loadData["mapColor_b"].AsFloat;

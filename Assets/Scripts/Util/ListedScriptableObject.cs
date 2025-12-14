@@ -43,6 +43,18 @@ public abstract class ListedScriptableObject<T> : ManageableScriptableObject whe
 
         return instances;
     }
+    public static T GetInstanceByID(int id)
+    {
+        List<T> instances = GetInstances();
+        foreach (var instance in instances)
+        {
+            if (instance.id == id)
+            {
+                return instance;
+            }
+        }
+        return null;
+    }
     public static List<T> GetRuntimeInstances()
     {
         T[] loadedObjects = Resources.LoadAll<T>(""); // or your folder path
