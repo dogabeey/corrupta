@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Lionsfall.SimpleJSON;
 using Lionsfall;
+using System.Globalization;
+using System;
 
 [CreateAssetMenu(fileName = "New City Definition", menuName = "Corrupta/New City Definition...")]
 public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
@@ -13,12 +15,11 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
 
     public Color Color => new Color(mapColor.r, mapColor.g, mapColor.b);
 
-    public string SaveId => "city_definition_" + id;
+    public string SaveId => "city_definition_" + city.name.ToLower();
 
     public override void Start()
     {
         SaveManager.Instance.Register(this);
-        Load();
     }
     public override void Update()
     {
@@ -44,7 +45,7 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
         return saveData;
     }
 
-    public void Load()
+    public bool Load(Action onLoadSuccess = null, Action onLoadFail = null)
     {
 
         JSONNode loadData = SaveManager.Instance.LoadSave(this);
@@ -56,6 +57,12 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
             mapColor.r = loadData["mapColor_r"].AsFloat;
             mapColor.g = loadData["mapColor_g"].AsFloat;
             mapColor.b = loadData["mapColor_b"].AsFloat;
+
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

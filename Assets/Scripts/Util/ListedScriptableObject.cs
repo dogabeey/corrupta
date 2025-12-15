@@ -55,7 +55,7 @@ public abstract class ListedScriptableObject<T> : ManageableScriptableObject whe
         }
         return null;
     }
-    public static List<T> GetRuntimeInstances()
+    public static List<T> GetRuntimeInstancesFromAssets()
     {
         T[] loadedObjects = Resources.LoadAll<T>(""); // or your folder path
         List<T> instances = new List<T>(loadedObjects.Length);

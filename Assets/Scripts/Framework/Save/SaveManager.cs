@@ -9,172 +9,195 @@ using Sirenix.OdinInspector;
 using Lionsfall.SimpleJSON;
 
 [CreateAssetMenu(fileName = "SaveManager", menuName = "Corrupta/Managers/Save Manager...")]
-	public class SaveManager : SerializedScriptableObject
+public class SaveManager : ManageableScriptableObject
+{
+    public static string DATABASE_URL = "";
+	public static string userId;
+	public static SaveManager Instance => GameManager.Instance.saveManager;
+
+	#region Member Variables
+
+	private List<ISaveable>	saveables;
+	private JSONNode	loadedSave;
+
+	[SerializeField] bool saveOnQuit = true;
+	[SerializeField] Dictionary<SaveDataType, string> saveDataStrings = new Dictionary<SaveDataType, string>();
+
+    #endregion
+
+    #region Properties
+
+    /// <summary>
+    /// Path to the save file on the device
+    /// </summary>
+    public static string SaveFilePath { get { return Application.persistentDataPath ; } }
+
+	/// <summary>
+	/// List of registered saveables
+	/// </summary>
+	private List<ISaveable> Saveables
 	{
-        public static string DATABASE_URL = "";
-		public static string userId;
-		public static SaveManager Instance => GameManager.Instance.saveManager;
-
-		#region Member Variables
-
-		private List<ISaveable>	saveables;
-		private JSONNode	loadedSave;
-
-		[SerializeField] bool saveOnQuit = true;
-		[SerializeField] Dictionary<SaveDataType, string> saveDataStrings = new Dictionary<SaveDataType, string>();
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Path to the save file on the device
-        /// </summary>
-        public static string SaveFilePath { get { return Application.persistentDataPath ; } }
-
-		/// <summary>
-		/// List of registered saveables
-		/// </summary>
-		private List<ISaveable> Saveables
+		get
 		{
-			get
+			if (saveables == null)
 			{
-				if (saveables == null)
-				{
-					saveables = new List<ISaveable>();
-				}
+				saveables = new List<ISaveable>();
+			}
 
-				return saveables;
+			return saveables;
+		}
+	}
+
+    public override void Start()
+    {
+    }
+
+    public override void Update()
+    {
+        
+
+    }
+    public override void OnManagerDestroy()
+    {
+        if(saveOnQuit)
+		{
+			Save();
+		}
+    }
+
+    #endregion
+
+    #region Unity Methods
+
+    [Button]
+    public void ClearSaves(SaveDataType saveDataType)
+    {
+		// For each selected save data type, clear the registered saveables of that type
+		List<SaveDataType> saveDataTypes = saveDataType.GetSelectedFlags();
+		foreach (SaveDataType sdt in saveDataTypes)
+		{
+			// Remove the save file
+			if(saveDataStrings == null || !saveDataStrings.ContainsKey(sdt))
+			{
+				Debug.LogWarning("No save data string found for save data type: " + sdt);
+				continue;
+            }
+            if (System.IO.Directory.Exists($"{SaveFilePath}/{saveDataStrings[sdt]}"))
+			{
+				System.IO.Directory.Delete($"{SaveFilePath}/{saveDataStrings[sdt]}", true);
+				Debug.Log("Save file deleted");
+			}
+			else
+			{
+				Debug.Log("No save file found");
 			}
 		}
+    }
 
-        #endregion
+	#endregion
 
-        #region Unity Methods
+	#region Public Methods
 
-        [Button]
-        public void ClearSaves(SaveDataType saveDataType)
-        {
-			// For each selected save data type, clear the registered saveables of that type
-			List<SaveDataType> saveDataTypes = saveDataType.GetSelectedFlags();
-			foreach (SaveDataType sdt in saveDataTypes)
-			{
-				// Remove the save file
-				if(saveDataStrings == null || !saveDataStrings.ContainsKey(sdt))
+	/// <summary>
+	/// Registers a saveable to be saved
+	/// </summary>
+	public void Register(ISaveable saveable)
+	{
+		Saveables.Add(saveable);
+	}
+
+	public JSONNode LoadSave(ISaveable saveable)
+	{
+		// Check if the save file has been loaded and if not try and load it
+		if (loadedSave == null && !LoadSave(saveable, out loadedSave))
+		{
+			return null;
+		}
+
+		// Check if the loaded save file has the given save id
+		if (!loadedSave.AsObject.HasKey(saveable.SaveId))
+		{
+			return null;
+		}
+
+		// Return the JSONNode for the save id
+		return loadedSave[saveable.SaveId];
+	}
+
+	#endregion
+
+	#region Private Methods
+
+	/// <summary>
+	/// Saves all registered saveables to the save file
+	/// </summary>
+	public void Save(Action onSaveComplete = null)
+	{
+
+        Dictionary<string, object> saveJson = new Dictionary<string, object>();
+		if(saveables != null)
+		{
+			for (int i = 0; i < saveables.Count; i++)
+			{ 
+				SaveDataType saveDataType = saveables[i].SaveDataType;
+				if(!saveDataStrings.ContainsKey(saveDataType))
 				{
-					Debug.LogWarning("No save data string found for save data type: " + sdt);
-					continue;
+					saveDataStrings.Add(saveDataType, saveDataType.ToString());
+				}
+                string saveString = saveDataStrings[saveDataType];
+                //saveJson.Add(saveables[i].SaveId, saveables[i].Save());
+                if (saveJson.ContainsKey(saveables[i].SaveId))
+				{
+					saveJson[saveables[i].SaveId] = saveables[i].Save();
+				}else
+				{
+					saveJson.Add(saveables[i].SaveId, saveables[i].Save());
                 }
-                if (System.IO.Directory.Exists($"{SaveFilePath}/{saveDataStrings[sdt]}"))
-				{
-					System.IO.Directory.Delete($"{SaveFilePath}/{saveDataStrings[sdt]}");
-					Debug.Log("Save file deleted");
-				}
-				else
-				{
-					Debug.Log("No save file found");
-				}
-			}
-        }
-
-		#endregion
-
-		#region Public Methods
-
-		/// <summary>
-		/// Registers a saveable to be saved
-		/// </summary>
-		public void Register(ISaveable saveable)
-		{
-			Saveables.Add(saveable);
-		}
-
-		public JSONNode LoadSave(ISaveable saveable)
-		{
-			// Check if the save file has been loaded and if not try and load it
-			if (loadedSave == null && !LoadSave(saveable, out loadedSave))
-			{
-				return null;
-			}
-
-			// Check if the loaded save file has the given save id
-			if (!loadedSave.AsObject.HasKey(saveable.SaveId))
-			{
-				return null;
-			}
-
-			// Return the JSONNode for the save id
-			return loadedSave[saveable.SaveId];
-		}
-
-		#endregion
-
-		#region Private Methods
-
-		/// <summary>
-		/// Saves all registered saveables to the save file
-		/// </summary>
-		public void Save(Action onSaveComplete = null)
-		{
-
-            Dictionary<string, object> saveJson = new Dictionary<string, object>();
-			if(saveables != null)
-			{
-				for (int i = 0; i < saveables.Count; i++)
-                {
-					SaveDataType saveDataType = saveables[i].SaveDataType;
-                    string saveString = saveDataStrings[saveDataType];
-                    //saveJson.Add(saveables[i].SaveId, saveables[i].Save());
-                    if (saveJson.ContainsKey(saveables[i].SaveId))
-					{
-						saveJson[saveables[i].SaveId] = saveables[i].Save();
-					}else
-					{
-						saveJson.Add(saveables[i].SaveId, saveables[i].Save());
-                    }
-					System.IO.Directory.CreateDirectory($"{SaveFilePath}/{saveString}");
-					System.IO.File.WriteAllText($"{SaveFilePath}/{saveString}/{saveables[i].SaveId}.json", JsonConvert.SerializeObject(saveJson));
-                }
+				System.IO.Directory.CreateDirectory($"{SaveFilePath}/{saveString}");
+				System.IO.File.WriteAllText($"{SaveFilePath}/{saveString}/{saveables[i].SaveId}.json", JsonConvert.SerializeObject(saveJson));
+            }
 				
-			}
-
-            onSaveComplete?.Invoke();
 		}
 
-		/// <summary>
-		/// Tries to load the save file
-		/// </summary>
-		private bool LoadSave(ISaveable saveable, out JSONNode json)
-        {
-            string saveString = saveDataStrings[saveable.SaveDataType];
+        onSaveComplete?.Invoke();
+	}
 
-            json = null;
+	/// <summary>
+	/// Tries to load the save file
+	/// </summary>
+	private bool LoadSave(ISaveable saveable, out JSONNode json)
+{
+    json = null;
+    if (saveDataStrings == null || !saveDataStrings.ContainsKey(saveable.SaveDataType)) { return false; }
 
-			if (!System.IO.File.Exists($"{SaveFilePath}/{saveString}/{saveable.SaveId}.json"))
-			{
-				Debug.Log($"<color=yellow>No save file found at: {SaveFilePath}/{saveString}/{saveable.SaveId}.json</color>");
-				return false;
-			}
+        string saveString = saveDataStrings[saveable.SaveDataType];
 
-			Debug.Log($"<color=green>Loading save file: {SaveFilePath}/{saveString}/{saveable.SaveId}.json</color>");
-            json = JSON.Parse(System.IO.File.ReadAllText($"{SaveFilePath}/{saveString}/{saveable.SaveId}.json"));
+
+		if (!System.IO.File.Exists($"{SaveFilePath}/{saveString}/{saveable.SaveId}.json"))
+		{
+			Debug.Log($"<color=yellow>No save file found at: {SaveFilePath}/{saveString}/{saveable.SaveId}.json</color>");
+			return false;
+		}
+
+		Debug.Log($"<color=green>Loading save file: {SaveFilePath}/{saveString}/{saveable.SaveId}.json</color>");
+        json = JSON.Parse(System.IO.File.ReadAllText($"{SaveFilePath}/{saveString}/{saveable.SaveId}.json"));
 
 			
 
-			return json != null;
-		}
-
-
-		#endregion
+		return json != null;
 	}
 
-	[Flags]
-    public enum SaveDataType
-    {
-        MetaData = 1,
-        Settings = 2,
-        WorldProgression = 4,
-        LevelProgression = 8,
-        Tutorial = 16,
-		Everything = MetaData | Settings | WorldProgression | LevelProgression | Tutorial
-    }
+
+	#endregion
+}
+
+[Flags]
+public enum SaveDataType
+{
+    MetaData = 1,
+    Settings = 2,
+    WorldProgression = 4,
+    LevelProgression = 8,
+    Tutorial = 16,
+	Everything = MetaData | Settings | WorldProgression | LevelProgression | Tutorial
+}

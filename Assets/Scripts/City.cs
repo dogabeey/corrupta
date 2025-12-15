@@ -129,7 +129,7 @@ public class City : ListedScriptableObject<City>, ISaveable
 
         saveData["cityName"] = cityName;
         saveData["description"] = description;
-        saveData["mayor_id"] = mayor.id;
+        if(mayor) saveData["mayor_id"] = mayor.id;
         saveData["citizen_count"] = citizens.Count;
         for (int i = 0; i < citizens.Count; i++)
         {
@@ -142,15 +142,18 @@ public class City : ListedScriptableObject<City>, ISaveable
         return saveData;
     }
 
-    public void Load()
+    public bool Load(Action onLoadSuccess = null, Action onLoadFail = null)
     {
         JSONNode loadData = SaveManager.Instance.LoadSave(this);
         if (loadData != null)
         {
             cityName = loadData["cityName"];
             description = loadData["description"];
-            int mayorId = loadData["mayor_id"].AsInt;
-            mayor = GameManager.Instance.people.FindAsync(p => p.id == mayorId).Result; // This row is async, because there can be references that haven't loaded yet since there might be circular references. e.g. Person references City as birthplace and City references Person as Mayor.
+            if (mayor)
+            {
+                int mayorId = loadData["mayor_id"].AsInt;
+                mayor = GameManager.Instance.people.FindAsync(p => p.id == mayorId).Result; // This row is async, because there can be references that haven't loaded yet since there might be circular references. e.g. Person references City as birthplace and City references Person as Mayor.
+            }
             // TODO: Need to implement the list of the citizens here.
             int citizenCount = loadData["citizen_count"];
             for (int i = 0;i < citizenCount;i++)
@@ -170,6 +173,14 @@ public class City : ListedScriptableObject<City>, ISaveable
                 citizenGroup.occupation = occupation;
                 citizens.Add(citizenGroup);
             }
+            
+            onLoadSuccess?.Invoke();
+            return true;
+        }
+        else
+        {
+            onLoadFail?.Invoke();
+            return false;
         }
     }
 }

@@ -37,19 +37,26 @@ public class GameManager : MonoBehaviour, ISaveable
 
         InitGame();
     }
-    
+
 
     private void InitGame()
     {
         EventManager.Instance.Init();
 
-        cityDefinitions = CityDefiniton.GetRuntimeInstances();
-        cities = City.GetRuntimeInstances();
-        ideologies = Ideology.GetRuntimeInstances();
-        medias = Media.GetRuntimeInstances();
-        people = Person.GetRuntimeInstances();
-        occupations = Occupation.GetRuntimeInstances();
-        parties = Party.GetRuntimeInstances();
+        cityDefinitions = CityDefiniton.GetRuntimeInstancesFromAssets();
+        cities = City.GetRuntimeInstancesFromAssets();
+        ideologies = Ideology.GetRuntimeInstancesFromAssets();
+        if (!Load())
+        { 
+            // Medias, people, occupations and parties can be removed/added dynamically. We should always load them from the save data and only load from assets if there is no save data.
+            medias = Media.GetRuntimeInstancesFromAssets();
+            people = Person.GetRuntimeInstancesFromAssets();
+            occupations = Occupation.GetRuntimeInstancesFromAssets();
+            parties = Party.GetRuntimeInstancesFromAssets();
+        }
+        
+
+        saveManager.Start();
 
         cityDefinitions.ForEach(cd => cd.Start());
         cities.ForEach(c => c.Start());
@@ -64,6 +71,31 @@ public class GameManager : MonoBehaviour, ISaveable
         Country.RandomizeAll();
     }
 
+    private void Update()
+    {
+        saveManager.Update();
+
+        cityDefinitions.ForEach(cd => cd.Update());
+        cities.ForEach(c => c.Update());
+        ideologies.ForEach(i => i.Update());
+        medias.ForEach(m => m.Update());
+        people.ForEach(p => p.Update());
+        occupations.ForEach(o => o.Update());
+        parties.ForEach(p => p.Update());
+    }
+    private void OnDestroy()
+    {
+        saveManager.OnManagerDestroy();
+
+        cityDefinitions.ForEach(cd => cd.OnManagerDestroy());
+        cities.ForEach(c => c.OnManagerDestroy());
+        ideologies.ForEach(i => i.OnManagerDestroy());
+        medias.ForEach(m => m.OnManagerDestroy());
+        people.ForEach(p => p.OnManagerDestroy());
+        occupations.ForEach(o => o.OnManagerDestroy());
+        parties.ForEach(p => p.OnManagerDestroy());
+    }
+
     public Dictionary<string, object> Save()
     {
         Dictionary<string, object> saveData = new Dictionary<string, object>();
@@ -71,9 +103,21 @@ public class GameManager : MonoBehaviour, ISaveable
         return saveData;
     }
 
-    public void Load()
+    public bool Load(System.Action onLoadSuccess = null, System.Action onLoadFail = null)
     {
         JSONNode saveData = SaveManager.Instance.LoadSave(this);
+        if (saveData != null)
+        {
+
+            onLoadSuccess?.Invoke();
+            return true;
+        }
+        else
+        {
+
+            onLoadFail?.Invoke();
+            return false;
+        }
 
     }
 
