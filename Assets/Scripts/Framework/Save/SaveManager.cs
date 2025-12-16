@@ -11,26 +11,25 @@ using Lionsfall.SimpleJSON;
 [CreateAssetMenu(fileName = "SaveManager", menuName = "Corrupta/Managers/Save Manager...")]
 public class SaveManager : ManageableScriptableObject
 {
-    public static string DATABASE_URL = "";
+	public static string DATABASE_URL = "";
 	public static string userId;
 	public static SaveManager Instance => GameManager.Instance.saveManager;
 
 	#region Member Variables
 
-	private List<ISaveable>	saveables;
-	private JSONNode	loadedSave;
+	private List<ISaveable> saveables;
+	private JSONNode loadedSave;
 
 	[SerializeField] bool saveOnQuit = true;
-	[SerializeField] Dictionary<SaveDataType, string> saveDataStrings = new Dictionary<SaveDataType, string>();
 
-    #endregion
+	#endregion
 
-    #region Properties
+	#region Properties
 
-    /// <summary>
-    /// Path to the save file on the device
-    /// </summary>
-    public static string SaveFilePath { get { return Application.persistentDataPath ; } }
+	/// <summary>
+	/// Path to the save file on the device
+	/// </summary>
+	public static string SaveFilePath { get { return Application.persistentDataPath; } }
 
 	/// <summary>
 	/// List of registered saveables
@@ -48,51 +47,45 @@ public class SaveManager : ManageableScriptableObject
 		}
 	}
 
-    public override void Start()
-    {
-    }
+	public override void Start()
+	{
+	}
 
-    public override void Update()
-    {
-        
+	public override void Update()
+	{
 
-    }
-    public override void OnManagerDestroy()
-    {
-        if(saveOnQuit)
+
+	}
+	public override void OnManagerDestroy()
+	{
+		if (saveOnQuit)
 		{
 			Save();
 		}
-    }
+	}
 
-    #endregion
+	#endregion
 
-    #region Unity Methods
+	#region Unity Methods
 
-    [Button]
-    public void ClearSaves(SaveDataType saveDataType)
-    {
-		// For each selected save data type, clear the registered saveables of that type
-		List<SaveDataType> saveDataTypes = saveDataType.GetSelectedFlags();
+	[Button]
+	public void ClearSaveFiles(SaveDataType saveDataType)
+	{
+		SaveDataType[] saveDataTypes = Enum.GetValues(typeof(SaveDataType)) as SaveDataType[];
 		foreach (SaveDataType sdt in saveDataTypes)
 		{
-			// Remove the save file
-			if(saveDataStrings == null || !saveDataStrings.ContainsKey(sdt))
+			if (!saveDataType.HasFlag(sdt))
 			{
-				Debug.LogWarning("No save data string found for save data type: " + sdt);
 				continue;
-            }
-            if (System.IO.Directory.Exists($"{SaveFilePath}/{saveDataStrings[sdt]}"))
-			{
-				System.IO.Directory.Delete($"{SaveFilePath}/{saveDataStrings[sdt]}", true);
-				Debug.Log("Save file deleted");
 			}
-			else
+			string saveString = sdt.ToString();
+			string filePath = $"{SaveFilePath}/{saveString}.json";
+			if (System.IO.File.Exists(filePath))
 			{
-				Debug.Log("No save file found");
+				System.IO.File.Delete(filePath);
 			}
 		}
-    }
+	}
 
 	#endregion
 
@@ -134,63 +127,56 @@ public class SaveManager : ManageableScriptableObject
 	public void Save(Action onSaveComplete = null)
 	{
 
-        Dictionary<string, object> saveJson = new Dictionary<string, object>();
-		if(saveables != null)
+		Dictionary<string, object> saveJson = new Dictionary<string, object>();
+		if (saveables != null)
 		{
-			for (int i = 0; i < saveables.Count; i++)
-			{ 
-				SaveDataType saveDataType = saveables[i].SaveDataType;
-				if(!saveDataStrings.ContainsKey(saveDataType))
+			SaveDataType[] saveDataTypes = Enum.GetValues(typeof(SaveDataType)) as SaveDataType[];
+			foreach (SaveDataType sdt in saveDataTypes)
+			{
+				string saveString = sdt.ToString();
+				for (int i = 0; i < saveables.Count; i++)
 				{
-					saveDataStrings.Add(saveDataType, saveDataType.ToString());
+					if (saveables[i].SaveDataType != sdt)
+					{
+						continue;
+					}
+					//saveJson.Add(saveables[i].SaveId, saveables[i].Save());
+					if (saveJson.ContainsKey(saveables[i].SaveId))
+					{
+						saveJson[saveables[i].SaveId] = saveables[i].Save();
+					}
+					else
+					{
+						saveJson.Add(saveables[i].SaveId, saveables[i].Save());
+					}
 				}
-                string saveString = saveDataStrings[saveDataType];
-                //saveJson.Add(saveables[i].SaveId, saveables[i].Save());
-                if (saveJson.ContainsKey(saveables[i].SaveId))
-				{
-					saveJson[saveables[i].SaveId] = saveables[i].Save();
-				}else
-				{
-					saveJson.Add(saveables[i].SaveId, saveables[i].Save());
-                }
 				System.IO.Directory.CreateDirectory($"{SaveFilePath}/{saveString}");
-				System.IO.File.WriteAllText($"{SaveFilePath}/{saveString}/{saveables[i].SaveId}.json", JsonConvert.SerializeObject(saveJson));
-            }
-				
+				System.IO.File.WriteAllText($"{SaveFilePath}/{saveString}.json", JsonConvert.SerializeObject(saveJson));
+			}
 		}
 
-        onSaveComplete?.Invoke();
+		onSaveComplete?.Invoke();
 	}
 
 	/// <summary>
 	/// Tries to load the save file
 	/// </summary>
 	private bool LoadSave(ISaveable saveable, out JSONNode json)
-{
-    json = null;
-    if (saveDataStrings == null || !saveDataStrings.ContainsKey(saveable.SaveDataType)) { return false; }
-
-        string saveString = saveDataStrings[saveable.SaveDataType];
-
-
-		if (!System.IO.File.Exists($"{SaveFilePath}/{saveString}/{saveable.SaveId}.json"))
+	{
+		string saveString = saveable.SaveDataType.ToString();
+		string filePath = $"{SaveFilePath}/{saveString}.json";
+		if (!System.IO.File.Exists(filePath))
 		{
-			Debug.Log($"<color=yellow>No save file found at: {SaveFilePath}/{saveString}/{saveable.SaveId}.json</color>");
+			json = null;
 			return false;
 		}
-
-		Debug.Log($"<color=green>Loading save file: {SaveFilePath}/{saveString}/{saveable.SaveId}.json</color>");
-        json = JSON.Parse(System.IO.File.ReadAllText($"{SaveFilePath}/{saveString}/{saveable.SaveId}.json"));
-
-			
-
-		return json != null;
+		string fileContents = System.IO.File.ReadAllText(filePath);
+		json = JSON.Parse(fileContents);
+		return true;
 	}
+    #endregion
 
-
-	#endregion
 }
-
 [Flags]
 public enum SaveDataType
 {

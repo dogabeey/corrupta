@@ -43,6 +43,11 @@ public class GameManager : MonoBehaviour, ISaveable
     {
         EventManager.Instance.Init();
 
+        medias = new List<Media>();
+        people = new List<Person>();
+        occupations = new List<Occupation>();
+        parties = new List<Party>();
+
         cityDefinitions = CityDefiniton.GetRuntimeInstancesFromAssets();
         cities = City.GetRuntimeInstancesFromAssets();
         ideologies = Ideology.GetRuntimeInstancesFromAssets();
