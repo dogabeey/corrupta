@@ -11,8 +11,6 @@ using Lionsfall.SimpleJSON;
 [CreateAssetMenu(fileName = "SaveManager", menuName = "Corrupta/Managers/Save Manager...")]
 public class SaveManager : ManageableScriptableObject
 {
-	public static string DATABASE_URL = "";
-	public static string userId;
 	public static SaveManager Instance => GameManager.Instance.saveManager;
 
 	#region Member Variables
@@ -20,7 +18,8 @@ public class SaveManager : ManageableScriptableObject
 	private List<ISaveable> saveables;
 	private JSONNode loadedSave;
 
-	[SerializeField] bool saveOnQuit = true;
+	[SerializeField] string saveProfile = "default";
+    [SerializeField] bool saveOnQuit = true;
 
 	#endregion
 
@@ -29,7 +28,7 @@ public class SaveManager : ManageableScriptableObject
 	/// <summary>
 	/// Path to the save file on the device
 	/// </summary>
-	public static string SaveFilePath { get { return Application.persistentDataPath; } }
+	public string SaveFilePath { get { return Application.persistentDataPath + "/" + saveProfile; } }
 
 	/// <summary>
 	/// List of registered saveables
@@ -127,13 +126,13 @@ public class SaveManager : ManageableScriptableObject
 	public void Save(Action onSaveComplete = null)
 	{
 
-		Dictionary<string, object> saveJson = new Dictionary<string, object>();
 		if (saveables != null)
 		{
 			SaveDataType[] saveDataTypes = Enum.GetValues(typeof(SaveDataType)) as SaveDataType[];
 			foreach (SaveDataType sdt in saveDataTypes)
-			{
-				string saveString = sdt.ToString();
+            {
+                Dictionary<string, object> saveJson = new Dictionary<string, object>();
+                string saveString = sdt.ToString();
 				for (int i = 0; i < saveables.Count; i++)
 				{
 					if (saveables[i].SaveDataType != sdt)
@@ -150,7 +149,7 @@ public class SaveManager : ManageableScriptableObject
 						saveJson.Add(saveables[i].SaveId, saveables[i].Save());
 					}
 				}
-				System.IO.Directory.CreateDirectory($"{SaveFilePath}/{saveString}");
+				System.IO.Directory.CreateDirectory($"{SaveFilePath}");
 				System.IO.File.WriteAllText($"{SaveFilePath}/{saveString}.json", JsonConvert.SerializeObject(saveJson));
 			}
 		}
@@ -177,13 +176,11 @@ public class SaveManager : ManageableScriptableObject
     #endregion
 
 }
-[Flags]
 public enum SaveDataType
 {
-    MetaData = 1,
-    Settings = 2,
-    WorldProgression = 4,
-    LevelProgression = 8,
-    Tutorial = 16,
-	Everything = MetaData | Settings | WorldProgression | LevelProgression | Tutorial
+    MetaData,
+    Settings,
+    WorldProgression,
+    LevelProgression,
+    Tutorial
 }

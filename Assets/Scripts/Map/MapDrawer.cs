@@ -60,7 +60,6 @@ public class MapDrawer : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit,256))
         {
-            Debug.Log("Hit point: " + hit.textureCoord.x * _mapWidth + " " + hit.textureCoord.y * _mapHeight);
             SelectColor(_texture.GetPixel((int)(hit.textureCoord.x * _mapWidth), (int)(hit.textureCoord.y * _mapHeight)));
         }
 
