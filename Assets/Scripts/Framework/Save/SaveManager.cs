@@ -18,7 +18,8 @@ public class SaveManager : ManageableScriptableObject
 	private List<ISaveable> saveables;
 	private JSONNode loadedSave;
 
-	[SerializeField] string saveProfile = "default";
+	[SerializeField] SaveData[] saveDatas;
+    [SerializeField] string saveProfile = "default";
     [SerializeField] bool saveOnQuit = true;
 
 	#endregion
@@ -28,12 +29,23 @@ public class SaveManager : ManageableScriptableObject
 	/// <summary>
 	/// Path to the save file on the device
 	/// </summary>
-	public string SaveFilePath { get { return Application.persistentDataPath + "/" + saveProfile; } }
 
-	/// <summary>
-	/// List of registered saveables
-	/// </summary>
-	private List<ISaveable> Saveables
+	public string GetSaveFilePath(bool isGlobal)
+	{
+		if (isGlobal)
+		{
+			return Application.persistentDataPath + "/Global";
+		}
+		else
+		{
+			return Application.persistentDataPath + "/" + saveProfile;
+		}
+	}
+
+    /// <summary>
+    /// List of registered saveables
+    /// </summary>
+    private List<ISaveable> Saveables
 	{
 		get
 		{
@@ -65,28 +77,6 @@ public class SaveManager : ManageableScriptableObject
 
 	#endregion
 
-	#region Unity Methods
-
-	[Button]
-	public void ClearSaveFiles(SaveDataType saveDataType)
-	{
-		SaveDataType[] saveDataTypes = Enum.GetValues(typeof(SaveDataType)) as SaveDataType[];
-		foreach (SaveDataType sdt in saveDataTypes)
-		{
-			if (!saveDataType.HasFlag(sdt))
-			{
-				continue;
-			}
-			string saveString = sdt.ToString();
-			string filePath = $"{SaveFilePath}/{saveString}.json";
-			if (System.IO.File.Exists(filePath))
-			{
-				System.IO.File.Delete(filePath);
-			}
-		}
-	}
-
-	#endregion
 
 	#region Public Methods
 
@@ -128,14 +118,13 @@ public class SaveManager : ManageableScriptableObject
 
 		if (saveables != null)
 		{
-			SaveDataType[] saveDataTypes = Enum.GetValues(typeof(SaveDataType)) as SaveDataType[];
-			foreach (SaveDataType sdt in saveDataTypes)
+			foreach (SaveData saveData in saveDatas)
             {
                 Dictionary<string, object> saveJson = new Dictionary<string, object>();
-                string saveString = sdt.ToString();
+                string saveString = saveData.saveDataType.ToString();
 				for (int i = 0; i < saveables.Count; i++)
 				{
-					if (saveables[i].SaveDataType != sdt)
+					if (saveables[i].SaveDataType != saveData.saveDataType)
 					{
 						continue;
 					}
@@ -149,8 +138,8 @@ public class SaveManager : ManageableScriptableObject
 						saveJson.Add(saveables[i].SaveId, saveables[i].Save());
 					}
 				}
-				System.IO.Directory.CreateDirectory($"{SaveFilePath}");
-				System.IO.File.WriteAllText($"{SaveFilePath}/{saveString}.json", JsonConvert.SerializeObject(saveJson));
+				System.IO.Directory.CreateDirectory($"{GetSaveFilePath(saveData.isGlobalProfile)}");
+                System.IO.File.WriteAllText($"{GetSaveFilePath(saveData.isGlobalProfile)}/{saveString}.json", JsonConvert.SerializeObject(saveJson));
 			}
 		}
 
@@ -162,8 +151,9 @@ public class SaveManager : ManageableScriptableObject
 	/// </summary>
 	private bool LoadSave(ISaveable saveable, out JSONNode json)
 	{
-		string saveString = saveable.SaveDataType.ToString();
-		string filePath = $"{SaveFilePath}/{saveString}.json";
+		SaveData saveData = Array.Find(saveDatas, data => data.saveDataType == saveable.SaveDataType);
+        string saveString = saveData.saveDataType.ToString();
+		string filePath = $"{GetSaveFilePath(saveData.isGlobalProfile)}/{saveString}.json";
 		if (!System.IO.File.Exists(filePath))
 		{
 			json = null;
@@ -183,4 +173,11 @@ public enum SaveDataType
     WorldProgression,
     LevelProgression,
     Tutorial
+}
+
+public class SaveData
+{
+	public SaveDataType saveDataType;
+	[Tooltip("If true, this save will be a global save that is not tied to a specific profile (i.e. graphics settings)")]
+    public bool isGlobalProfile = false;
 }
