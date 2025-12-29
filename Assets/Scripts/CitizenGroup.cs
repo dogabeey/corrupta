@@ -16,13 +16,14 @@ public class CitizenGroup
     public float wealth;
     public float happiness;
     public float education;
+    public float partizanship;
 
     public CitizenGroup()
     {
         
     }
 
-    public CitizenGroup(Party party, Ideology ideology, Occupation occupation, float wealth, float happiness, float education)
+    public CitizenGroup(Party party, Ideology ideology, Occupation occupation, float wealth, float happiness, float education, float partizanship)
     {
         this.party = party;
         this.ideology = ideology;
@@ -30,5 +31,6 @@ public class CitizenGroup
         this.wealth = wealth;
         this.happiness = happiness;
         this.education = education;
+        this.partizanship = partizanship;
     }
 }

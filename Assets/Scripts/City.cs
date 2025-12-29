@@ -49,9 +49,9 @@ public class City : ListedScriptableObject<City>, ISaveable
         List<int> partyWeights = new List<int>();
         List<int> occupationWeights = new List<int>();
 
-        List<Ideology> ideologies = GameManager.Instance.ideologies;
-        List<Party> parties = GameManager.Instance.parties;
-        List<Occupation> occupations = GameManager.Instance.occupations;
+        List<Ideology> ideologies = Ideology.GetInstances();
+        List<Party> parties = Party.GetInstances();
+        List<Occupation> occupations = Occupation.GetInstances();
 
         ideologyRates.ForEach(p => ideologyWeights.Add(p.rate));
         partyRates.ForEach(p => partyWeights.Add(p.rate));
@@ -65,8 +65,11 @@ public class City : ListedScriptableObject<City>, ISaveable
 
             float wealth = UnityEngine.Random.Range(occupation.wealthRange.x, occupation.wealthRange.y);
             float education = UnityEngine.Random.Range(occupation.educationRange.x, occupation.educationRange.y);
+            float happiness = UnityEngine.Random.Range(0, 100);
             float partizanship = UnityEngine.Random.Range(occupation.partizanshipRange.x, occupation.partizanshipRange.y);
-            citizens.Add(new CitizenGroup(party, ideology, occupation, wealth, education, partizanship));
+
+
+            citizens.Add(new CitizenGroup(party, ideology, occupation, wealth, happiness, education, partizanship));
         }
     }
 
@@ -78,7 +81,7 @@ public class City : ListedScriptableObject<City>, ISaveable
         {
             if (!ideologyRates.Any(ir => ir.ideology == ideology))
             {
-                ideologyRates.Add(new IdeologyRate { ideology = ideology, rate = 0 });
+                ideologyRates.Add(new IdeologyRate { ideology = ideology, rate = 1 });
             }
         }
         // Add all parties that are missing in the party rates list
@@ -87,7 +90,7 @@ public class City : ListedScriptableObject<City>, ISaveable
         {
             if (!partyRates.Any(pr => pr.party == party))
             {
-                partyRates.Add(new PartyRate { party = party, rate = 0 });
+                partyRates.Add(new PartyRate { party = party, rate = 1 });
             }
         }
         // Add all occupations that are missing in the occupation rates list
@@ -96,7 +99,7 @@ public class City : ListedScriptableObject<City>, ISaveable
         {
             if (!occuptionRates.Any(or => or.occupation == occupation))
             {
-                occuptionRates.Add(new OccupationRate { occupation = occupation, rate = 0 });
+                occuptionRates.Add(new OccupationRate { occupation = occupation, rate = 1 });
             }
         }
     }
