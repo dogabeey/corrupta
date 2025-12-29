@@ -25,17 +25,16 @@ public class Person : ListedScriptableObject<Person>
     public float fame = 0;
     public float corruption = 0;
     public Ideology ideology;
-    
 
-    public int management = Mathf.RoundToInt(UnityEngine.Random.value * 10);
-    public int diplomacy = Mathf.RoundToInt(UnityEngine.Random.value * 10);
-    public int wisdom = Mathf.RoundToInt(UnityEngine.Random.value * 10);
-    public int speech = Mathf.RoundToInt(UnityEngine.Random.value * 10);
-    public int intrigue = Mathf.RoundToInt(UnityEngine.Random.value * 10);
+
+    public int management;
+    public int diplomacy;
+    public int wisdom;
+    public int speech;
+    public int intrigue;
 
     public Person()
     {
-
     }
     public override void Start()
     {
@@ -47,6 +46,13 @@ public class Person : ListedScriptableObject<Person>
     {
     }
 
+    public void CreateNewAssetFromSO()
+    {
+        string assetPathAndName = UnityEditor.AssetDatabase.GenerateUniqueAssetPath($"Assets/Resources/ScriptableObjects/People/New Person.asset");
+        UnityEditor.AssetDatabase.CreateAsset(this, assetPathAndName);
+        UnityEditor.AssetDatabase.SaveAssets();
+        UnityEditor.AssetDatabase.Refresh();
+    }
     public string GetTitleString()
     {
         if (GetTitle() == Title.Advisor) return "Advisor";

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a44c2f0efcb7e884b80e7e9c124f76c4, type: 3}
-  m_Name: BKP
+  m_Name: CXP
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -25,7 +25,7 @@ MonoBehaviour:
   partyName: 
   logo: 
   color: 
-  founder: {fileID: 11400000, guid: 7f2675ebbaf34dc4ab34a45d0b59e3b3, type: 2}
+  founder: {fileID: 0}
   chairPerson: {fileID: 0}
   viceChairPerson: {fileID: 0}
   ideology: {fileID: 0}

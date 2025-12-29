@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +15,7 @@ public class Party : ListedScriptableObject<Party>
     public string logo;
     public string color;
 
+    [InlineButton(nameof(CreateNewFounder), label: "*", ShowIf = nameof(HasNoFounder))]
     public Person founder;
     public Person chairPerson;
     public Person viceChairPerson;
@@ -27,5 +31,15 @@ public class Party : ListedScriptableObject<Party>
     public override void OnManagerDestroy()
     {
     }
+
+    #region Odin Inspector
+    public void CreateNewFounder()
+    {
+        Person newPerson = OdinEditorWindow.CreateInstance<Person>();
+        newPerson.CreateNewAssetFromSO();
+        founder = newPerson;
+    }
+    public bool HasNoFounder() => !founder;
+    #endregion
 }
 
