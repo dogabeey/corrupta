@@ -15,10 +15,13 @@ public class Party : ListedScriptableObject<Party>
     public string logo;
     public string color;
 
-    [InlineButton(nameof(CreateNewFounder), label: "*", ShowIf = nameof(HasNoFounder))]
+    [CreateNewInstanceButton(pathEnum: AssetPathEnum.People)]
     public Person founder;
+    [CreateNewInstanceButton(pathEnum: AssetPathEnum.People)]
     public Person chairPerson;
+    [CreateNewInstanceButton(pathEnum: AssetPathEnum.People)]
     public Person viceChairPerson;
+    [CreateNewInstanceButton(pathEnum: AssetPathEnum.Ideologies)]
     public Ideology ideology;
 
     public List<Person> deputyList = new List<Person>();
@@ -35,8 +38,7 @@ public class Party : ListedScriptableObject<Party>
     #region Odin Inspector
     public void CreateNewFounder()
     {
-        Person newPerson = OdinEditorWindow.CreateInstance<Person>();
-        newPerson.CreateNewAssetFromSO();
+        Person newPerson = Person.CreateNewAsset();
         founder = newPerson;
     }
     public bool HasNoFounder() => !founder;

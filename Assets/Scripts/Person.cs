@@ -46,12 +46,15 @@ public class Person : ListedScriptableObject<Person>
     {
     }
 
-    public void CreateNewAssetFromSO()
+    public static Person CreateNewAsset()
     {
+        Person person = CreateInstance<Person>();
         string assetPathAndName = UnityEditor.AssetDatabase.GenerateUniqueAssetPath($"Assets/Resources/ScriptableObjects/People/New Person.asset");
-        UnityEditor.AssetDatabase.CreateAsset(this, assetPathAndName);
+
+        UnityEditor.AssetDatabase.CreateAsset(person, assetPathAndName);
         UnityEditor.AssetDatabase.SaveAssets();
         UnityEditor.AssetDatabase.Refresh();
+        return person;
     }
     public string GetTitleString()
     {

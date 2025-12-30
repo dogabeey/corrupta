@@ -25,7 +25,7 @@ MonoBehaviour:
   partyName: 
   logo: 
   color: 
-  founder: {fileID: 11400000, guid: 7f2675ebbaf34dc4ab34a45d0b59e3b3, type: 2}
+  founder: {fileID: 0}
   chairPerson: {fileID: 0}
   viceChairPerson: {fileID: 0}
   ideology: {fileID: 0}
