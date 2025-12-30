@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a44c2f0efcb7e884b80e7e9c124f76c4, type: 3}
-  m_Name: BKP
+  m_Script: {fileID: 11500000, guid: 643285c0dc399a94fbcfd0878931ce03, type: 3}
+  m_Name: 6 - Religionism
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,12 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 0
-  partyName: 
-  logo: 
-  color: 
-  founder: {fileID: 11400000, guid: 7f2675ebbaf34dc4ab34a45d0b59e3b3, type: 2}
-  chairPerson: {fileID: 11400000, guid: 7f2675ebbaf34dc4ab34a45d0b59e3b3, type: 2}
-  viceChairPerson: {fileID: 11400000, guid: 2117932352b6e9d4e884335c45103f0b, type: 2}
-  ideology: {fileID: 11400000, guid: 2d07518ec12373b4299e3f603ba9017f, type: 2}
-  deputyList: []
+  id: 6
+  ideologyName: Religionism
+  description: Bases political authority and law on religious doctrine. Moral order
+    and governance are derived from sacred texts, traditions, or religious institutions.

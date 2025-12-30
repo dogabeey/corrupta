@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu(fileName = "New Person", menuName = "Corrupta/New Person...")]
 public class Person : ListedScriptableObject<Person>
@@ -44,6 +45,28 @@ public class Person : ListedScriptableObject<Person>
     }
     public override void OnManagerDestroy()
     {
+    }
+
+    private void OnValidate()
+    {
+        // Make asset's file name match person's name
+        if (this.name != id + " - " + firstName + " " + lastName)
+        {
+            this.name = id + " - " + firstName + " " + lastName;
+            UnityEditor.AssetDatabase.RenameAsset(UnityEditor.AssetDatabase.GetAssetPath(this), this.name);
+            UnityEditor.AssetDatabase.SaveAssets();
+            UnityEditor.AssetDatabase.Refresh();
+        }
+
+        // Clamp stats between 0 and 100
+        fame = Mathf.Clamp(fame, 0, 100);
+        corruption = Mathf.Clamp(corruption, 0, 100);
+        management = Mathf.Clamp(management, 0, 100);
+        diplomacy = Mathf.Clamp(diplomacy, 0, 100);
+        wisdom = Mathf.Clamp(wisdom, 0, 100);
+        speech = Mathf.Clamp(speech, 0, 100);
+        intrigue = Mathf.Clamp(intrigue, 0, 100);
+        
     }
 
     public static Person CreateNewAsset()

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a44c2f0efcb7e884b80e7e9c124f76c4, type: 3}
-  m_Name: BKP
+  m_Script: {fileID: 11500000, guid: 6fd16cc9e67274d44bea34c4d54fce6a, type: 3}
+  m_Name: 1 - Thousand Alley Thunder
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,12 +21,14 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 0
-  partyName: 
-  logo: 
-  color: 
-  founder: {fileID: 11400000, guid: 7f2675ebbaf34dc4ab34a45d0b59e3b3, type: 2}
-  chairPerson: {fileID: 11400000, guid: 7f2675ebbaf34dc4ab34a45d0b59e3b3, type: 2}
-  viceChairPerson: {fileID: 11400000, guid: 2117932352b6e9d4e884335c45103f0b, type: 2}
-  ideology: {fileID: 11400000, guid: 2d07518ec12373b4299e3f603ba9017f, type: 2}
-  deputyList: []
+  id: 1
+  firstName: Thousand Alley
+  lastName: Thunder
+  fame: 0
+  corruption: 0
+  ideology: {fileID: 0}
+  management: 0
+  diplomacy: 0
+  wisdom: 0
+  speech: 0
+  intrigue: 0
