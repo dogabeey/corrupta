@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Eppy;
-namespace Corruptor
+
+public class Team
 {
-    public class Team
-    {
-        enum AdvisorType { MediaAdvisor, Intelligence, CampaignManager, SpeechWriter, PrincipalClerk }
-        Tuple<Person, AdvisorType, int>[] TeamMembers;
-    }
+    public Person teamLead;
+    public List<TeamMember> teamMembers;
 }
+
+public class TeamMember
+{
+    public Person person;
+    public AdvisorType advisorType;
+}
+public enum AdvisorType { MediaAdvisor, Intelligence, CampaignManager, SpeechWriter, PrincipalClerk }

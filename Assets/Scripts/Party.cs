@@ -23,8 +23,7 @@ public class Party : ListedScriptableObject<Party>
     public Person viceChairPerson;
     [CreateNewInstanceButton(pathEnum: AssetPathEnum.Ideologies)]
     public Ideology ideology;
-
-    public List<Person> deputyList = new List<Person>();
+    public List<Person> deputyList;
     public override void Start()
     {
     }
@@ -34,14 +33,5 @@ public class Party : ListedScriptableObject<Party>
     public override void OnManagerDestroy()
     {
     }
-
-    #region Odin Inspector
-    public void CreateNewFounder()
-    {
-        Person newPerson = Person.CreateNewAsset();
-        founder = newPerson;
-    }
-    public bool HasNoFounder() => !founder;
-    #endregion
 }
 

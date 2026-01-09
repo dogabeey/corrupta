@@ -23,5 +23,6 @@ MonoBehaviour:
     SerializationNodes: []
   id: 11
   ideologyName: Militarism
-  description: Supports hereditary rule as a stabilizing force. Legitimacy is derived
-    from dynasty, tradition, or divine sanction rather than popular mandate.
+  description: Believes military strength is the foundation of national power. Policy
+    favors defense spending, expansion of armed forces, and resolving conflicts through
+    force.
