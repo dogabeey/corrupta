@@ -41,8 +41,7 @@
  * * * * */
 using System;
 
-namespace Lionsfall.SimpleJSON
-{
+
 #if !SimpleJSON_ExcludeBinary
     public abstract partial class JSONNode
     {
@@ -298,4 +297,3 @@ namespace Lionsfall.SimpleJSON
         }
     }
 #endif
-}

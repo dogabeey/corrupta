@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using System;
 using System.Threading;
 using Sirenix.OdinInspector;
-using Lionsfall.SimpleJSON;
 
 [CreateAssetMenu(fileName = "SaveManager", menuName = "Corrupta/Managers/Save Manager...")]
 public class SaveManager : ManageableScriptableObject

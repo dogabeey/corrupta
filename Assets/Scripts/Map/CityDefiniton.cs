@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Lionsfall.SimpleJSON;
-using Lionsfall;
 using System.Globalization;
 using System;
 

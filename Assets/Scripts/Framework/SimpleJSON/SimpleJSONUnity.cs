@@ -41,9 +41,6 @@
 
 using System;
 using UnityEngine;
-
-namespace Lionsfall.SimpleJSON
-{
     public enum JSONContainerType { Array, Object }
 	public partial class JSONNode
 	{
@@ -367,4 +364,3 @@ namespace Lionsfall.SimpleJSON
         }
         #endregion Matrix4x4
     }
-}

@@ -1,5 +1,3 @@
-using Lionsfall;
-using Lionsfall.SimpleJSON;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;

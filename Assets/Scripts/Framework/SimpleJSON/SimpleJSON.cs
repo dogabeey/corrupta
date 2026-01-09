@@ -40,8 +40,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace Lionsfall.SimpleJSON
-{
     public enum JSONNodeType
     {
         Array = 1,
@@ -1349,4 +1347,3 @@ namespace Lionsfall.SimpleJSON
             return JSONNode.Parse(aJSON);
         }
     }
-}

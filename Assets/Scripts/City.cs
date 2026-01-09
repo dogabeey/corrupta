@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using Sirenix.OdinInspector;
 using System.Linq;
-using Lionsfall.SimpleJSON;
 
 [CreateAssetMenu(fileName = "New City", menuName = "Corrupta/New City...")]
 public class City : ListedScriptableObject<City>, ISaveable

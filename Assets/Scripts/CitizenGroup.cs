@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Lionsfall.SimpleJSON;
 
 [System.Serializable]
 public class CitizenGroup
