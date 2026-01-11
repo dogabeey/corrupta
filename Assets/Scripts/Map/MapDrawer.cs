@@ -49,7 +49,7 @@ public class MapDrawer : MonoBehaviour
                 Vector3 worldAngle1 = GetWorldPointFromMeshTexture(meshRenderer, angle1);
                 Vector3 worldAngle2 = GetWorldPointFromMeshTexture(meshRenderer, angle2);
 
-                CreateCityNameText(city, worldPoint1, worldPoint2, worldAngle1, worldAngle2, 1);
+                CreateCityNameText(city, worldPoint1, worldPoint2, worldAngle1, worldAngle2, 0.5f);
             }
         }
     }
