@@ -49,7 +49,7 @@ public class MapDrawer : MonoBehaviour
                 Vector3 worldAngle1 = GetWorldPointFromMeshTexture(meshRenderer, angle1);
                 Vector3 worldAngle2 = GetWorldPointFromMeshTexture(meshRenderer, angle2);
 
-                CreateCityNameText(city, worldPoint1, worldPoint2, worldAngle1, worldAngle2);
+                CreateCityNameText(city, worldPoint1, worldPoint2, worldAngle1, worldAngle2, 1);
             }
         }
     }
@@ -148,12 +148,12 @@ public class MapDrawer : MonoBehaviour
     }
 
     // Create a tmp text for cit name and place it between pos1 and pos2
-    private void CreateCityNameText(City city, Vector3 pos1, Vector3 pos2, Vector3 angle1, Vector3 angle2)
+    private void CreateCityNameText(City city, Vector3 pos1, Vector3 pos2, Vector3 angle1, Vector3 angle2, float heightOffset)
     {
         TMP_Text cityText = Instantiate(cityTextPrefab, cityTextParent);
         cityText.text = city.cityName;
         Vector3 midPoint = (pos1 + pos2 + angle1 + angle2) / 4f;
-        midPoint.y = transform.position.y;
+        midPoint.y = transform.position.y + heightOffset;
         cityText.transform.position = midPoint + Vector3.up * 0.1f; // Slightly above the map
         // Set x bounds of the text box to fit between angle1 and angle2
         cityText.rectTransform.sizeDelta = new Vector2(Vector3.Distance(angle1, angle2) * 10f, cityText.rectTransform.sizeDelta.y);
