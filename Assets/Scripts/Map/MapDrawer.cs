@@ -13,6 +13,7 @@ public class MapDrawer : MonoBehaviour
     public MeshRenderer meshRenderer;
     public Transform cityTextParent;
     public TMP_Text cityTextPrefab;
+    public float textHeightOffset = 1f;
     [ReadOnly] private Color selectedColor;
 
     private Texture2D _texture;
@@ -49,7 +50,7 @@ public class MapDrawer : MonoBehaviour
                 Vector3 worldAngle1 = GetWorldPointFromMeshTexture(meshRenderer, angle1);
                 Vector3 worldAngle2 = GetWorldPointFromMeshTexture(meshRenderer, angle2);
 
-                CreateCityNameText(city, worldPoint1, worldPoint2, worldAngle1, worldAngle2, 0.5f);
+                CreateCityNameText(city, worldPoint1, worldPoint2, worldAngle1, worldAngle2, textHeightOffset);
             }
         }
     }
