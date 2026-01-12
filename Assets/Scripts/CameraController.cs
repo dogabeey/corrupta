@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     public Camera minZoomCamera, maxZoomCamera;
     public float maxXAtMinZoom, maxXAtMaxZoom, minXAtMinZoom, minXAtMaxZoom, maxZAtMinZoom, maxZAtMaxZoom, minZAtMinZoom, minZAtMaxZoom;
     public float scrollSpeed = 10f;
-    public float zoomSpeed = 5f;
+    public float zoomSpeed = 1f;
 
     private GameInput gameInput;
     private float zoomAmount;
@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
     private void HandleZoomInput(InputAction.CallbackContext ctx)
     {
         float zoomInput = ctx.ReadValue<float>();
-        zoomAmount += zoomInput * zoomSpeed * Time.deltaTime;
+        zoomAmount -= zoomInput * zoomSpeed * Time.deltaTime * 60;
         zoomAmount = Mathf.Clamp(zoomAmount, -1, 1);
         LerpCamera(minZoomCamera, maxZoomCamera, zoomAmount);
     }
@@ -67,13 +67,14 @@ public class CameraController : MonoBehaviour
     {
         Vector3 targetPosition = cameraParent.position + direction * scrollSpeed * Time.deltaTime;
 
-        float maxX = Mathf.Lerp(maxXAtMinZoom, maxXAtMaxZoom, (zoomAmount + 1) / 2);
-        float minX = Mathf.Lerp(minXAtMinZoom, minXAtMaxZoom, (zoomAmount + 1) / 2);
-        float maxZ = Mathf.Lerp(maxZAtMinZoom, maxZAtMaxZoom, (zoomAmount + 1) / 2);
-        float minZ = Mathf.Lerp(minZAtMinZoom, minZAtMaxZoom, (zoomAmount + 1) / 2);
+        float maxX = Mathf.Lerp(maxXAtMinZoom, maxXAtMaxZoom, zoomAmount + 1);
+        float minX = Mathf.Lerp(minXAtMinZoom, minXAtMaxZoom, zoomAmount + 1);
+        float maxZ = Mathf.Lerp(maxZAtMinZoom, maxZAtMaxZoom, zoomAmount + 1);
+        float minZ = Mathf.Lerp(minZAtMinZoom, minZAtMaxZoom, zoomAmount + 1);
 
         targetPosition.x = Mathf.Clamp(targetPosition.x, minX, maxX);
         targetPosition.z = Mathf.Clamp(targetPosition.z, minZ, maxZ);
 
+        cameraParent.DOMove(targetPosition, 0.1f);
     }
 }
