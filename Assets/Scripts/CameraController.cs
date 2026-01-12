@@ -1,25 +1,48 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
+
     public Transform cameraParent;
     public Camera minZoomCamera, maxZoomCamera;
-    public float maxX, minX, maxZ, minZ;
+    public float maxXAtMinZoom, maxXAtMaxZoom, minXAtMinZoom, minXAtMaxZoom, maxZAtMinZoom, maxZAtMaxZoom, minZAtMinZoom, minZAtMaxZoom;
     public float scrollSpeed = 10f;
     public float zoomSpeed = 5f;
 
+    private GameInput gameInput;
     private float zoomAmount;
 
-    private void Update()
+    private void Awake()
     {
-        float zoomInput = Input.GetAxis("Mouse ScrollWheel");
-        zoomAmount += zoomInput * zoomSpeed;
+        gameInput = GameManager.Instance.gameInput;
+        gameInput.MapControls.Enable();
+    }
+    private void OnEnable()
+    {
+        gameInput.MapControls.ScrollUp.performed += ctx => ScrollCameraByVector(Vector3.back);
+        gameInput.MapControls.ScrollDown.performed += ctx => ScrollCameraByVector(Vector3.forward);
+        gameInput.MapControls.ScrollLeft.performed += ctx => ScrollCameraByVector(Vector3.left);
+        gameInput.MapControls.ScrollRight.performed += ctx => ScrollCameraByVector(Vector3.right);
+        gameInput.MapControls.Zoom.performed += ctx => HandleZoomInput(ctx);
+    }
+    private void OnDisable()
+    {
+        gameInput.MapControls.ScrollUp.performed -= ctx => ScrollCameraByVector(Vector3.back);
+        gameInput.MapControls.ScrollDown.performed -= ctx => ScrollCameraByVector(Vector3.forward);
+        gameInput.MapControls.ScrollLeft.performed -= ctx => ScrollCameraByVector(Vector3.left);
+        gameInput.MapControls.ScrollRight.performed -= ctx => ScrollCameraByVector(Vector3.right);
+        gameInput.MapControls.Zoom.performed -= ctx => HandleZoomInput(ctx);
+    }
 
+
+    private void HandleZoomInput(InputAction.CallbackContext ctx)
+    {
+        float zoomInput = ctx.ReadValue<float>();
+        zoomAmount += zoomInput * zoomSpeed * Time.deltaTime;
         zoomAmount = Mathf.Clamp(zoomAmount, -1, 1);
         LerpCamera(minZoomCamera, maxZoomCamera, zoomAmount);
-
-
     }
 
     private void LerpCamera(Camera cam1, Camera cam2, float t)
@@ -43,8 +66,14 @@ public class CameraController : MonoBehaviour
     private void ScrollCameraByVector(Vector3 direction)
     {
         Vector3 targetPosition = cameraParent.position + direction * scrollSpeed * Time.deltaTime;
+
+        float maxX = Mathf.Lerp(maxXAtMinZoom, maxXAtMaxZoom, (zoomAmount + 1) / 2);
+        float minX = Mathf.Lerp(minXAtMinZoom, minXAtMaxZoom, (zoomAmount + 1) / 2);
+        float maxZ = Mathf.Lerp(maxZAtMinZoom, maxZAtMaxZoom, (zoomAmount + 1) / 2);
+        float minZ = Mathf.Lerp(minZAtMinZoom, minZAtMaxZoom, (zoomAmount + 1) / 2);
+
         targetPosition.x = Mathf.Clamp(targetPosition.x, minX, maxX);
         targetPosition.z = Mathf.Clamp(targetPosition.z, minZ, maxZ);
-        cameraParent.position = targetPosition;
+
     }
 }

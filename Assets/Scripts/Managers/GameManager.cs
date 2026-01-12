@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour, ISaveable
     [InlineEditor]
     public SaveManager saveManager;
 
+    internal GameInput gameInput;
     internal List<CityDefiniton> cityDefinitions;
     internal List<City> cities;
     internal List<Ideology> ideologies;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour, ISaveable
     {
         Instance = this;
 
+        gameInput = new GameInput();
         SaveManager.Instance.Register(this);
 
         InitGame();

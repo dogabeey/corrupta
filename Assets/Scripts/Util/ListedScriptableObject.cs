@@ -1,6 +1,9 @@
 ﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public abstract class  ManageableScriptableObject : SerializedScriptableObject
 {
@@ -17,7 +20,8 @@ public abstract class ListedScriptableObject<T> : ManageableScriptableObject whe
     [Button("Add New Instance", Icon = SdfIconType.Newspaper)]
     // Add a new instance of this type's scriptable object to the same folder as this scriptable object
     public void AddNewInstance(string objectName)
-    {   
+    {
+#if UNITY_EDITOR
         T instance = CreateInstance<T>();
         string path = UnityEditor.AssetDatabase.GetAssetPath(this);
         string directory = System.IO.Path.GetDirectoryName(path);
@@ -27,6 +31,7 @@ public abstract class ListedScriptableObject<T> : ManageableScriptableObject whe
         UnityEditor.AssetDatabase.Refresh();
         UnityEditor.EditorUtility.FocusProjectWindow();
         UnityEditor.Selection.activeObject = instance;
+#endif
     }
 
     public static List<T> GetInstances()
