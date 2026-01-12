@@ -8,11 +8,12 @@ public class CameraController : MonoBehaviour
     public Transform cameraParent;
     public Camera minZoomCamera, maxZoomCamera;
     public float maxXAtMinZoom, maxXAtMaxZoom, minXAtMinZoom, minXAtMaxZoom, maxZAtMinZoom, maxZAtMaxZoom, minZAtMinZoom, minZAtMaxZoom;
-    public float scrollSpeed = 10f;
+    public float scrollSpeed = 1f;
     public float zoomSpeed = 1f;
 
     private GameInput gameInput;
     private float zoomAmount;
+    private Vector3 currentDirection;
 
     private void Awake()
     {
@@ -21,19 +22,32 @@ public class CameraController : MonoBehaviour
     }
     private void OnEnable()
     {
-        gameInput.MapControls.ScrollUp.performed += ctx => ScrollCameraByVector(Vector3.back);
-        gameInput.MapControls.ScrollDown.performed += ctx => ScrollCameraByVector(Vector3.forward);
-        gameInput.MapControls.ScrollLeft.performed += ctx => ScrollCameraByVector(Vector3.left);
-        gameInput.MapControls.ScrollRight.performed += ctx => ScrollCameraByVector(Vector3.right);
+        gameInput.MapControls.ScrollUp.started += ctx => ScrollCameraByVector(Vector3.back);
+        gameInput.MapControls.ScrollDown.started += ctx => ScrollCameraByVector(Vector3.forward);
+        gameInput.MapControls.ScrollLeft.started += ctx => ScrollCameraByVector(Vector3.left);
+        gameInput.MapControls.ScrollRight.started += ctx => ScrollCameraByVector(Vector3.right);
+        gameInput.MapControls.ScrollUp.canceled += ctx => SetDirectionToZero();
+        gameInput.MapControls.ScrollDown.canceled += ctx => SetDirectionToZero();
+        gameInput.MapControls.ScrollLeft.canceled += ctx => SetDirectionToZero();
+        gameInput.MapControls.ScrollRight.canceled += ctx => SetDirectionToZero();
         gameInput.MapControls.Zoom.performed += ctx => HandleZoomInput(ctx);
     }
     private void OnDisable()
     {
-        gameInput.MapControls.ScrollUp.performed -= ctx => ScrollCameraByVector(Vector3.back);
-        gameInput.MapControls.ScrollDown.performed -= ctx => ScrollCameraByVector(Vector3.forward);
-        gameInput.MapControls.ScrollLeft.performed -= ctx => ScrollCameraByVector(Vector3.left);
-        gameInput.MapControls.ScrollRight.performed -= ctx => ScrollCameraByVector(Vector3.right);
+        gameInput.MapControls.ScrollUp.started -= ctx => ScrollCameraByVector(Vector3.back);
+        gameInput.MapControls.ScrollDown.started -= ctx => ScrollCameraByVector(Vector3.forward);
+        gameInput.MapControls.ScrollLeft.started -= ctx => ScrollCameraByVector(Vector3.left);
+        gameInput.MapControls.ScrollRight.started -= ctx => ScrollCameraByVector(Vector3.right);
+        gameInput.MapControls.ScrollUp.canceled -= ctx => SetDirectionToZero();
+        gameInput.MapControls.ScrollDown.canceled -= ctx => SetDirectionToZero();
+        gameInput.MapControls.ScrollLeft.canceled -= ctx => SetDirectionToZero();
+        gameInput.MapControls.ScrollRight.canceled -= ctx => SetDirectionToZero();
         gameInput.MapControls.Zoom.performed -= ctx => HandleZoomInput(ctx);
+    }
+
+    private void Update()
+    {
+        cameraParent.transform.DOMove(currentDirection, 0.1f).SetRelative();
     }
 
 
@@ -65,7 +79,7 @@ public class CameraController : MonoBehaviour
 
     private void ScrollCameraByVector(Vector3 direction)
     {
-        Vector3 targetPosition = cameraParent.position + direction * scrollSpeed * Time.deltaTime;
+        Vector3 targetPosition = direction * scrollSpeed * Time.deltaTime;
 
         float maxX = Mathf.Lerp(maxXAtMinZoom, maxXAtMaxZoom, zoomAmount + 1);
         float minX = Mathf.Lerp(minXAtMinZoom, minXAtMaxZoom, zoomAmount + 1);
@@ -75,6 +89,11 @@ public class CameraController : MonoBehaviour
         targetPosition.x = Mathf.Clamp(targetPosition.x, minX, maxX);
         targetPosition.z = Mathf.Clamp(targetPosition.z, minZ, maxZ);
 
-        cameraParent.DOMove(targetPosition, 0.1f);
+        currentDirection = targetPosition;
     }
+    private void SetDirectionToZero()
+    { 
+        currentDirection = Vector3.zero;
+    }
+
 }

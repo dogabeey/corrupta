@@ -973,7 +973,7 @@ Canvas:
   m_GameObject: {fileID: 262025794}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1704869859}
   m_PlaneDistance: 6.34
   m_PixelPerfect: 0
@@ -1198,14 +1198,14 @@ MonoBehaviour:
   minZoomCamera: {fileID: 1873074003}
   maxZoomCamera: {fileID: 415419790}
   maxXAtMinZoom: 0
-  maxXAtMaxZoom: 0
+  maxXAtMaxZoom: 5
   minXAtMinZoom: 0
-  minXAtMaxZoom: 0
+  minXAtMaxZoom: -5
   maxZAtMinZoom: 0
-  maxZAtMaxZoom: 0
+  maxZAtMaxZoom: 3
   minZAtMinZoom: 0
-  minZAtMaxZoom: 0
-  scrollSpeed: 10
+  minZAtMaxZoom: -3
+  scrollSpeed: 3
   zoomSpeed: 1
 --- !u!1 &371407072
 GameObject:
@@ -1575,7 +1575,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415419786}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.16037738, g: 0.07791921, b: 0.07791921, a: 1}
@@ -4431,7 +4431,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1873073999}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.16037738, g: 0.07791921, b: 0.07791921, a: 1}
