@@ -13,7 +13,8 @@ public class CameraController : MonoBehaviour
 
     private GameInput gameInput;
     private float zoomAmount;
-    private Vector3 currentDirection;
+    private Vector3 currentDirectionHotkey;
+    private Vector3 currentDirectionEdgeScrolling;
 
     private void Awake()
     {
@@ -22,10 +23,10 @@ public class CameraController : MonoBehaviour
     }
     private void OnEnable()
     {
-        gameInput.MapControls.ScrollUp.started += ctx => ScrollCameraByVector(Vector3.back);
-        gameInput.MapControls.ScrollDown.started += ctx => ScrollCameraByVector(Vector3.forward);
-        gameInput.MapControls.ScrollLeft.started += ctx => ScrollCameraByVector(Vector3.left);
-        gameInput.MapControls.ScrollRight.started += ctx => ScrollCameraByVector(Vector3.right);
+        gameInput.MapControls.ScrollUp.started += ctx => ScrollCameraByVector(Vector3.forward, ref currentDirectionHotkey);
+        gameInput.MapControls.ScrollDown.started += ctx => ScrollCameraByVector(Vector3.back, ref currentDirectionHotkey);
+        gameInput.MapControls.ScrollLeft.started += ctx => ScrollCameraByVector(Vector3.left, ref currentDirectionHotkey);
+        gameInput.MapControls.ScrollRight.started += ctx => ScrollCameraByVector(Vector3.right, ref currentDirectionHotkey);
         gameInput.MapControls.ScrollUp.canceled += ctx => SetDirectionToZero();
         gameInput.MapControls.ScrollDown.canceled += ctx => SetDirectionToZero();
         gameInput.MapControls.ScrollLeft.canceled += ctx => SetDirectionToZero();
@@ -34,10 +35,10 @@ public class CameraController : MonoBehaviour
     }
     private void OnDisable()
     {
-        gameInput.MapControls.ScrollUp.started -= ctx => ScrollCameraByVector(Vector3.back);
-        gameInput.MapControls.ScrollDown.started -= ctx => ScrollCameraByVector(Vector3.forward);
-        gameInput.MapControls.ScrollLeft.started -= ctx => ScrollCameraByVector(Vector3.left);
-        gameInput.MapControls.ScrollRight.started -= ctx => ScrollCameraByVector(Vector3.right);
+        gameInput.MapControls.ScrollUp.started -= ctx => ScrollCameraByVector(Vector3.forward, ref currentDirectionHotkey);
+        gameInput.MapControls.ScrollDown.started -= ctx => ScrollCameraByVector(Vector3.back, ref currentDirectionHotkey);
+        gameInput.MapControls.ScrollLeft.started -= ctx => ScrollCameraByVector(Vector3.left, ref currentDirectionHotkey);
+        gameInput.MapControls.ScrollRight.started -= ctx => ScrollCameraByVector(Vector3.right, ref currentDirectionHotkey);
         gameInput.MapControls.ScrollUp.canceled -= ctx => SetDirectionToZero();
         gameInput.MapControls.ScrollDown.canceled -= ctx => SetDirectionToZero();
         gameInput.MapControls.ScrollLeft.canceled -= ctx => SetDirectionToZero();
@@ -47,7 +48,29 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        cameraParent.transform.DOMove(currentDirection, 0.1f).SetRelative();
+
+        // Check if the mouse is near the left edge of the screen
+        if (Input.mousePosition.x >= 0 && Input.mousePosition.x < 10)
+        {
+            ScrollCameraByVector(Vector3.left, ref currentDirectionEdgeScrolling);
+        }
+        // Check if the mouse is near the right edge of the screen
+        else if (Input.mousePosition.x <= Screen.width && Input.mousePosition.x > Screen.width - 10)
+        {
+            ScrollCameraByVector(Vector3.right, ref currentDirectionEdgeScrolling);
+        }
+        // Check if the mouse is near the bottom edge of the screen
+        if (Input.mousePosition.y >= 0 && Input.mousePosition.y < 10)
+        {
+            ScrollCameraByVector(Vector3.back, ref currentDirectionEdgeScrolling);
+        }
+        // Check if the mouse is near the top edge of the screen
+        else if (Input.mousePosition.y <= Screen.height && Input.mousePosition.y > Screen.height - 10)
+        {
+            ScrollCameraByVector(Vector3.forward, ref currentDirectionEdgeScrolling);
+        }
+        cameraParent.transform.DOMove(currentDirectionHotkey, 0.1f).SetRelative();
+        cameraParent.transform.DOMove(currentDirectionEdgeScrolling, 0.1f).SetRelative();
     }
 
 
@@ -77,7 +100,7 @@ public class CameraController : MonoBehaviour
 
     }
 
-    private void ScrollCameraByVector(Vector3 direction)
+    private void ScrollCameraByVector(Vector3 direction, ref Vector3 currentDirection)
     {
         Vector3 targetPosition = direction * scrollSpeed * Time.deltaTime;
 
@@ -93,7 +116,10 @@ public class CameraController : MonoBehaviour
     }
     private void SetDirectionToZero()
     { 
-        currentDirection = Vector3.zero;
+        currentDirectionHotkey = Vector3.zero;
     }
-
+    private void SetScrollDirectionToZero()
+    {
+        currentDirectionEdgeScrolling = Vector3.zero;
+    }
 }

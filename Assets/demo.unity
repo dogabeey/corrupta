@@ -1135,6 +1135,7 @@ MonoBehaviour:
   cityTextParent: {fileID: 2082349751}
   cityTextPrefab: {fileID: 7746126778376375630, guid: 2b39a37ba8d1fe949a9823665bdeed76,
     type: 3}
+  textHeightOffset: 1
 --- !u!114 &338030105
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1205,7 +1206,7 @@ MonoBehaviour:
   maxZAtMaxZoom: 3
   minZAtMinZoom: 0
   minZAtMaxZoom: -3
-  scrollSpeed: 3
+  scrollSpeed: 6
   zoomSpeed: 1
 --- !u!1 &371407072
 GameObject:
