@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
 
     public Transform cameraParent;
     public Camera minZoomCamera, maxZoomCamera;
+    public float edgeScrollThreshold = 5f;
     public float maxXAtMinZoom, maxXAtMaxZoom, minXAtMinZoom, minXAtMaxZoom, maxZAtMinZoom, maxZAtMaxZoom, minZAtMinZoom, minZAtMaxZoom;
     public float scrollSpeed = 1f;
     public float zoomSpeed = 1f;
@@ -48,31 +49,40 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-
-        // Check if the mouse is near the left edge of the screen
-        if (Input.mousePosition.x >= 0 && Input.mousePosition.x < 10)
-        {
-            ScrollCameraByVector(Vector3.left, ref currentDirectionEdgeScrolling);
-        }
-        // Check if the mouse is near the right edge of the screen
-        else if (Input.mousePosition.x <= Screen.width && Input.mousePosition.x > Screen.width - 10)
-        {
-            ScrollCameraByVector(Vector3.right, ref currentDirectionEdgeScrolling);
-        }
-        // Check if the mouse is near the bottom edge of the screen
-        if (Input.mousePosition.y >= 0 && Input.mousePosition.y < 10)
-        {
-            ScrollCameraByVector(Vector3.back, ref currentDirectionEdgeScrolling);
-        }
-        // Check if the mouse is near the top edge of the screen
-        else if (Input.mousePosition.y <= Screen.height && Input.mousePosition.y > Screen.height - 10)
-        {
-            ScrollCameraByVector(Vector3.forward, ref currentDirectionEdgeScrolling);
-        }
+        HandleEdgeScrolling();
         cameraParent.transform.DOMove(currentDirectionHotkey, 0.1f).SetRelative();
         cameraParent.transform.DOMove(currentDirectionEdgeScrolling, 0.1f).SetRelative();
     }
 
+    private void HandleEdgeScrolling()
+    {
+        // Check if the mouse is near the left edge of the screen
+        if (Input.mousePosition.x >= 0 && Input.mousePosition.x < edgeScrollThreshold)
+        {
+            ScrollCameraByVector(Vector3.left, ref currentDirectionEdgeScrolling);
+        }
+        // Check if the mouse is near the right edge of the screen
+        if (Input.mousePosition.x <= Screen.width && Input.mousePosition.x > Screen.width - edgeScrollThreshold)
+        {
+            ScrollCameraByVector(Vector3.right, ref currentDirectionEdgeScrolling);
+        }
+        // Check if the mouse is near the bottom edge of the screen
+        if (Input.mousePosition.y >= 0 && Input.mousePosition.y < edgeScrollThreshold)
+        {
+            ScrollCameraByVector(Vector3.back, ref currentDirectionEdgeScrolling);
+        }
+        // Check if the mouse is near the top edge of the screen
+         if (Input.mousePosition.y <= Screen.height && Input.mousePosition.y > Screen.height - edgeScrollThreshold)
+        {
+            ScrollCameraByVector(Vector3.forward, ref currentDirectionEdgeScrolling);
+        }
+        // If the mouse is not near any edge, set the scroll direction to zero
+        if (Input.mousePosition.x >= edgeScrollThreshold && Input.mousePosition.x <= Screen.width - edgeScrollThreshold &&
+            Input.mousePosition.y >= edgeScrollThreshold && Input.mousePosition.y <= Screen.height - edgeScrollThreshold)
+        {
+            SetScrollDirectionToZero();
+        }
+    }
 
     private void HandleZoomInput(InputAction.CallbackContext ctx)
     {
