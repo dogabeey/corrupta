@@ -148,6 +148,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _ProvinceSelect: 0
+    - _ProvinceSelected: 0
     - _Province_Select: 1
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -167,7 +168,7 @@ Material:
     - _StencilWriteMask: 255
     - _Strength: 0.38
     - _Surface: 1
-    - _Thickness: 0.0046
+    - _Thickness: 0.004
     - _UVSec: 0
     - _UseUIAlphaClip: 0
     - _WindQuality: 0

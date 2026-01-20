@@ -14,29 +14,48 @@ public class MapDrawer : MonoBehaviour
     public Transform cityTextParent;
     public TMP_Text cityTextPrefab;
     public float textHeightOffset = 1f;
-    [ReadOnly] private Color selectedColor;
+    [Header("Debug")]
+    public bool doNotGenerateCityLabels = false;
 
     private Texture2D _texture;
     private float _mapHeight, _mapWidth;
+    private Color _selectedColor;
 
 
     public Color SelectedColor { 
-        get => selectedColor; 
-        set => selectedColor = value;
+        get => _selectedColor; 
+        set
+        {
+            _selectedColor = value;
+            if(_selectedColor.r == 0 && _selectedColor.g == 0 && _selectedColor.b == 0)
+            {
+                meshRenderer.material.SetInt("_ProvinceSelected", 0); // Deselect province.
+            }
+            else
+            {
+                meshRenderer.material.SetInt("_ProvinceSelected", 1); // Select province.
+                meshRenderer.material.SetColor("_ProvinceColor", _selectedColor);
+            }
+        }
     }
 
     private void Start()
     {
-        _texture = (Texture2D) meshRenderer.material.mainTexture;
+        _texture = (Texture2D)meshRenderer.material.mainTexture;
         _mapHeight = _texture.height;
         _mapWidth = _texture.width;
 
+        if(!doNotGenerateCityLabels) GenerateCityLabels();
+    }
+
+    private void GenerateCityLabels()
+    {
         var uniqueColors = FindAllUniqueColorsInTexture();
-        foreach ( var color in uniqueColors)
+        foreach (var color in uniqueColors)
         {
             var pixels = GetProvincePixels(color);
             City city = GetSelectedCityFromColor(color);
-            if(city)
+            if (city)
             {
                 city.surfaceSizeByPixel = pixels.Count;
 
