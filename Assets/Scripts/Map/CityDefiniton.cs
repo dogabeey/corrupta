@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Globalization;
 using System;
 using Sirenix.OdinInspector;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "New City Definition", menuName = "Corrupta/New City Definition...")]
 public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
@@ -16,6 +17,20 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
 
     public string SaveId => "city_definition_" + city.name.ToLower();
 
+
+    public void OnValidate()
+    {
+        //Look for a city with the same name and assign it if exists
+        if (city == null)
+        {
+            City foundCity = Resources.LoadAll<City>("").First(x => x.name == this.name.Replace("Def", ""));
+            if (foundCity != null)
+            {
+                city = foundCity;
+            }
+        }
+
+    }
     public override void Start()
     {
         SaveManager.Instance.Register(this);

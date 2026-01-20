@@ -1,0 +1,369 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d51c2f862ba2fd4183142cd71f241c9, type: 3}
+  m_Name: City_1
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 310f7e130b259b74f80c67fcbd7210f7, type: 2}
+    - {fileID: 11400000, guid: b7c48acbb77fca84294f2ca197dfd281, type: 2}
+    - {fileID: 11400000, guid: 72320e286bd980548b3b34c9250dbd03, type: 2}
+    - {fileID: 11400000, guid: a3bf0fb7d4e4dd24caa104466c5335f6, type: 2}
+    - {fileID: 11400000, guid: 297f49dc447af134680aba3d8fb2258e, type: 2}
+    - {fileID: 11400000, guid: 68c51fba998260d4cb5007881b49549e, type: 2}
+    - {fileID: 11400000, guid: 56d31b7ae2d05d04bb43a98df3a09c44, type: 2}
+    - {fileID: 11400000, guid: 33135f9b2206cca45958eb51ea721629, type: 2}
+    - {fileID: 11400000, guid: a74a4ed3c5a3be94592abcbdd23567c4, type: 2}
+    - {fileID: 11400000, guid: e6a900e499238094cadaaf34ada5b059, type: 2}
+    - {fileID: 11400000, guid: ec2d18642c728fa46b0cdb62fe5f69b7, type: 2}
+    - {fileID: 11400000, guid: 62444be5543c2b84897819ff31a96cbe, type: 2}
+    - {fileID: 11400000, guid: 765816f41d890eb4cabff07a64bf6033, type: 2}
+    - {fileID: 11400000, guid: 3f02eb34406b2824e879cae94e966e04, type: 2}
+    - {fileID: 11400000, guid: 2290590b316ebd741bceb2b57d128a66, type: 2}
+    - {fileID: 11400000, guid: 602f93d29ba1d4349a51a6af27e8acf7, type: 2}
+    - {fileID: 11400000, guid: 2d376465d99d74847aab8cae90088de5, type: 2}
+    - {fileID: 11400000, guid: ee1237368b2879b4cac4aa41c75cd7a8, type: 2}
+    - {fileID: 11400000, guid: f6e818e9facc9574fa25aa8038932baf, type: 2}
+    - {fileID: 11400000, guid: 43c67f1dd9cf3fe449b5fef32316b394, type: 2}
+    - {fileID: 11400000, guid: 71afd6e0c836138408c76632e616eaba, type: 2}
+    - {fileID: 11400000, guid: 5bd96e3a56268c246a3dcc9c1c2b7a26, type: 2}
+    - {fileID: 11400000, guid: 12e958f4690e97b44b03950a33824c2b, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: occuptionRates
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[City+OccupationRate, Game]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 23
+    - Name: 
+      Entry: 7
+      Data: 1|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 0
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 1
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 2
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 3
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 4
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 6|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 5
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 6
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 7
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 8
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 9
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 11|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 10
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 12|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 11
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 13|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 12
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 14|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 13
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 15|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 14
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 16|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 15
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 17|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 16
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 18|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 17
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 19|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 18
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 20|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 19
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 21|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 20
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 22|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 21
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 23|City+OccupationRate, Game
+    - Name: occupation
+      Entry: 10
+      Data: 22
+    - Name: rate
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  id: 1
+  cityName: 
+  description: 
+  mayor: {fileID: 0}
+  citizens: []
+  partyRates:
+  - party: {fileID: 11400000, guid: 1491e1ac70608934a864177aea7efa17, type: 2}
+    rate: 1
+  - party: {fileID: 11400000, guid: 27ea0ec3095256244aee62540839cd3d, type: 2}
+    rate: 1
+  ideologyRates:
+  - ideology: {fileID: 11400000, guid: 912b3cd2f8823e442a0cec31ba04160a, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: c573308e7b9fa7f44909b7985c2a0256, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: 0e624b93196e2cc4c9c90ecb93163033, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: 1cb4f376675c86d46979d20ff3601b43, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: 5ed1a81f875a6034680d1647c45b7d79, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: bfc65de10e09d084ea7a7eebbc49cf35, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: 8f52a44eade17f248aeed909ae1466a7, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: c6ef90f45fbeeb34b8459e1b35ec6986, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: c613a23e440cd3647b23dfa3a6cc7bed, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: 7a6db0a55024cad4097f33ed080984a9, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: af55ae4af6bc8604a8e4932d127232d1, type: 2}
+    rate: 1
+  - ideology: {fileID: 11400000, guid: 2d07518ec12373b4299e3f603ba9017f, type: 2}
+    rate: 1
