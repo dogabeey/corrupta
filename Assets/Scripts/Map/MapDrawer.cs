@@ -68,9 +68,7 @@ public class MapDrawer : MonoBehaviour
 
     private void SelectColor(Color color)
     {
-        Color srgb = color.linear == color ? color.gamma : color;  // Convert back to gamma
-        meshRenderer.material.SetInt(GameConstants.Instance.mapShaderProvinceSelectString, srgb == Color.black ? 0 : 1);
-        meshRenderer.material.SetColor(GameConstants.Instance.mapShaderProvinceColorString, srgb);
+        Debug.Log("Selected color: <color=#" + ColorUtility.ToHtmlStringRGB(color) + ">" + ColorUtility.ToHtmlStringRGB(color) + "</color>");
 
         SelectedColor = color;
         EventManager.TriggerEvent(GameConstants.GameEvents.SELECTED_CITY, new EventParam());

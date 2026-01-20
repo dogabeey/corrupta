@@ -339,7 +339,7 @@ MonoBehaviour:
   citizens: []
   partyRates:
   - party: {fileID: 11400000, guid: 1491e1ac70608934a864177aea7efa17, type: 2}
-    rate: 1
+    rate: 2
   - party: {fileID: 11400000, guid: 27ea0ec3095256244aee62540839cd3d, type: 2}
     rate: 1
   ideologyRates:

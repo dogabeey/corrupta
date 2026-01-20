@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 using System.Linq;
 
 [CreateAssetMenu(fileName = "New City Definition", menuName = "Corrupta/New City Definition...")]
-public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
+public class CityDefiniton : ListedScriptableObject<CityDefiniton>
 {
     public City city;
     [ColorUsage(false, false)]
@@ -33,7 +33,6 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
     }
     public override void Start()
     {
-        SaveManager.Instance.Register(this);
     }
     public override void Update()
     {
@@ -42,42 +41,6 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
     public override void OnManagerDestroy()
     {
         
-    }
-
-    public SaveDataType SaveDataType => SaveDataType.WorldProgression;
-
-    public Dictionary<string, object> Save()
-    {
-        Dictionary<string, object> saveData = new Dictionary<string, object>();
-
-
-        saveData["city_id"] = city.id;
-        saveData["mapColor_r"] =(int)mapColor.r;
-        saveData["mapColor_g"] = (int)mapColor.g;
-        saveData["mapColor_b"] =(int)mapColor.b;
-
-        return saveData;
-    }
-
-    public bool Load(Action onLoadSuccess = null, Action onLoadFail = null)
-    {
-
-        JSONNode loadData = SaveManager.Instance.LoadSave(this);
-        
-        if (loadData != null)
-        {
-            int cityId = loadData["city_id"].AsInt;
-            city = GameManager.Instance.cities.Find(x => x.id == cityId);
-            mapColor.r = loadData["mapColor_r"].AsFloat;
-            mapColor.g = loadData["mapColor_g"].AsFloat;
-            mapColor.b = loadData["mapColor_b"].AsFloat;
-
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
 #if UNITY_EDITOR
