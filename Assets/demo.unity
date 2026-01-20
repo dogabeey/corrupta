@@ -783,7 +783,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -73.11926, y: 0}
+  m_AnchoredPosition: {x: -73.11914, y: 0}
   m_SizeDelta: {x: 146.2387, y: 849.8276}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &222024724
@@ -1175,7 +1175,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000028461216}
   m_LocalPosition: {x: 0, y: -16.74, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2082349751}
@@ -1260,6 +1260,7 @@ MonoBehaviour:
   cameraParent: {fileID: 353242964}
   minZoomCamera: {fileID: 1873074003}
   maxZoomCamera: {fileID: 415419790}
+  edgeScrollThreshold: 5
   maxXAtMinZoom: 0
   maxXAtMaxZoom: 5
   minXAtMinZoom: 0

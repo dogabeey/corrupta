@@ -17,11 +17,11 @@ public abstract class ListedScriptableObject<T> : ManageableScriptableObject whe
     public int id;
 
 
+#if UNITY_EDITOR
     [Button("Add New Instance", Icon = SdfIconType.Newspaper)]
     // Add a new instance of this type's scriptable object to the same folder as this scriptable object
     public void AddNewInstance(string objectName)
     {
-#if UNITY_EDITOR
         T instance = CreateInstance<T>();
         string path = UnityEditor.AssetDatabase.GetAssetPath(this);
         string directory = System.IO.Path.GetDirectoryName(path);
@@ -31,8 +31,23 @@ public abstract class ListedScriptableObject<T> : ManageableScriptableObject whe
         UnityEditor.AssetDatabase.Refresh();
         UnityEditor.EditorUtility.FocusProjectWindow();
         UnityEditor.Selection.activeObject = instance;
-#endif
     }
+    // Add a new instance of this type's scriptable object to the same folder as this scriptable object
+    public T1 AddNewInstanceAlloc<T1>(string objectName) where T1 : ListedScriptableObject<T1>
+    {
+        T1 instance = CreateInstance<T1>();
+        string path = UnityEditor.AssetDatabase.GetAssetPath(this);
+        string directory = System.IO.Path.GetDirectoryName(path);
+        string assetPathAndName = UnityEditor.AssetDatabase.GenerateUniqueAssetPath(directory + "/" + objectName + ".asset");
+        UnityEditor.AssetDatabase.CreateAsset(instance, assetPathAndName);
+        UnityEditor.AssetDatabase.SaveAssets();
+        UnityEditor.AssetDatabase.Refresh();
+        UnityEditor.EditorUtility.FocusProjectWindow();
+        UnityEditor.Selection.activeObject = instance;
+
+        return instance;
+    }
+#endif
 
     public static List<T> GetInstances()
     {

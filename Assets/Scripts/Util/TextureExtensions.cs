@@ -3,10 +3,10 @@ using UnityEngine;
 
 public static class TextureExtensions
 {
-    public static List<Color32> GetUniqueColors(this Texture2D texture)
+    public static List<Color> GetUniqueColors(this Texture2D texture)
     {
-        var pixels = texture.GetPixels32();
-        var set = new HashSet<Color32>(pixels);
-        return new List<Color32>(set);
+        var pixels = texture.GetPixels();
+        var set = new HashSet<Color>(pixels);
+        return new List<Color>(set);
     }
 }

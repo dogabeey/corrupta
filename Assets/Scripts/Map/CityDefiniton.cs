@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Globalization;
 using System;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu(fileName = "New City Definition", menuName = "Corrupta/New City Definition...")]
 public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
@@ -63,4 +64,29 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>, ISaveable
             return false;
         }
     }
+
+#if UNITY_EDITOR
+    [Button]
+    public void GenerateCityDefinitionsForEachColor(Texture2D provinceMap)
+    {
+        List<Color> colors = new List<Color>();
+        colors = provinceMap.GetUniqueColors();
+        for (int i = 0; i < colors.Count; i++)
+        {
+            if (colors[i] == Color.black) continue; // Skip black color
+
+
+            CityDefiniton newCityDef = AddNewInstanceAlloc<CityDefiniton>("CityDef_" + i);
+            newCityDef.name = "CityDef_" + i;
+            newCityDef.id = i;
+            newCityDef.mapColor = colors[i];
+
+            City newCity = AddNewInstanceAlloc<City>("City_" + i);
+            newCity.name = "City_" + i;
+            newCity.id = i;
+
+            newCityDef.city = newCity;
+        }
+    }
+#endif
 }
