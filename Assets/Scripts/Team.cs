@@ -12,4 +12,3 @@ public class TeamMember
     public Person person;
     public AdvisorType advisorType;
 }
-public enum AdvisorType { MediaAdvisor, Intelligence, CampaignManager, SpeechWriter, PrincipalClerk }
