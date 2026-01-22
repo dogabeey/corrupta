@@ -95,4 +95,9 @@ public static class ListExtensions
 
         return randomElements;
     }
+
+    public static Queue<T> ToQueue<T>(this List<T> list)
+    {
+        return new Queue<T>(list);
+    }
 }

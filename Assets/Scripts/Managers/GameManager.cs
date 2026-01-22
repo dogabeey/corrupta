@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour, ISaveable
     public EventManager eventManager;
     [InlineEditor]
     public SaveManager saveManager;
+    [InlineEditor]
+    public PoolingSystem poolingSystem;
 
     internal GameInput gameInput;
     internal List<CityDefiniton> cityDefinitions;

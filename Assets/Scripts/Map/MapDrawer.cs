@@ -245,16 +245,8 @@ public class MapDrawer : MonoBehaviour
     // Create a tmp text for cit name and place it between pos1 and pos2
     private void CreateCityNameText(City city, Vector3 pos1, Vector3 pos2, Vector3 angle1, Vector3 angle2, float heightOffset)
     {
-        TMP_Text[] existingTexts = GameObject.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None).Where(t => t.transform.parent == cityTextParent).ToArray();
-        foreach (var text in existingTexts)
-        {
-            if (text.name == "CityLabel_" + city.id)
-            {
-                Destroy(text.gameObject);
-            }
-        }
-
-        TMP_Text cityText = Instantiate(cityTextPrefab, cityTextParent);
+        TMP_Text cityText = Pool.CityText.Spawn<TMP_Text>(Vector3.zero, Quaternion.identity);
+        cityText.transform.SetParent(cityTextParent);
         cityText.name = "CityLabel_" + city.id;
         cityText.text = city.cityName;
         Vector3 midPoint = (pos1 + pos2 + angle1 + angle2) / 4f;
@@ -266,7 +258,7 @@ public class MapDrawer : MonoBehaviour
         Vector3 direction = (angle2 - angle1).normalized;
         float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
         cityText.transform.rotation = Quaternion.Euler(90f, -angle, 0f);
-        cityText.transform.localScale *= 0.85f;
+        cityText.transform.localScale = Vector3.one;
         cityText.transform.localScale *= GameConstants.Instance.mapTextScaleFactor;
     }
 }

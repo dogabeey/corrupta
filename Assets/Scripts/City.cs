@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 using System.Linq;
 
 [CreateAssetMenu(fileName = "New City", menuName = "Corrupta/New City...")]
-public class City : ListedScriptableObject<City>, ISaveable
+public class City : ListedScriptableObject<City>
 {
     public string cityName;
     public string description;
@@ -23,15 +23,13 @@ public class City : ListedScriptableObject<City>, ISaveable
     public float SurfaceAreaInKm2 => surfaceSizeByPixel;
     public string SurfaceAreaInKm2String => (SurfaceAreaInKm2 / 1000).ToString("N1") + " km²";
 
-    public string SaveId => "City_" + id;
+   // public string SaveId => "City_" + id;
 
     public SaveDataType SaveDataType => SaveDataType.WorldProgression;
 
     internal int surfaceSizeByPixel;
     public override void Start()
     {
-        SaveManager.Instance.Register(this);
-        Load();
     }
     public override void Update()
     {
@@ -131,6 +129,7 @@ public class City : ListedScriptableObject<City>, ISaveable
         return GameManager.Instance.cityDefinitions.Find(c => c.city.id == id);
     }
 
+    /*
     public Dictionary<string, object> Save()
     {
         Dictionary<string, object> saveData = new Dictionary<string, object>();
@@ -191,4 +190,5 @@ public class City : ListedScriptableObject<City>, ISaveable
             return false;
         }
     }
+    */
 }

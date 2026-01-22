@@ -1,38 +1,71 @@
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class PoolingSystem<T> : MonoBehaviour where T : MonoBehaviour
+[System.Serializable]
+public class PoolDictionary
 {
-    public Dictionary<Pool, Queue<GameObject>> poolDictionary = new Dictionary<Pool, Queue<GameObject>>();
+    public Pool poolType;
+    public List<GameObject> pooledObjects;
 
-    private void CreatePool(Pool poolType, GameObject prefab, int initialSize)
+    public bool ContainsKey(Pool key)
     {
-        if (!poolDictionary.ContainsKey(poolType))
+        return poolType == key;
+    }
+}
+
+public class PoolingSystem : SerializedMonoBehaviour
+{
+    //public Dictionary<Pool, GameObject> poolPrefabs = new Dictionary<Pool, GameObject>();
+    public List<PoolDictionary> poolDictionary;
+
+    public Dictionary<Pool, Queue<GameObject>> poolDictonaryQueue;
+
+    public void Awake()
+    {
+        poolDictonaryQueue = new Dictionary<Pool, Queue<GameObject>>();
+        // Convert List to Dictionary of Queues
+        foreach (var poolDict in poolDictionary)
         {
-            poolDictionary[poolType] = new Queue<GameObject>();
-            for (int i = 0; i < initialSize; i++)
-            {
-                GameObject obj = Instantiate(prefab);
-                obj.SetActive(false);
-                poolDictionary[poolType].Enqueue(obj);
-            }
+            poolDictonaryQueue[poolDict.poolType] = new Queue<GameObject>(poolDict.pooledObjects);
         }
     }
-    public T Spawn(Pool poolType, Vector3 position, Quaternion rotation)
+    public T Spawn<T>(Pool poolType, Vector3 position, Quaternion rotation) where T : Component
     {
-        if (poolDictionary.ContainsKey(poolType) && poolDictionary[poolType].Count > 0)
+        Queue<GameObject> poolQueue = poolDictonaryQueue.FirstOrDefault(pd => pd.Key == poolType).Value as Queue<GameObject>;
+        if (poolQueue == null)
         {
-            GameObject obj = poolDictionary[poolType].Dequeue();
+            Debug.LogError("Pool type not found: " + poolType);
+            return null;
+        }
+        GameObject obj;
+        if (poolQueue.Count > 0)
+        {
+            obj = poolQueue.Dequeue() as GameObject;
             obj.SetActive(true);
-            obj.transform.position = position;
-            obj.transform.rotation = rotation;
-            return obj.GetComponent<T>();
         }
         else
         {
-            Debug.LogWarning("No objects available in pool: " + poolType);
+            Debug.LogError("No objects available in pool: " + poolType);
             return null;
         }
+        obj.transform.position = position;
+        obj.transform.rotation = rotation;
+        return obj.GetComponent<T>();
+    }
+    public T Despawn<T>(Pool poolType, T obj) where T : Component
+    {
+            Queue<GameObject> poolQueue = poolDictionary.FirstOrDefault(pd => pd.poolType == poolType)?.pooledObjects.ToQueue();
+        if (poolQueue == null)
+        {
+            Debug.LogError("Pool type not found: " + poolType);
+            return null;
+        }
+        obj.gameObject.SetActive(false);
+        poolQueue.Enqueue(obj.gameObject);
+        return obj;
     }
 }
 
@@ -43,7 +76,12 @@ public enum Pool
 
 public static class PoolExtensions
 {
-    public static void Spawn(this Pool pool)
+    public static T Spawn<T>(this Pool pool, Vector3 position, Quaternion rotation) where T : MonoBehaviour
     {
+        return GameManager.Instance.poolingSystem.Spawn<T>(pool, position, rotation);
+    }
+    public static void Despawn<T>(this Pool pool, T obj) where T : MonoBehaviour
+    {
+        GameManager.Instance.poolingSystem.Despawn<T>(pool, obj);
     }
 }
