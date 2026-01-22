@@ -15,22 +15,28 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>
 
     public Color Color => new Color(mapColor.r, mapColor.g, mapColor.b);
 
-    public string SaveId => "city_definition_" + city.name.ToLower();
-
-
-    public void OnValidate()
+    private void OnValidate()
     {
-        //Look for a city with the same name and assign it if exists
-        if (city == null)
-        {
-            City foundCity = Resources.LoadAll<City>("").First(x => x.name == this.name.Replace("Def", ""));
-            if (foundCity != null)
-            {
-                city = foundCity;
-            }
-        }
+        /*
+        Debug.Log("OnValidate called for CityDefiniton: " + name);
 
+        if (city != null)
+            return;
+
+        var cities = Resources.LoadAll<City>("");
+
+        var foundCity = cities.FirstOrDefault(
+            x => x.name == name.Replace("Def", "")
+        );
+
+        if (foundCity != null)
+        {
+            Debug.Log("Automatically linking CityDefiniton " + name + " to City " + foundCity.name);
+            city = foundCity;
+        }
+        */
     }
+
     public override void Start()
     {
     }

@@ -18,7 +18,7 @@ public class CityUI : ToggleUIBehaviour
     void Start()
     {
         toggle = GetComponent<Toggle>();
-        if (mapDrawer.SelectedColor != Color.black)
+        if (mapDrawer.SelectedColor.r != 0 || mapDrawer.SelectedColor.g != 0 || mapDrawer.SelectedColor.b != 0)
             DrawUI();
     }
 

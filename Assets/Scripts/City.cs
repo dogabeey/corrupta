@@ -74,6 +74,11 @@ public class City : ListedScriptableObject<City>, ISaveable
 
     private void OnValidate()
     {
+        //SyncRatesWithDefinitions();
+    }
+
+    public void SyncRatesWithDefinitions()
+    {
         // Add all ideologies that are missing in the ideology rates list
         var allIdeologies = Ideology.GetInstances();
         foreach (var ideology in allIdeologies)

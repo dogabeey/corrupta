@@ -22,5 +22,5 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   id: 64
-  city: {fileID: 0}
+  city: {fileID: 11400000, guid: 65c60ec9742459c47bbc7cc19f3aa5c4, type: 2}
   mapColor: {r: 1, g: 1, b: 1, a: 1}
