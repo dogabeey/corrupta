@@ -11,6 +11,7 @@ public class City : ListedScriptableObject<City>, ISaveable
 {
     public string cityName;
     public string description;
+    [CreateNewInstanceButton(pathEnum: AssetPathEnum.People)]
     public Person mayor;
     public List<CitizenGroup> citizens;
     [Header("Generation Settings")]

@@ -7,6 +7,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Linq;
 using TMPro;
+using UnityEngine.UI;
 
 public class MapDrawer : MonoBehaviour
 {
@@ -15,12 +16,21 @@ public class MapDrawer : MonoBehaviour
     public TMP_Text cityTextPrefab;
     public float textHeightOffset = 1f;
     [Header("Debug")]
+    public bool editMode = false;
+    [ShowIf(nameof(IsEditMode))] public TMP_InputField cityNameInput;
+    [ShowIf(nameof(IsEditMode))] public TMP_InputField cityDescriptionInput;
+    [ShowIf(nameof(IsEditMode))] public TMP_InputField cityPopulationInput;
+
     public bool doNotGenerateCityLabels = false;
 
     private Texture2D _texture;
     private float _mapHeight, _mapWidth;
     private Color _selectedColor;
 
+
+    #region Odin Inspector Hooks
+    private bool IsEditMode() => editMode;
+    #endregion
 
     public Color SelectedColor { 
         get => _selectedColor; 
@@ -46,6 +56,57 @@ public class MapDrawer : MonoBehaviour
         _mapWidth = _texture.width;
 
         if(!doNotGenerateCityLabels) GenerateCityLabels();
+
+
+    }
+
+    private void OnEnable()
+    {
+        if (editMode)
+        {
+            cityNameInput.onValueChanged.AddListener(OnCityNameChanged);
+            cityDescriptionInput.onValueChanged.AddListener(OnCityDescriptionChanged);
+            cityPopulationInput.onValueChanged.AddListener(OnCityPopulationChanged);
+        }
+    }
+    private void OnDisable()
+    {
+        if (editMode)
+        {
+            cityNameInput.onValueChanged.RemoveListener(OnCityNameChanged);
+            cityDescriptionInput.onValueChanged.RemoveListener(OnCityDescriptionChanged);
+            cityPopulationInput.onValueChanged.RemoveListener(OnCityPopulationChanged);
+        }
+    }
+
+    private void OnCityNameChanged(string newName)
+    {
+        City city = GetSelectedCityFromColor(SelectedColor);
+        if (city != null)
+        {
+            city.cityName = newName;
+            GenerateCityLabel(SelectedColor);
+        }
+    }
+    private void OnCityDescriptionChanged(string newDescription)
+    {
+        City city = GetSelectedCityFromColor(SelectedColor);
+        if (city != null)
+        {
+            city.description = newDescription;
+        }
+    }
+    private void OnCityPopulationChanged(string newPopulation)
+    {
+        City city = GetSelectedCityFromColor(SelectedColor);
+        city.citizens.Clear();
+        if (city != null)
+        {
+            if (int.TryParse(newPopulation, out int population))
+            {
+                city.GenerateCitizens(population);
+            }
+        }
     }
 
     private void GenerateCityLabels()
@@ -53,24 +114,29 @@ public class MapDrawer : MonoBehaviour
         var uniqueColors = FindAllUniqueColorsInTexture();
         foreach (var color in uniqueColors)
         {
-            var pixels = GetProvincePixels(color);
-            City city = GetSelectedCityFromColor(color);
-            if (city)
-            {
-                city.surfaceSizeByPixel = pixels.Count;
+            GenerateCityLabel(color);
+        }
+    }
 
-                Vector2 point1 = pixels.GetPointWithSmallestY();
-                Vector2 point2 = pixels.GetPointWithLargestY();
-                Vector3 worldPoint1 = GetWorldPointFromMeshTexture(meshRenderer, point1);
-                Vector3 worldPoint2 = GetWorldPointFromMeshTexture(meshRenderer, point2);
+    private void GenerateCityLabel(Color color)
+    {
+        var pixels = GetProvincePixels(color);
+        City city = GetSelectedCityFromColor(color);
+        if (city)
+        {
+            city.surfaceSizeByPixel = pixels.Count;
 
-                Vector3 angle1 = pixels.GetPointWithSmallestX();
-                Vector3 angle2 = pixels.GetPointWithLargestX();
-                Vector3 worldAngle1 = GetWorldPointFromMeshTexture(meshRenderer, angle1);
-                Vector3 worldAngle2 = GetWorldPointFromMeshTexture(meshRenderer, angle2);
+            Vector2 point1 = pixels.GetPointWithSmallestY();
+            Vector2 point2 = pixels.GetPointWithLargestY();
+            Vector3 worldPoint1 = GetWorldPointFromMeshTexture(meshRenderer, point1);
+            Vector3 worldPoint2 = GetWorldPointFromMeshTexture(meshRenderer, point2);
 
-                CreateCityNameText(city, worldPoint1, worldPoint2, worldAngle1, worldAngle2, textHeightOffset);
-            }
+            Vector3 angle1 = pixels.GetPointWithSmallestX();
+            Vector3 angle2 = pixels.GetPointWithLargestX();
+            Vector3 worldAngle1 = GetWorldPointFromMeshTexture(meshRenderer, angle1);
+            Vector3 worldAngle2 = GetWorldPointFromMeshTexture(meshRenderer, angle2);
+
+            CreateCityNameText(city, worldPoint1, worldPoint2, worldAngle1, worldAngle2, textHeightOffset);
         }
     }
 
@@ -91,6 +157,17 @@ public class MapDrawer : MonoBehaviour
 
         SelectedColor = color;
         EventManager.TriggerEvent(GameConstants.GameEvents.SELECTED_CITY, new EventParam());
+
+        if (editMode)
+        {
+            City selectedCity = GetSelectedCityFromColor(color);
+            if (selectedCity != null)
+            {
+                cityNameInput.text = selectedCity.cityName;
+                cityDescriptionInput.text = selectedCity.description;
+                cityPopulationInput.text = selectedCity.Population.ToString();
+            }
+        }
     }
 
     public City GetSelectedCityFromColor(Color selectedColor)
@@ -168,11 +245,21 @@ public class MapDrawer : MonoBehaviour
     // Create a tmp text for cit name and place it between pos1 and pos2
     private void CreateCityNameText(City city, Vector3 pos1, Vector3 pos2, Vector3 angle1, Vector3 angle2, float heightOffset)
     {
+        TMP_Text[] existingTexts = GameObject.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None).Where(t => t.transform.parent == cityTextParent).ToArray();
+        foreach (var text in existingTexts)
+        {
+            if (text.name == "CityLabel_" + city.id)
+            {
+                Destroy(text.gameObject);
+            }
+        }
+
         TMP_Text cityText = Instantiate(cityTextPrefab, cityTextParent);
+        cityText.name = "CityLabel_" + city.id;
         cityText.text = city.cityName;
         Vector3 midPoint = (pos1 + pos2 + angle1 + angle2) / 4f;
-        midPoint.y = transform.position.y + heightOffset;
-        cityText.transform.position = midPoint + Vector3.up * 0.1f; // Slightly above the map
+        midPoint.y = cityTextParent.position.y + heightOffset;
+        cityText.transform.position = midPoint;
         // Set x bounds of the text box to fit between angle1 and angle2
         cityText.rectTransform.sizeDelta = new Vector2(Vector3.Distance(angle1, angle2) * 10f, cityText.rectTransform.sizeDelta.y);
         // Set its rotation to angle between pos1 and pos2
