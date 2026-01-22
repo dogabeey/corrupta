@@ -48,16 +48,16 @@ public class GameManager : MonoBehaviour, ISaveable
         occupations = new List<Occupation>();
         parties = new List<Party>();
 
-        cityDefinitions = CityDefiniton.GetRuntimeInstancesFromAssets();
-        cities = City.GetRuntimeInstancesFromAssets();
-        ideologies = Ideology.GetRuntimeInstancesFromAssets();
+        cityDefinitions = CityDefiniton.CreateRuntimeInstancesFromAssets();
+        cities = City.CreateRuntimeInstancesFromAssets();
+        ideologies = Ideology.CreateRuntimeInstancesFromAssets();
         if (!Load())
         { 
             // Medias, people, occupations and parties can be removed/added dynamically. We should always load them from the save data and only load from assets if there is no save data.
-            medias = Media.GetRuntimeInstancesFromAssets();
-            people = Person.GetRuntimeInstancesFromAssets();
-            occupations = Occupation.GetRuntimeInstancesFromAssets();
-            parties = Party.GetRuntimeInstancesFromAssets();
+            medias = Media.CreateRuntimeInstancesFromAssets();
+            people = Person.CreateRuntimeInstancesFromAssets();
+            occupations = Occupation.CreateRuntimeInstancesFromAssets();
+            parties = Party.CreateRuntimeInstancesFromAssets();
         }
         
 
