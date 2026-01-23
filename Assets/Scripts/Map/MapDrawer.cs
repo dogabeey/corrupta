@@ -57,6 +57,55 @@ public class MapDrawer : MonoBehaviour
         _mapHeight = _texture.height;
         _mapWidth = _texture.width;
     }
+    private void OnEnable()
+    {
+        if (editMode)
+        {
+            cityNameInput.onValueChanged.AddListener(OnCityNameChanged);
+            cityDescriptionInput.onValueChanged.AddListener(OnCityDescriptionChanged);
+            cityPopulationInput.onValueChanged.AddListener(OnCityPopulationChanged);
+        }
+    }
+    private void OnDisable()
+    {
+        if (editMode)
+        {
+            cityNameInput.onValueChanged.RemoveListener(OnCityNameChanged);
+            cityDescriptionInput.onValueChanged.RemoveListener(OnCityDescriptionChanged);
+            cityPopulationInput.onValueChanged.RemoveListener(OnCityPopulationChanged);
+        }
+    }
+
+    private void OnCityNameChanged(string newName)
+    {
+        City city = GetSelectedCityFromColor(SelectedColor);
+        if (city != null)
+        {
+            City citySO = City.GetInstanceByID(city.id);
+            city.cityName = newName;
+            citySO.cityName = newName;
+        }
+    }
+    private void OnCityDescriptionChanged(string newDescription)
+    {
+        City city = GetSelectedCityFromColor(SelectedColor);
+        if (city != null)
+        {
+            city.description = newDescription;
+        }
+    }
+    private void OnCityPopulationChanged(string newPopulation)
+    {
+        City city = GetSelectedCityFromColor(SelectedColor);
+        city.citizens.Clear();
+        if (city != null)
+        {
+            if (int.TryParse(newPopulation, out int population))
+            {
+                city.GenerateCitizens(population);
+            }
+        }
+    }
 
     [Button("Generate City Labels")]
     public void GenerateCityLabels()
