@@ -56,10 +56,6 @@ public class MapDrawer : MonoBehaviour
         _texture = (Texture2D)meshRenderer.material.mainTexture;
         _mapHeight = _texture.height;
         _mapWidth = _texture.width;
-
-        GenerateCityLabels();
-
-
     }
 
     [Button("Generate City Labels")]
