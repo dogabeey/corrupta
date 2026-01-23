@@ -8,6 +8,8 @@ using Sirenix.OdinInspector;
 using System.Linq;
 using TMPro;
 using UnityEngine.UI;
+using JetBrains.Annotations;
+using UnityEditor;
 
 public class MapDrawer : MonoBehaviour
 {
@@ -55,61 +57,13 @@ public class MapDrawer : MonoBehaviour
         _mapHeight = _texture.height;
         _mapWidth = _texture.width;
 
-        if(!doNotGenerateCityLabels) GenerateCityLabels();
+        GenerateCityLabels();
 
 
     }
 
-    private void OnEnable()
-    {
-        if (editMode)
-        {
-            cityNameInput.onValueChanged.AddListener(OnCityNameChanged);
-            cityDescriptionInput.onValueChanged.AddListener(OnCityDescriptionChanged);
-            cityPopulationInput.onValueChanged.AddListener(OnCityPopulationChanged);
-        }
-    }
-    private void OnDisable()
-    {
-        if (editMode)
-        {
-            cityNameInput.onValueChanged.RemoveListener(OnCityNameChanged);
-            cityDescriptionInput.onValueChanged.RemoveListener(OnCityDescriptionChanged);
-            cityPopulationInput.onValueChanged.RemoveListener(OnCityPopulationChanged);
-        }
-    }
-
-    private void OnCityNameChanged(string newName)
-    {
-        City city = GetSelectedCityFromColor(SelectedColor);
-        if (city != null)
-        {
-            city.cityName = newName;
-            GenerateCityLabel(SelectedColor);
-        }
-    }
-    private void OnCityDescriptionChanged(string newDescription)
-    {
-        City city = GetSelectedCityFromColor(SelectedColor);
-        if (city != null)
-        {
-            city.description = newDescription;
-        }
-    }
-    private void OnCityPopulationChanged(string newPopulation)
-    {
-        City city = GetSelectedCityFromColor(SelectedColor);
-        city.citizens.Clear();
-        if (city != null)
-        {
-            if (int.TryParse(newPopulation, out int population))
-            {
-                city.GenerateCitizens(population);
-            }
-        }
-    }
-
-    private void GenerateCityLabels()
+    [Button("Generate City Labels")]
+    public void GenerateCityLabels()
     {
         var uniqueColors = FindAllUniqueColorsInTexture();
         foreach (var color in uniqueColors)
@@ -121,7 +75,7 @@ public class MapDrawer : MonoBehaviour
     private void GenerateCityLabel(Color color)
     {
         var pixels = GetProvincePixels(color);
-        City city = GetSelectedCityFromColor(color);
+        City city = GetSelectedCityFromColorEditor(color);
         if (city)
         {
             city.surfaceSizeByPixel = pixels.Count;
@@ -193,9 +147,35 @@ public class MapDrawer : MonoBehaviour
         }
         return city;
     }
+    public City GetSelectedCityFromColorEditor(Color selectedColor)
+    {
+        var cityDefs = CityDefiniton.GetInstances();
+        // Find the city definition that is closest to the selected color
+        CityDefiniton cd = cityDefs.OrderBy(c =>
+        {
+            float distance = c.Color.Distance(selectedColor);
+
+            return distance;
+        }
+        ).Where(c => c.Color.Distance(selectedColor) < 0.1f).FirstOrDefault();
+
+        List<City> instances = City.GetInstances();
+        City city = null;
+        if (cd)
+        {
+            if (instances.Exists(c => c.id == cd.city.id))
+            {
+                city = instances.Find(c => c.id == cd.city.id);
+            }
+        }
+        return city;
+    }
     private HashSet<Color> FindAllUniqueColorsInTexture()
     {
         HashSet<Color> uniqueColors = new HashSet<Color>();
+        _texture = (Texture2D)meshRenderer.sharedMaterial.mainTexture;
+        _mapHeight = _texture.height;
+        _mapWidth = _texture.width;
         for (int x = 0; x < _mapWidth; x++)
         {
             for (int y = 0; y < _mapHeight; y++)
@@ -243,9 +223,23 @@ public class MapDrawer : MonoBehaviour
     }
 
     // Create a tmp text for cit name and place it between pos1 and pos2
-    private void CreateCityNameText(City city, Vector3 pos1, Vector3 pos2, Vector3 angle1, Vector3 angle2, float heightOffset)
+    private void CreateCityNameTextViaPool(City city, Vector3 pos1, Vector3 pos2, Vector3 angle1, Vector3 angle2, float heightOffset)
     {
         TMP_Text cityText = Pool.CityText.Spawn<TMP_Text>(Vector3.zero, Quaternion.identity);
+        ArrangeCityLabel(city, pos1, pos2, angle1, angle2, heightOffset, cityText);
+    }
+
+    private void CreateCityNameText(City city, Vector3 pos1, Vector3 pos2, Vector3 angle1, Vector3 angle2, float heightOffset)
+    {
+        #if UNITY_EDITOR
+
+        TMP_Text cityText = PrefabUtility.InstantiatePrefab(cityTextPrefab, cityTextParent) as TMP_Text;
+        ArrangeCityLabel(city, pos1, pos2, angle1, angle2, heightOffset, cityText);
+        #endif
+    }
+
+    private void ArrangeCityLabel(City city, Vector3 pos1, Vector3 pos2, Vector3 angle1, Vector3 angle2, float heightOffset, TMP_Text cityText)
+    {
         cityText.transform.SetParent(cityTextParent);
         cityText.name = "CityLabel_" + city.id;
         cityText.text = city.cityName;
@@ -258,7 +252,6 @@ public class MapDrawer : MonoBehaviour
         Vector3 direction = (angle2 - angle1).normalized;
         float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
         cityText.transform.rotation = Quaternion.Euler(90f, -angle, 0f);
-        cityText.transform.localScale = Vector3.one;
-        cityText.transform.localScale *= GameConstants.Instance.mapTextScaleFactor;
+        cityText.transform.localScale = Vector3.one * 0.66f;
     }
 }
