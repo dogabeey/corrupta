@@ -6,12 +6,10 @@ public class MediaController : MonoBehaviour
     public Ideology ideology;
     public float influence;
 
-    void Start()
+    public void Init(Media mediaSO)
     {
-        
-    }
-    void Update()
-    {
-        
+        this.mediaSO = mediaSO;
+        ideology = mediaSO.ideology;
+        influence = mediaSO.influence;
     }
 }

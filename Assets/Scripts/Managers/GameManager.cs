@@ -45,12 +45,12 @@ public class GameManager : MonoBehaviour, ISaveable
     {
         EventManager.Instance.Init();
 
-        medias = Media.GetInstances(); // Needs controller. *
-        people = Person.GetInstances(); // Needs controller.
-        parties = Party.GetInstances(); // Needs controller.
+        medias = Media.GetInstances(); // Needs controller. **
+        people = Person.GetInstances(); // Needs controller. **
+        parties = Party.GetInstances(); // Needs controller. **
         cityDefinitions = CityDefiniton.GetInstances(); 
         occupations = Occupation.GetInstances(); 
-        cities = City.GetInstances(); // Needs controller.
+        cities = City.GetInstances(); // Needs controller. **
         ideologies = Ideology.GetInstances(); 
 
         if (!Load())

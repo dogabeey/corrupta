@@ -90,7 +90,7 @@ public class Person : ListedScriptableObject<Person>
         if (GetTitle() == Title.ParliamentAdmin) return "Admin of Parliament";
         if (GetTitle() == Title.PartyLeader) return "Party Leader";
         if (GetTitle() == Title.PartyViceLeader) return "Party Vice Leader";
-        if (GetTitle() == Title.VicePresident) return "President of " + Country.Instance.name;
+        if (GetTitle() == Title.VicePresident) return "Vice President of " + Country.Instance.name;
         if (GetTitle() == Title.President) return "President of " + Country.Instance.name;
         else return "absolutely nothing";
     }
