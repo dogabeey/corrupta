@@ -7,12 +7,12 @@ using UnityEngine;
 public class Media : ListedScriptableObject<Media>
 {
 
-    string name;
-    Person founder;
-    Person boss;
-    Ideology ideology;
+    public string mediaName;
+    public Ideology ideology;
+    public float influence;
+    public MediaType mediaType;
 
-    enum mediaType { newspaper, tvChannel, blog }
+    public enum MediaType { newspaper, tvChannel, blog }
     public override void Start()
     {
     }
@@ -23,4 +23,3 @@ public class Media : ListedScriptableObject<Media>
     {
     }
 }
-

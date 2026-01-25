@@ -45,37 +45,25 @@ public class GameManager : MonoBehaviour, ISaveable
     {
         EventManager.Instance.Init();
 
-        medias = new List<Media>();
-        people = new List<Person>();
-        occupations = new List<Occupation>();
-        parties = new List<Party>();
+        medias = Media.GetInstances(); // Needs controller. *
+        people = Person.GetInstances(); // Needs controller.
+        parties = Party.GetInstances(); // Needs controller.
+        cityDefinitions = CityDefiniton.GetInstances(); 
+        occupations = Occupation.GetInstances(); 
+        cities = City.GetInstances(); // Needs controller.
+        ideologies = Ideology.GetInstances(); 
 
-        cityDefinitions = CityDefiniton.CreateRuntimeInstancesFromAssets();
-        cities = City.CreateRuntimeInstancesFromAssets();
-        ideologies = Ideology.CreateRuntimeInstancesFromAssets();
         if (!Load())
         { 
-            // Medias, people, occupations and parties can be removed/added dynamically. We should always load them from the save data and only load from assets if there is no save data.
-            medias = Media.CreateRuntimeInstancesFromAssets();
-            people = Person.CreateRuntimeInstancesFromAssets();
-            occupations = Occupation.CreateRuntimeInstancesFromAssets();
-            parties = Party.CreateRuntimeInstancesFromAssets();
+            // Medias, people and parties can be removed/added dynamically. We should always load them from the save data and only load from assets if there is no save data.
+
         }
         
 
         saveManager.Start();
 
-        cityDefinitions.ForEach(cd => cd.Start());
-        cities.ForEach(c => c.Start());
-        ideologies.ForEach(i => i.Start());
-        medias.ForEach(m => m.Start());
-        people.ForEach(p => p.Start());
-        occupations.ForEach(o => o.Start());
-        parties.ForEach(p => p.Start());
 
-        Country.InitCountry("Turkey", "Ankara");
-
-        Country.RandomizeAll();
+        //Country.InitCountry("Turkey", "Ankara");
     }
 
     private void Update()

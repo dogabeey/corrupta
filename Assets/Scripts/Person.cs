@@ -24,15 +24,16 @@ public class Person : ListedScriptableObject<Person>
 
     public string firstName, lastName;
     public float fame = 0;
+    public float personAge = 30;
     public float corruption = 0;
     public Ideology ideology;
 
 
-    public int management;
-    public int diplomacy;
-    public int wisdom;
-    public int speech;
-    public int intrigue;
+    public int baseManagement;
+    public int baseDiplomacy;
+    public int baseWisdom;
+    public int baseSpeech;
+    public int baseIntrigue;
 
     public Person()
     {
@@ -61,11 +62,11 @@ public class Person : ListedScriptableObject<Person>
         // Clamp stats between 0 and 100
         fame = Mathf.Clamp(fame, 0, 100);
         corruption = Mathf.Clamp(corruption, 0, 100);
-        management = Mathf.Clamp(management, 0, 100);
-        diplomacy = Mathf.Clamp(diplomacy, 0, 100);
-        wisdom = Mathf.Clamp(wisdom, 0, 100);
-        speech = Mathf.Clamp(speech, 0, 100);
-        intrigue = Mathf.Clamp(intrigue, 0, 100);
+        baseManagement = Mathf.Clamp(baseManagement, 0, 100);
+        baseDiplomacy = Mathf.Clamp(baseDiplomacy, 0, 100);
+        baseWisdom = Mathf.Clamp(baseWisdom, 0, 100);
+        baseSpeech = Mathf.Clamp(baseSpeech, 0, 100);
+        baseIntrigue = Mathf.Clamp(baseIntrigue, 0, 100);
         
     }
 
