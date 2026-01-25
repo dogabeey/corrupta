@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour, ISaveable
     [InlineEditor]
     public PoolingSystem poolingSystem;
 
+    public List<CityController> cityControllers;
+    public List<PersonController> personControllers;
+    public List<PartyController> partyControllers;
+    public List<MediaController> mediaControllers;
+
     internal GameInput gameInput;
     internal List<CityDefiniton> cityDefinitions;
     internal List<City> cities;
@@ -48,22 +53,45 @@ public class GameManager : MonoBehaviour, ISaveable
         medias = Media.GetInstances(); // Needs controller. **
         people = Person.GetInstances(); // Needs controller. **
         parties = Party.GetInstances(); // Needs controller. **
-        cityDefinitions = CityDefiniton.GetInstances(); 
-        occupations = Occupation.GetInstances(); 
+        cityDefinitions = CityDefiniton.GetInstances();
+        occupations = Occupation.GetInstances();
         cities = City.GetInstances(); // Needs controller. **
-        ideologies = Ideology.GetInstances(); 
+        ideologies = Ideology.GetInstances();
 
-        if (!Load())
-        { 
-            // Medias, people and parties can be removed/added dynamically. We should always load them from the save data and only load from assets if there is no save data.
-
-        }
-        
+        InitializeControllers();
 
         saveManager.Start();
-
+            
 
         //Country.InitCountry("Turkey", "Ankara");
+    }
+
+    private void InitializeControllers()
+    {
+        cities.ForEach(c =>
+        {
+            CityController cityController = new GameObject(c.cityName + "_Controller").AddComponent<CityController>();
+            cityController.Init(c);
+            cityControllers.Add(cityController);
+        });
+        people.ForEach(p =>
+        {
+            PersonController personController = new GameObject(p.firstName + "_" + p.lastName + "_Controller").AddComponent<PersonController>();
+            personController.Init(p);
+            personControllers.Add(personController);
+        });
+        parties.ForEach(p =>
+        {
+            PartyController partyController = new GameObject(p.partyName + "_Controller").AddComponent<PartyController>();
+            partyController.Init(p);
+            partyControllers.Add(partyController);
+        });
+        medias.ForEach(m =>
+        {
+            MediaController mediaController = new GameObject(m.mediaName + "_Controller").AddComponent<MediaController>();
+            mediaController.Init(m);
+            mediaControllers.Add(mediaController);
+        });
     }
 
     private void Update()
