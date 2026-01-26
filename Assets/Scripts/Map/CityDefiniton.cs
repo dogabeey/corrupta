@@ -37,18 +37,6 @@ public class CityDefiniton : ListedScriptableObject<CityDefiniton>
         */
     }
 
-    public override void Start()
-    {
-    }
-    public override void Update()
-    {
-        
-    }
-    public override void OnManagerDestroy()
-    {
-        
-    }
-
 #if UNITY_EDITOR
     [Button]
     public void GenerateCityDefinitionsForEachColor(Texture2D provinceMap)

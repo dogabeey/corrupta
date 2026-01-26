@@ -28,17 +28,6 @@ public class City : ListedScriptableObject<City>
     public SaveDataType SaveDataType => SaveDataType.WorldProgression;
 
     internal int surfaceSizeByPixel;
-    public override void Start()
-    {
-    }
-    public override void Update()
-    {
-
-    }
-    public override void OnManagerDestroy()
-    {
-
-    }
 
     [Button("Add Random Citizens")]
     public void GenerateCitizens(int count)

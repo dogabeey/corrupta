@@ -35,19 +35,6 @@ public class Person : ListedScriptableObject<Person>
     public int baseSpeech;
     public int baseIntrigue;
 
-    public Person()
-    {
-    }
-    public override void Start()
-    {
-    }
-    public override void Update()
-    {
-    }
-    public override void OnManagerDestroy()
-    {
-    }
-
     private void OnValidate()
     {
         // Make asset's file name match person's name

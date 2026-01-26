@@ -26,14 +26,5 @@ public class Party : ListedScriptableObject<Party>
     [CreateNewInstanceButton(pathEnum: AssetPathEnum.Ideologies)]
     public Ideology ideology;
     public List<Person> deputyList;
-    public override void Start()
-    {
-    }
-    public override void Update()
-    {
-    }
-    public override void OnManagerDestroy()
-    {
-    }
 }
 

@@ -56,24 +56,6 @@ public class SaveManager : ManageableScriptableObject
 			return saveables;
 		}
 	}
-
-	public override void Start()
-	{
-	}
-
-	public override void Update()
-	{
-
-
-	}
-	public override void OnManagerDestroy()
-	{
-		if (saveOnQuit)
-		{
-			Save();
-		}
-	}
-
 	#endregion
 
 

@@ -32,19 +32,6 @@ public class CityController : ObjectController
     public Person mayor;
     public List<CitizenGroup> citizens;
 
-    public void Start()
-    {
-
-    }
-    public void Update()
-    {
-
-    }
-    public void OnDestroy()
-    {
-
-    }
-
     public CityController(City citySO, Person mayor, List<CitizenGroup> citizens)
     {
         this.citySO = citySO;

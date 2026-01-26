@@ -11,16 +11,6 @@ public class GameConstants : ListedScriptableObject<GameConstants>
 
     public static GameConstants Instance => GameManager.Instance.gameConstants;
 
-    public override void Start()
-    {
-    }
-    public override void Update()
-    {
-    }
-    public override void OnManagerDestroy()
-    {
-    }
-
     public struct GameEvents
     {
         public static string SELECTED_CITY = "SELECTED_CITY";

@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour, ISaveable
         LoadInstances();
         InitializeControllers();
 
-        saveManager.Start();
         StartAllControllers();
     }
 
@@ -102,7 +101,6 @@ public class GameManager : MonoBehaviour, ISaveable
 
     private void Update()
     {
-        saveManager.Update();
         UpdateAllControllers();
 
     }
@@ -117,7 +115,6 @@ public class GameManager : MonoBehaviour, ISaveable
 
     private void OnDestroy()
     {
-        saveManager.OnManagerDestroy();
         DestroyAllControllers();
     }
 

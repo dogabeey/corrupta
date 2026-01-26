@@ -13,13 +13,5 @@ public class Media : ListedScriptableObject<Media>
     public MediaType mediaType;
 
     public enum MediaType { newspaper, tvChannel, blog }
-    public override void Start()
-    {
-    }
-    public override void Update()
-    {
-    }
-    public override void OnManagerDestroy()
-    {
-    }
+
 }

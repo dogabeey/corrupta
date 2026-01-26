@@ -14,16 +14,6 @@ public class Ideology  : ListedScriptableObject<Ideology>
     [TextArea(3,10)]
     public string description;
 
-    public override void Start()
-    {
-    }
-    public override void Update()
-    {
-    }
-    public override void OnManagerDestroy()
-    {
-    }
-
     private void OnValidate()
     {
         // Make asset's file name match ideology's name

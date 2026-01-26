@@ -7,9 +7,6 @@ using UnityEditor;
 
 public abstract class  ManageableScriptableObject : SerializedScriptableObject
 {
-    public abstract void Start();
-    public abstract void Update();
-    public abstract void OnManagerDestroy();
 }
 
 public abstract class ListedScriptableObject<T> : ManageableScriptableObject where T : ListedScriptableObject<T>
