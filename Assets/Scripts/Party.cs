@@ -7,26 +7,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PartyController : MonoBehaviour
-{
-    public Party partySO;
-    public string partyName;
-    public Person chairPerson;
-    public Person viceChairPerson;
-    public Ideology ideology;
-    public List<Person> deputyList;
-
-    public void Init(Party partySO)
-    {
-        this.partySO = partySO;
-        partyName = partySO.partyName;
-        chairPerson = partySO.chairPerson;
-        viceChairPerson = partySO.viceChairPerson; 
-        ideology = partySO.ideology;
-        deputyList = partySO.deputyList;
-    }
-}
-
 
 [CreateAssetMenu(fileName = "New Party", menuName = "Corrupta/New Party...")]
 public class Party : ListedScriptableObject<Party>

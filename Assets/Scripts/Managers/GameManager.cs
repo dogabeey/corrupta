@@ -50,6 +50,23 @@ public class GameManager : MonoBehaviour, ISaveable
     {
         EventManager.Instance.Init();
 
+        LoadInstances();
+        InitializeControllers();
+
+        saveManager.Start();
+        StartAllControllers();
+    }
+
+    private void StartAllControllers()
+    {
+        cityControllers.ForEach(cc => cc.Start());
+        personControllers.ForEach(pc => pc.Start());
+        partyControllers.ForEach(pc => pc.Start());
+        mediaControllers.ForEach(mc => mc.Start());
+    }
+
+    private void LoadInstances()
+    {
         medias = Media.GetInstances(); // Needs controller. **
         people = Person.GetInstances(); // Needs controller. **
         parties = Party.GetInstances(); // Needs controller. **
@@ -57,39 +74,28 @@ public class GameManager : MonoBehaviour, ISaveable
         occupations = Occupation.GetInstances();
         cities = City.GetInstances(); // Needs controller. **
         ideologies = Ideology.GetInstances();
-
-        InitializeControllers();
-
-        saveManager.Start();
-            
-
-        //Country.InitCountry("Turkey", "Ankara");
     }
 
     private void InitializeControllers()
     {
         cities.ForEach(c =>
         {
-            CityController cityController = new GameObject(c.cityName + "_Controller").AddComponent<CityController>();
-            cityController.Init(c);
+            CityController cityController = new CityController(c, c.mayor, c.citizens);
             cityControllers.Add(cityController);
         });
         people.ForEach(p =>
         {
-            PersonController personController = new GameObject(p.firstName + "_" + p.lastName + "_Controller").AddComponent<PersonController>();
-            personController.Init(p);
+            PersonController personController = new PersonController(p, p.fame, p.personAge, p.corruption, p.ideology, p.baseManagement, p.baseDiplomacy, p.baseWisdom, p.baseSpeech, p.baseIntrigue);
             personControllers.Add(personController);
         });
         parties.ForEach(p =>
         {
-            PartyController partyController = new GameObject(p.partyName + "_Controller").AddComponent<PartyController>();
-            partyController.Init(p);
+            PartyController partyController = new PartyController(p, p.partyName, p.chairPerson, p.viceChairPerson, p.ideology, p.deputyList);
             partyControllers.Add(partyController);
         });
         medias.ForEach(m =>
         {
-            MediaController mediaController = new GameObject(m.mediaName + "_Controller").AddComponent<MediaController>();
-            mediaController.Init(m);
+            MediaController mediaController = new MediaController(m, m.ideology, m.influence);
             mediaControllers.Add(mediaController);
         });
     }
@@ -97,26 +103,30 @@ public class GameManager : MonoBehaviour, ISaveable
     private void Update()
     {
         saveManager.Update();
+        UpdateAllControllers();
 
-        cityDefinitions.ForEach(cd => cd.Update());
-        cities.ForEach(c => c.Update());
-        ideologies.ForEach(i => i.Update());
-        medias.ForEach(m => m.Update());
-        people.ForEach(p => p.Update());
-        occupations.ForEach(o => o.Update());
-        parties.ForEach(p => p.Update());
     }
+
+    private void UpdateAllControllers()
+    {
+        cityControllers.ForEach(cc => cc.Update());
+        personControllers.ForEach(pc => pc.Update());
+        partyControllers.ForEach(pc => pc.Update());
+        mediaControllers.ForEach(mc => mc.Update());
+    }
+
     private void OnDestroy()
     {
         saveManager.OnManagerDestroy();
+        DestroyAllControllers();
+    }
 
-        cityDefinitions.ForEach(cd => cd.OnManagerDestroy());
-        cities.ForEach(c => c.OnManagerDestroy());
-        ideologies.ForEach(i => i.OnManagerDestroy());
-        medias.ForEach(m => m.OnManagerDestroy());
-        people.ForEach(p => p.OnManagerDestroy());
-        occupations.ForEach(o => o.OnManagerDestroy());
-        parties.ForEach(p => p.OnManagerDestroy());
+    private void DestroyAllControllers()
+    {
+        cityControllers.ForEach(cc => cc.OnDestroy());
+        personControllers.ForEach(pc => pc.OnDestroy());
+        partyControllers.ForEach(pc => pc.OnDestroy());
+        mediaControllers.ForEach(mc => mc.OnDestroy());
     }
 
     public Dictionary<string, object> Save()
