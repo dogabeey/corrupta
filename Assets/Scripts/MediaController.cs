@@ -18,6 +18,7 @@ public class MediaController : ObjectController
     public void Init(Media mediaSO)
     {
         this.mediaSO = mediaSO;
+        id = mediaSO.id;
         ideology = mediaSO.ideology;
         influence = mediaSO.influence;
     }

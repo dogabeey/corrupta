@@ -24,6 +24,7 @@ public class PartyController : ObjectController
     public void Init(Party partySO)
     {
         this.partySO = partySO;
+        id = partySO.id;
         partyName = partySO.partyName;
         chairPerson = partySO.chairPerson;
         viceChairPerson = partySO.viceChairPerson; 

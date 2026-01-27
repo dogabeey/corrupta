@@ -39,6 +39,7 @@ public class PersonController : ObjectController
     public void Init(Person personSO)
     {
         this.personSO = personSO;
+        id = personSO.id;
         fame = personSO.fame;
         personAge = personSO.personAge;
         corruption = personSO.corruption;
