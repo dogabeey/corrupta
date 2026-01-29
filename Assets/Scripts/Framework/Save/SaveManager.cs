@@ -1,5 +1,7 @@
 ﻿using System.Collections;
-
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
@@ -18,8 +20,8 @@ public class SaveManager : ManageableScriptableObject
 	private JSONNode loadedSave;
 
 	[SerializeField] SaveData[] saveDatas;
-    [SerializeField] string saveProfile = "default";
-    [SerializeField] bool saveOnQuit = true;
+	[SerializeField] string saveProfile = "default";
+	[SerializeField] bool saveOnQuit = true;
 
 	#endregion
 
@@ -41,10 +43,10 @@ public class SaveManager : ManageableScriptableObject
 		}
 	}
 
-    /// <summary>
-    /// List of registered saveables
-    /// </summary>
-    private List<ISaveable> Saveables
+	/// <summary>
+	/// List of registered saveables
+	/// </summary>
+	private List<ISaveable> Saveables
 	{
 		get
 		{
@@ -100,9 +102,9 @@ public class SaveManager : ManageableScriptableObject
 		if (saveables != null)
 		{
 			foreach (SaveData saveData in saveDatas)
-            {
-                Dictionary<string, object> saveJson = new Dictionary<string, object>();
-                string saveString = saveData.saveDataType.ToString();
+			{
+				Dictionary<string, object> saveJson = new Dictionary<string, object>();
+				string saveString = saveData.saveDataType.ToString();
 				for (int i = 0; i < saveables.Count; i++)
 				{
 					if (saveables[i].SaveDataType != saveData.saveDataType)
@@ -117,11 +119,11 @@ public class SaveManager : ManageableScriptableObject
 					else
 					{
 						saveJson.Add(saveables[i].SaveId, saveables[i].Save());
-                    }
-                    System.IO.Directory.CreateDirectory($"{GetSaveFilePath(saveData.isGlobalProfile)}");
-                    System.IO.File.WriteAllText($"{GetSaveFilePath(saveData.isGlobalProfile)}/{saveString}.json", JsonConvert.SerializeObject(saveJson));
-                }
-            }
+					}
+					System.IO.Directory.CreateDirectory($"{GetSaveFilePath(saveData.isGlobalProfile)}");
+					System.IO.File.WriteAllText($"{GetSaveFilePath(saveData.isGlobalProfile)}/{saveString}.json", JsonConvert.SerializeObject(saveJson));
+				}
+			}
 		}
 
 		onSaveComplete?.Invoke();
@@ -133,7 +135,7 @@ public class SaveManager : ManageableScriptableObject
 	private bool LoadSave(ISaveable saveable, out JSONNode json)
 	{
 		SaveData saveData = Array.Find(saveDatas, data => data.saveDataType == saveable.SaveDataType);
-        string saveString = saveData.saveDataType.ToString();
+		string saveString = saveData.saveDataType.ToString();
 		string filePath = $"{GetSaveFilePath(saveData.isGlobalProfile)}/{saveString}.json";
 		if (!System.IO.File.Exists(filePath))
 		{
@@ -144,18 +146,32 @@ public class SaveManager : ManageableScriptableObject
 		json = JSON.Parse(fileContents);
 		return true;
 	}
-    #endregion
+#if UNITY_EDITOR
+	[MenuItem("Corrupta/Save Manager/Clear All Saves")]
+    private static void ClearAllSaves()
+	{
+		foreach (SaveData saveData in Instance.saveDatas)
+		{
+			string saveString = saveData.saveDataType.ToString();
+			string filePath = $"{Instance.GetSaveFilePath(saveData.isGlobalProfile)}/{saveString}.json";
+			if (System.IO.File.Exists(filePath))
+			{
+				System.IO.File.Delete(filePath);
+			}
+		}
+#endif
 
+	}
 }
+#endregion
 public enum SaveDataType
-{
-    MetaData,
-    Settings,
-    WorldProgression,
-    LevelProgression,
-    Tutorial
-}
-
+	{
+		MetaData,
+		Settings,
+		WorldProgression,
+		LevelProgression,
+		Tutorial
+	}
 public class SaveData
 {
 	public SaveDataType saveDataType;
