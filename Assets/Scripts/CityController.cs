@@ -85,11 +85,8 @@ public class CityController : ObjectController, ISaveable
         if (loadData != null)
         {
             citySO = City.GetInstanceByID(loadData["id"].AsInt);
-            if (mayor)
-            {
-                int mayorId = loadData["mayor_id"].AsInt;
-                mayor = GameManager.Instance.people.FindAsync(p => p.id == mayorId).Result; // This row is async, because there can be references that haven't loaded yet since there might be circular references. e.g. Person references City as birthplace and City references Person as Mayor.
-            }
+            int mayorId = loadData["mayor_id"].AsInt;
+            mayor = GameManager.Instance.people.FindAsync(p => p.id == mayorId).Result;
             int citizenCount = loadData["citizen_count"];
             for (int i = 0; i < citizenCount; i++)
             {

@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using System.Linq;
 using Sirenix.OdinInspector;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 public class ScriptableObjectBrowser : OdinMenuEditorWindow
 {
-    [MenuItem("Tools/ScriptableObject Browser")]
+    [MenuItem("Corrupta/ScriptableObject Browser")]
     private static void Open()
     {
         var window = GetWindow<ScriptableObjectBrowser>();
@@ -181,3 +182,4 @@ public class ScriptableObjectBrowser : OdinMenuEditorWindow
     }
 
 }
+#endif
