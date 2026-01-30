@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fd16cc9e67274d44bea34c4d54fce6a, type: 3}
-  m_Name: 0 - Ramadan Tullip Maleborn
+  m_Name: "0 - Recep Tayyip Erdo\u011Fan"
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -22,13 +22,14 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   id: 0
-  firstName: Ramadan Tullip
-  lastName: Maleborn
+  firstName: Recep Tayyip
+  lastName: "Erdo\u011Fan"
   fame: 100
+  personAge: 30
   corruption: 100
   ideology: {fileID: 11400000, guid: c613a23e440cd3647b23dfa3a6cc7bed, type: 2}
-  management: 7
-  diplomacy: 0
-  wisdom: 0
-  speech: 7
-  intrigue: 10
+  baseManagement: 0
+  baseDiplomacy: 0
+  baseWisdom: 0
+  baseSpeech: 0
+  baseIntrigue: 0

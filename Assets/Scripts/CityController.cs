@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public interface IController
@@ -85,8 +86,21 @@ public class CityController : ObjectController, ISaveable
         if (loadData != null)
         {
             citySO = City.GetInstanceByID(loadData["id"].AsInt);
-            int mayorId = loadData["mayor_id"].AsInt;
-            mayor = GameManager.Instance.people.FindAsync(p => p.id == mayorId).Result;
+            if (loadData.HasKey("mayor_id"))
+            {
+                int mayorId = loadData["mayor_id"].AsInt;
+                mayor = GameManager.Instance.people.FirstOrDefault(p => p.id == mayorId);
+                if (!mayor)
+                {
+                    Debug.LogWarning($"[CityController] Mayor with ID {mayorId} not found for City ID {citySO.id}. Reverting to default mayor.");
+                    mayor = citySO.mayor;
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[CityController] No mayor_id found in save data. Reverting to default mayor.");
+            }
+
             int citizenCount = loadData["citizen_count"];
             for (int i = 0; i < citizenCount; i++)
             {
