@@ -129,7 +129,8 @@ public class SaveManager : ManageableScriptableObject
 						saveJson.Add(saveables[i].SaveId, saveables[i].Save());
 					}
 					System.IO.Directory.CreateDirectory($"{GetSaveFilePath(saveData.isGlobalProfile)}");
-					System.IO.File.WriteAllText($"{GetSaveFilePath(saveData.isGlobalProfile)}/{saveString}.json", JsonConvert.SerializeObject(saveJson));
+					
+                    System.IO.File.WriteAllText($"{GetSaveFilePath(saveData.isGlobalProfile)}/{saveString}.json", JsonConvert.SerializeObject(BeautifyJson(JsonConvert.SerializeObject(saveJson))));
 				}
 			}
 		}
@@ -137,10 +138,45 @@ public class SaveManager : ManageableScriptableObject
 		onSaveComplete?.Invoke();
 	}
 
-	/// <summary>
-	/// Tries to load the save file
-	/// </summary>
-	private bool LoadSave(ISaveable saveable, out JSONNode json)
+	private string BeautifyJson(string jsonString)
+	{
+		if (string.IsNullOrWhiteSpace(jsonString))
+		{
+			return jsonString;
+		}
+
+		// Prefer SimpleJSON formatting since it's already used across the project.
+		try
+		{
+			var parsedJson = JSON.Parse(jsonString);
+			// If parsing fails, SimpleJSON returns null.
+			if (parsedJson != null)
+			{
+				// Indent with 2 spaces.
+				return parsedJson.ToString(2);
+			}
+		}
+		catch
+		{
+			// Ignore and fall back.
+		}
+
+		// Fallback to Newtonsoft.Json pretty printing.
+		try
+		{
+			return JsonConvert.SerializeObject(JsonConvert.DeserializeObject(jsonString), Formatting.Indented);
+		}
+		catch
+		{
+			// If it's not valid JSON, just return the original string.
+			return jsonString;
+		}
+    }
+
+    /// <summary>
+    /// Tries to load the save file
+    /// </summary>
+    private bool LoadSave(ISaveable saveable, out JSONNode json)
 	{
 		SaveData saveData = Array.Find(saveDatas, data => data.saveDataType == saveable.SaveDataType);
 		string saveString = saveData.saveDataType.ToString();
