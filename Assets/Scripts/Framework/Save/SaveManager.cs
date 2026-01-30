@@ -8,11 +8,19 @@ using Newtonsoft.Json;
 using System;
 using System.Threading;
 using Sirenix.OdinInspector;
+using System.Linq;
+using DG.Tweening.Core.Easing;
 
 [CreateAssetMenu(fileName = "SaveManager", menuName = "Corrupta/Managers/Save Manager...")]
 public class SaveManager : ManageableScriptableObject
 {
-	public static SaveManager Instance => GameManager.Instance.saveManager;
+	public static SaveManager Instance
+	{
+		get
+		{
+			return GameManager.Instance.saveManager;
+        }
+    }
 
 	#region Member Variables
 
@@ -148,6 +156,7 @@ public class SaveManager : ManageableScriptableObject
 	}
 #if UNITY_EDITOR
 	[MenuItem("Corrupta/Save Manager/Clear All Saves")]
+	[Button]
     private static void ClearAllSaves()
 	{
 		foreach (SaveData saveData in Instance.saveDatas)
@@ -159,9 +168,20 @@ public class SaveManager : ManageableScriptableObject
 				System.IO.File.Delete(filePath);
 			}
 		}
-#endif
-
+    }
+	[MenuItem("Corrupta/Save Manager/Save Now")]
+    [Button]
+    private static void SaveNow()
+	{
+		Instance.Save();
 	}
+	[MenuItem("Corrupta/Save Manager/Show Save Folder")]
+    [Button]
+    private static void ShowSaveFolder()
+	{
+		EditorUtility.RevealInFinder(Application.persistentDataPath);
+    }
+#endif
 }
 #endregion
 public enum SaveDataType

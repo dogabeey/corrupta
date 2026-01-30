@@ -28,8 +28,19 @@ public class GameManager : MonoBehaviour, ISaveable
     internal List<Occupation> occupations;
     internal List<Party> parties;
 
+    private static GameManager instance;
 
-    public static GameManager Instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (!instance)
+            {
+                instance = GameObject.FindAnyObjectByType<GameManager>();
+            }
+            return instance;
+        }
+    }
 
     public string SaveId => "Game_Manager";
 
@@ -37,8 +48,6 @@ public class GameManager : MonoBehaviour, ISaveable
 
     private void Awake()
     {
-        Instance = this;
-
         gameInput = new GameInput();
         SaveManager.Instance.Register(this);
 
