@@ -71,7 +71,6 @@ public class CityController : ObjectController, ISaveable
         saveData["citizen_count"] = citizens.Count;
         for (int i = 0; i < citizens.Count; i++)
         {
-            saveData[$"citizens/citizen_{i}"] = citizens[i];
             saveData[$"citizens/citizen_{i}/party_id"] = citizens[i].party != null ? citizens[i].party.id : -1;
             saveData[$"citizens/citizen_{i}/ideology_id"] = citizens[i].ideology != null ? citizens[i].ideology.id : -1;
             saveData[$"citizens/citizen_{i}/occupation_id"] = citizens[i].occupation != null ? citizens[i].occupation.id : -1;

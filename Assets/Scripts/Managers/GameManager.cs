@@ -127,6 +127,11 @@ public class GameManager : MonoBehaviour, ISaveable
         DestroyAllControllers();
     }
 
+    private void OnApplicationQuit()
+    {
+        saveManager.Save(); 
+    }
+
     private void DestroyAllControllers()
     {
         cityControllers.ForEach(cc => cc.OnDestroy());

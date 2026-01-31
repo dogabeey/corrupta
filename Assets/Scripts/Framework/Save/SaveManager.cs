@@ -130,7 +130,7 @@ public class SaveManager : ManageableScriptableObject
 					}
 					System.IO.Directory.CreateDirectory($"{GetSaveFilePath(saveData.isGlobalProfile)}");
 					
-                    System.IO.File.WriteAllText($"{GetSaveFilePath(saveData.isGlobalProfile)}/{saveString}.json", JsonConvert.SerializeObject(BeautifyJson(JsonConvert.SerializeObject(saveJson))));
+                    System.IO.File.WriteAllText($"{GetSaveFilePath(saveData.isGlobalProfile)}/{saveString}.json", JsonConvert.SerializeObject(saveJson));
 				}
 			}
 		}

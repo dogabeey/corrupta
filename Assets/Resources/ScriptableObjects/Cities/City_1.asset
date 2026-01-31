@@ -336,7 +336,42 @@ MonoBehaviour:
   cityName: Abc
   description: 
   mayor: {fileID: 0}
-  citizens: []
+  citizens:
+  - party: {fileID: 11400000, guid: 27ea0ec3095256244aee62540839cd3d, type: 2}
+    ideology: {fileID: 11400000, guid: 5ed1a81f875a6034680d1647c45b7d79, type: 2}
+    occupation: {fileID: 11400000, guid: 2290590b316ebd741bceb2b57d128a66, type: 2}
+    wealth: 71.45305
+    happiness: 35
+    education: 53.977856
+    partizanship: 70.59628
+  - party: {fileID: 11400000, guid: 1491e1ac70608934a864177aea7efa17, type: 2}
+    ideology: {fileID: 11400000, guid: 2d07518ec12373b4299e3f603ba9017f, type: 2}
+    occupation: {fileID: 11400000, guid: 71afd6e0c836138408c76632e616eaba, type: 2}
+    wealth: 12.279897
+    happiness: 46
+    education: 0.34775725
+    partizanship: 88.537094
+  - party: {fileID: 11400000, guid: 1491e1ac70608934a864177aea7efa17, type: 2}
+    ideology: {fileID: 11400000, guid: 0e624b93196e2cc4c9c90ecb93163033, type: 2}
+    occupation: {fileID: 11400000, guid: 62444be5543c2b84897819ff31a96cbe, type: 2}
+    wealth: 71.20027
+    happiness: 26
+    education: 78.6751
+    partizanship: 20.923557
+  - party: {fileID: 11400000, guid: 1491e1ac70608934a864177aea7efa17, type: 2}
+    ideology: {fileID: 11400000, guid: c573308e7b9fa7f44909b7985c2a0256, type: 2}
+    occupation: {fileID: 11400000, guid: 68c51fba998260d4cb5007881b49549e, type: 2}
+    wealth: 97.46256
+    happiness: 53
+    education: 80.41518
+    partizanship: 82.823875
+  - party: {fileID: 11400000, guid: 1491e1ac70608934a864177aea7efa17, type: 2}
+    ideology: {fileID: 11400000, guid: c613a23e440cd3647b23dfa3a6cc7bed, type: 2}
+    occupation: {fileID: 11400000, guid: 3f02eb34406b2824e879cae94e966e04, type: 2}
+    wealth: 5.4364395
+    happiness: 82
+    education: 2.173682
+    partizanship: 94.82215
   partyRates:
   - party: {fileID: 11400000, guid: 1491e1ac70608934a864177aea7efa17, type: 2}
     rate: 1
