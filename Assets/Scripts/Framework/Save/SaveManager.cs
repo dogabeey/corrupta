@@ -29,7 +29,7 @@ public class SaveManager : ManageableScriptableObject
 
 	[SerializeField] SaveData[] saveDatas;
 	[SerializeField] string saveProfile = "default";
-	[SerializeField] bool saveOnQuit = true;
+	public bool saveOnQuit = true;
 
 	#endregion
 

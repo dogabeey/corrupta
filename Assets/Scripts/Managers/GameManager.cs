@@ -129,7 +129,8 @@ public class GameManager : MonoBehaviour, ISaveable
 
     private void OnApplicationQuit()
     {
-        saveManager.Save(); 
+        if(saveManager != null && saveManager.saveOnQuit)
+            saveManager.Save(); 
     }
 
     private void DestroyAllControllers()
