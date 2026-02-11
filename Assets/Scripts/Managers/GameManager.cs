@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour, ISaveable
     {
         cities.ForEach(c =>
         {
-            CityController cityController = new CityController(c, c.mayor, c.citizens);
+            CityController cityController = new CityController(c, c.mayor, c.governor, c.citizens);
             cityControllers.Add(cityController);
         });
         people.ForEach(p =>

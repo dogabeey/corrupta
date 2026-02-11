@@ -32,16 +32,18 @@ public class CityController : ObjectController, ISaveable
 {
     public City citySO;
     public Person mayor;
+    public Person governor;
     public List<CitizenGroup> citizens;
 
     public string SaveId => "City_" + citySO.id;
     public SaveDataType SaveDataType => SaveDataType.WorldProgression;
 
-    public CityController(City citySO, Person mayor, List<CitizenGroup> citizens)
+    public CityController(City citySO, Person mayor, Person governor, List<CitizenGroup> citizens)
     {
         this.citySO = citySO;
         id = citySO.id;
         this.mayor = mayor;
+        this.governor = governor;
         this.citizens = citizens;
     }
 
@@ -51,6 +53,7 @@ public class CityController : ObjectController, ISaveable
     {
         this.citySO = citySO;
         mayor = citySO.mayor;
+        governor = citySO.governor;
         citizens = citySO.citizens;
     }
 
@@ -68,6 +71,7 @@ public class CityController : ObjectController, ISaveable
 
         saveData["id"] = citySO.id;
         if (mayor) saveData["mayor_id"] = mayor.id;
+        if (governor) saveData["governor_id"] = governor.id;
         saveData["citizen_count"] = citizens.Count;
         for (int i = 0; i < citizens.Count; i++)
         {
@@ -98,6 +102,21 @@ public class CityController : ObjectController, ISaveable
             else
             {
                 Debug.LogWarning("[CityController] No mayor_id found in save data. Reverting to default mayor.");
+            }
+
+            if (loadData.HasKey("governor_id"))
+            {
+                int governorId = loadData["governor_id"].AsInt;
+                governor = GameManager.Instance.people.FirstOrDefault(p => p.id == governorId);
+                if (!governor)
+                {
+                    Debug.LogWarning($"[CityController] Governor with ID {governorId} not found for City ID {citySO.id}. Reverting to default governor.");
+                    governor = citySO.governor;
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[CityController] No governor_id found in save data. Reverting to default governor.");
             }
 
             int citizenCount = loadData["citizen_count"];

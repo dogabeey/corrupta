@@ -13,6 +13,8 @@ public class City : ListedScriptableObject<City>
     public string description;
     [CreateNewInstanceButton(pathEnum: AssetPathEnum.People)]
     public Person mayor;
+    [CreateNewInstanceButton(pathEnum: AssetPathEnum.People)]
+    public Person governor;
     public List<CitizenGroup> citizens;
     [Header("Generation Settings")]
     public List<PartyRate> partyRates;
