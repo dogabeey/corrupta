@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Splits layout children into pages and exposes navigation helpers.
@@ -14,7 +15,7 @@ public class LayoutPager : MonoBehaviour
     [SerializeField] private Button nextButton;
     [SerializeField, Min(1)] private int elementsPerPage = 6;
     [SerializeField] private bool includeInactiveChildren;
-    [SerializeField] private Text pageIndicator;
+    [SerializeField] private TMP_Text pageIndicator;
 
     [System.Serializable]
     public class PageChangedEvent : UnityEvent<int, int> { }
@@ -23,6 +24,7 @@ public class LayoutPager : MonoBehaviour
 
     private readonly List<GameObject> managedElements = new List<GameObject>();
     private int currentPage;
+    private bool skipNextOnEnableRefresh;
 
     private int PageCount => Mathf.Max(1, Mathf.CeilToInt(managedElements.Count / (float)elementsPerPage));
 
@@ -35,11 +37,19 @@ public class LayoutPager : MonoBehaviour
 
         WireButton(previousButton, GoToPreviousPage);
         WireButton(nextButton, GoToNextPage);
+
+        skipNextOnEnableRefresh = true;
         Refresh();
     }
 
     private void OnEnable()
     {
+        if (skipNextOnEnableRefresh)
+        {
+            skipNextOnEnableRefresh = false;
+            return;
+        }
+
         Refresh();
     }
 

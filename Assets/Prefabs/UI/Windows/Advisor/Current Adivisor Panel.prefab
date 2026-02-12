@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 7296816810714471333}
   - component: {fileID: 6917882294155170662}
   m_Layer: 5
-  m_Name: Advisor Section
+  m_Name: Current Adivisor Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
