@@ -45,7 +45,6 @@ public class AdvisorPool : SerializedMonoBehaviour
         var advisor = new Advisor<T>
         {
             // AdvisorType should be static information: create a fresh value object, not an "instance roster".
-            // This requires each concrete AdvisorType to have a public parameterless ctor.
             type = new T(),
             advisorName = GenerateRandomName(),
             costMultiplier = Random.Range(0.8f, 1.2f),

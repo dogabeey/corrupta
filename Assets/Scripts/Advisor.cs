@@ -51,28 +51,32 @@ public abstract class AdvisorType
     public abstract Sprite AdvisorIcon { get; }
     public abstract float CostMultiplier { get; }
 }
+public class LegalCounsel : AdvisorType
+{
+    public override string AdvisorTypeName => "Legal Counsel";
+    public override Sprite AdvisorIcon => null;
+    public override List<AdvisorAbility> Abilities => new List<AdvisorAbility>();
+    public override float CostMultiplier => 1f;
 
+}
 public class PRDirector : AdvisorType
 {
     public override string AdvisorTypeName => "Public Relations Director";
-    private List<AdvisorAbility> abilities = new List<AdvisorAbility>();
-    public override List<AdvisorAbility> Abilities => abilities;
+    public override List<AdvisorAbility> Abilities => new List<AdvisorAbility>();
     public override Sprite AdvisorIcon => null;
     public override float CostMultiplier => 1f;
 }
 public class ChiefOfStaff : AdvisorType
 {
     public override string AdvisorTypeName => "Chief of Staff";
-    private List<AdvisorAbility> abilities = new List<AdvisorAbility>();
-    public override List<AdvisorAbility> Abilities => abilities;
+    public override List<AdvisorAbility> Abilities => new List<AdvisorAbility>();
     public override Sprite AdvisorIcon => null;
     public override float CostMultiplier => 1f;
 }
 public class FinanceChairman : AdvisorType
 {
     public override string AdvisorTypeName => "Finance Chairman";
-    private List<AdvisorAbility> abilities = new List<AdvisorAbility>();
-    public override List<AdvisorAbility> Abilities => abilities;
+    public override List<AdvisorAbility> Abilities => new List<AdvisorAbility>();
     public override Sprite AdvisorIcon => null;
     public override float CostMultiplier => 1f;
 }
