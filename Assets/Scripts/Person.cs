@@ -38,6 +38,7 @@ public class Person : ListedScriptableObject<Person>
     private void OnValidate()
     {
         // Make asset's file name match person's name
+#if UNITY_EDITOR
         if (this.name != id + " - " + firstName + " " + lastName)
         {
             this.name = id + " - " + firstName + " " + lastName;
@@ -45,6 +46,7 @@ public class Person : ListedScriptableObject<Person>
             UnityEditor.AssetDatabase.SaveAssets();
             UnityEditor.AssetDatabase.Refresh();
         }
+#endif
 
         // Clamp stats between 0 and 100
         fame = Mathf.Clamp(fame, 0, 100);
@@ -57,6 +59,7 @@ public class Person : ListedScriptableObject<Person>
         
     }
 
+#if UNITY_EDITOR
     public static Person CreateNewAsset()
     {
         Person person = CreateInstance<Person>();
@@ -67,6 +70,7 @@ public class Person : ListedScriptableObject<Person>
         UnityEditor.AssetDatabase.Refresh();
         return person;
     }
+#endif
     public string GetTitleString()
     {
         if (GetTitle() == Title.Advisor) return "Advisor";

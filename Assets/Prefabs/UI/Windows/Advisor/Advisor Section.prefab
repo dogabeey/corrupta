@@ -907,7 +907,8 @@ PrefabInstance:
       value: action button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3723799761698200033, guid: d94ff23b835129249ab289eef887216a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d94ff23b835129249ab289eef887216a, type: 3}
@@ -1031,7 +1032,8 @@ PrefabInstance:
       value: action button (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3723799761698200033, guid: d94ff23b835129249ab289eef887216a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d94ff23b835129249ab289eef887216a, type: 3}
@@ -1155,7 +1157,8 @@ PrefabInstance:
       value: action button (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3723799761698200033, guid: d94ff23b835129249ab289eef887216a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d94ff23b835129249ab289eef887216a, type: 3}
@@ -1279,7 +1282,8 @@ PrefabInstance:
       value: action button (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3723799761698200033, guid: d94ff23b835129249ab289eef887216a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d94ff23b835129249ab289eef887216a, type: 3}
@@ -1403,7 +1407,8 @@ PrefabInstance:
       value: action button (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3723799761698200033, guid: d94ff23b835129249ab289eef887216a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d94ff23b835129249ab289eef887216a, type: 3}

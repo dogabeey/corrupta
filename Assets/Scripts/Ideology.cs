@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEditor;
 using System.Xml;
 using System.IO;
 using System.Collections.Generic;
@@ -17,6 +16,7 @@ public class Ideology  : ListedScriptableObject<Ideology>
     private void OnValidate()
     {
         // Make asset's file name match ideology's name
+#if UNITY_EDITOR
         if (this.name != id + " - " + ideologyName)
         {
             this.name = id + " - " + ideologyName;
@@ -24,6 +24,7 @@ public class Ideology  : ListedScriptableObject<Ideology>
             UnityEditor.AssetDatabase.SaveAssets();
             UnityEditor.AssetDatabase.Refresh();
         }
+#endif
     }
 
 }

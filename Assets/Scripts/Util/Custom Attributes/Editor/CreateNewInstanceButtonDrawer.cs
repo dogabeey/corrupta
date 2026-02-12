@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
@@ -59,3 +60,4 @@ public class CreateNewInstanceButtonDrawer
         EditorUtility.OpenPropertyEditor(asset);
     }
 }
+#endif
