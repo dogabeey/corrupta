@@ -3,27 +3,27 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.AddressableAssets;
 
-public class CurrentAdvisorUI : UIBehaviour
+public class PoolAdvisorUI : UIBehaviour
 {
-    protected AdvisorBase currentAdvisor;
+    protected AdvisorBase poolAdvisor;
 
     [Header("UI References")]
     public TMP_Text advisorNameText;
+    public TMP_Text advisorCostText;
     public LayoutGroup advisorBonusContainer;
-    public LayoutGroup advisorAbilityContainer;
     public Image advisorPortrait;
     public Image advisorTypeIcon;
     [Header("Prefabs")]
     public TMP_Text advisorBonusTextPrefab;
     public Button advisorAbilityButtonPrefab;
 
-    protected override string UpdateEventString => "ADVISOR_UPDATED";
-
+    protected override string UpdateEventString => "ADVISOR_POOL_UPDATED";
     public override void DrawUI()
     {
-        advisorNameText.text = currentAdvisor.AdvisorName;
-        advisorPortrait.sprite = Addressables.LoadAssetAsync<Sprite>(GameConstants.Gfx.Icons.advisor_portrait_set[currentAdvisor.PortraitIndex]).WaitForCompletion();
-        advisorTypeIcon.sprite = currentAdvisor.Type.AdvisorIcon;
+        advisorNameText.text = poolAdvisor.AdvisorName;
+        advisorCostText.text = poolAdvisor.CostMultiplier.ToString() + "<sprite index=0>";
+        advisorPortrait.sprite = Addressables.LoadAssetAsync<Sprite>(GameConstants.Gfx.Icons.advisor_portrait_set[poolAdvisor.PortraitIndex]).WaitForCompletion();
+        advisorTypeIcon.sprite = poolAdvisor.Type.AdvisorIcon;
 
         DrawBonusEffects();
     }
@@ -35,7 +35,7 @@ public class CurrentAdvisorUI : UIBehaviour
         for (int i = advisorBonusContainer.transform.childCount - 1; i >= 0; i--)
             Destroy(advisorBonusContainer.transform.GetChild(i).gameObject);
 
-        var effects = currentAdvisor.BonusEffects;
+        var effects = poolAdvisor.BonusEffects;
         if (effects == null) return;
 
         for (int i = 0; i < effects.Count; i++)
