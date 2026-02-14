@@ -27,6 +27,7 @@ public class GameConstants : ListedScriptableObject<GameConstants>
                 public const string opposition_researcher = "advisor_icons[opposition_researcher]";
                 public const string finance_chairman = "advisor_icons[finance_chairman]";
             }
+
             public const string advisor_portrait_set = "advisor_portraits[%]";
         }
     }

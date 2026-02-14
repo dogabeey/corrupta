@@ -16,6 +16,7 @@ public class LayoutPager : MonoBehaviour
     [SerializeField, Min(1)] private int elementsPerPage = 6;
     [SerializeField] private bool includeInactiveChildren;
     [SerializeField] private TMP_Text pageIndicator;
+    [SerializeField] private string pageFormat = "{0}/{1}";
 
     [System.Serializable]
     public class PageChangedEvent : UnityEvent<int, int> { }
@@ -142,11 +143,11 @@ public class LayoutPager : MonoBehaviour
 
         if (managedElements.Count == 0)
         {
-            pageIndicator.text = "0/0";
+            pageIndicator.text = "";
             return;
         }
 
-        pageIndicator.text = string.Format("{0}/{1}", currentPage + 1, PageCount);
+        pageIndicator.text = string.Format(pageFormat, currentPage + 1, PageCount);
     }
 
     private static void WireButton(Button button, UnityAction action)
