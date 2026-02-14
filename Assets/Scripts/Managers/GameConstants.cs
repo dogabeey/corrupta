@@ -9,7 +9,9 @@ public class GameConstants : ListedScriptableObject<GameConstants>
     public float mapMaxColorDistanceDetection = 0.1f;
     public string mapShaderProvinceColorString = "_ProvinceColor";
     public string mapShaderProvinceSelectString = "_ProvinceSelect";
-    [Header("ADDRESSABLES")]
+    [Header("ECONOMY")]
+    public float baseStartingMoney = 1000f;
+    public float baseAdvsiorCost = 100f;
     public static GameConstants Instance => GameManager.Instance.gameConstants;
 
     public struct GameEvents
@@ -20,7 +22,7 @@ public class GameConstants : ListedScriptableObject<GameConstants>
     {
         public struct Icons
         {
-            public struct advisor_icons
+            public struct AdvisorIcons
             {
                 public const string pr_manager = "advisor_icons[pr_manager]";
                 public const string chief_of_staff = "advisor_icons[chief_of_staff]";

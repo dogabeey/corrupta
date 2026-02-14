@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using System.Linq;
+using UnityEngine.AddressableAssets;
 
 public class AdvisorPool : SerializedMonoBehaviour
 {
@@ -46,6 +47,7 @@ public class AdvisorPool : SerializedMonoBehaviour
         {
             // AdvisorType should be static information: create a fresh value object, not an "instance roster".
             type = new T(),
+            advisorPortraitID = Random.Range(0, 30),
             advisorName = GenerateRandomName(),
             costMultiplier = Random.Range(0.8f, 1.2f),
             effectBonusMultiplier = Random.Range(0.8f, 1.2f),
