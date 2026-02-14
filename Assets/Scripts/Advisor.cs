@@ -8,17 +8,18 @@ using TMPro;
 public class Advisor<T> where T : AdvisorType
 {
     public T type;
-    public int advisorPortraitID;
     public string advisorName;
+    public int portraitIndex;
     public float costMultiplier;
     public float effectBonusMultiplier;
     public float apCostMultiplier;
 
-    public float Cost => GameConstants.Instance.baseAdvsiorCost * type.CostMultiplier * costMultiplier;
+    [Header("Bonus Effects")]
+    public List<BonusEffect> bonusEffects = new List<BonusEffect>();
 }
 
 // Non-generic interface so different Advisor<T> can live in one list
-public interface IAdvisor
+public interface IAdvisor : IBonusEffectSource
 {
     string AdvisorName { get; }
     AdvisorType Type { get; }
@@ -31,10 +32,15 @@ public interface IAdvisor
 public abstract class AdvisorBase : IAdvisor
 {
     public abstract string AdvisorName { get; }
+    public abstract int PortraitIndex { get; }
     public abstract AdvisorType Type { get; }
     public abstract float CostMultiplier { get; }
     public abstract float EffectBonusMultiplier { get; }
     public abstract float ApCostMultiplier { get; }
+
+    public abstract IReadOnlyList<BonusEffect> BonusEffects { get; }
+
+    public float Cost => GameConstants.Instance.baseAdvsiorCost * Type.CostMultiplier * CostMultiplier;
 }
 
 // Concrete wrapper for Advisor<T>
@@ -44,10 +50,13 @@ public sealed class AdvisorEntry<T> : AdvisorBase where T : AdvisorType
     public Advisor<T> advisor = new Advisor<T>();
 
     public override string AdvisorName => advisor.advisorName;
+    public override int PortraitIndex => advisor.portraitIndex;
     public override AdvisorType Type => advisor.type;
     public override float CostMultiplier => advisor.costMultiplier;
     public override float EffectBonusMultiplier => advisor.effectBonusMultiplier;
     public override float ApCostMultiplier => advisor.apCostMultiplier;
+
+    public override IReadOnlyList<BonusEffect> BonusEffects => advisor.bonusEffects;
 }
 
 public abstract class AdvisorType

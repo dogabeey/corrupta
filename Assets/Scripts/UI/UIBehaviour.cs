@@ -5,6 +5,11 @@ using TMPro;
 
 public abstract class UIBehaviour : MonoBehaviour
 {
+    /// <summary>
+    /// UpdateEventString is the event string which causes DrawUI() to execute automatically when an event with the same 
+    /// string fires in another piece of code.
+    /// Example: EventManager.TriggerEvent("EVENT_NAME_HERE");
+    /// </summary>
     protected abstract string UpdateEventString
     {
         get;

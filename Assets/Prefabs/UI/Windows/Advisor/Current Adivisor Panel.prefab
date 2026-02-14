@@ -439,7 +439,7 @@ MonoBehaviour:
   m_text: <color=green>+5%</color> Blue Collar <link=popularity><color=blue><u>Popularity</u></color></link>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cc7fa4dc8f90410eab92770a9b8339a, type: 2}
-  m_sharedMaterial: {fileID: -1066609603145130336, guid: 0cc7fa4dc8f90410eab92770a9b8339a,
+  m_sharedMaterial: {fileID: 4775930113265669740, guid: 0cc7fa4dc8f90410eab92770a9b8339a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -576,7 +576,7 @@ MonoBehaviour:
   m_text: ADVISOR NAME
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cc7fa4dc8f90410eab92770a9b8339a, type: 2}
-  m_sharedMaterial: {fileID: -1066609603145130336, guid: 0cc7fa4dc8f90410eab92770a9b8339a,
+  m_sharedMaterial: {fileID: 4775930113265669740, guid: 0cc7fa4dc8f90410eab92770a9b8339a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
