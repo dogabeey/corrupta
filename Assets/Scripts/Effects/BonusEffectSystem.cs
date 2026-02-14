@@ -26,12 +26,12 @@ public enum BonusOperation
     Multiply = 1
 }
 
+[Flags]
 public enum BonusScope
 {
     Global = 0,
-    OnlyOccupation = 1,
-    OnlyIdeology = 2,
-    OccupationAndIdeology = 3
+    Occupation = 1 << 0,
+    Ideology = 1 << 1
 }
 
 [Serializable]
@@ -46,48 +46,65 @@ public struct BonusEffect
     [Tooltip("For Add: +1, -2, etc. For Multiply: 1.05 for +5%, 0.9 for -10%")]
     public float value;
 
-    [Tooltip("Where this bonus applies (global or filtered)")]
+    [Tooltip("Where this bonus applies (global or filtered). Use flags to combine (Occupation | Ideology).")]
     public BonusScope scope;
 
-    [Tooltip("Optional filter when scope requires occupation")]
+    [Tooltip("Optional filter when scope includes Occupation")]
     public Occupation occupation;
 
-    [Tooltip("Optional filter when scope requires ideology")]
+    [Tooltip("Optional filter when scope includes Ideology")]
     public Ideology ideology;
 
     [Tooltip("UI-friendly label override (optional). When empty, a label is generated.")]
     public string customLabel;
 
-    public bool AppliesTo(Occupation occ, Ideology ideo)
+    public readonly bool AppliesTo(Occupation occ, Ideology ideo)
     {
-        switch (scope)
+        // Global means no filtering.
+        if (scope == BonusScope.Global) return true;
+
+        // If a flag is set, the corresponding filter must match.
+        if (scope.HasFlag(BonusScope.Occupation))
         {
-            case BonusScope.Global:
-                return true;
-            case BonusScope.OnlyOccupation:
-                return occupation != null && occupation == occ;
-            case BonusScope.OnlyIdeology:
-                return ideology != null && ideology == ideo;
-            case BonusScope.OccupationAndIdeology:
-                return occupation != null && ideology != null && occupation == occ && ideology == ideo;
-            default:
-                return false;
+            if (occupation == null) return false;
+            if (occ == null) return false;
+            if (occupation != occ) return false;
         }
+
+        if (scope.HasFlag(BonusScope.Ideology))
+        {
+            if (ideology == null) return false;
+            if (ideo == null) return false;
+            if (ideology != ideo) return false;
+        }
+
+        return true;
     }
 
-    public string GetLabel()
+    public readonly string GetLabel()
     {
         if (!string.IsNullOrWhiteSpace(customLabel)) return customLabel;
 
         string targetStr = target.ToString();
-        string scopeStr = scope switch
+        string scopeStr = string.Empty;
+
+        if (scope != BonusScope.Global)
         {
-            BonusScope.Global => string.Empty,
-            BonusScope.OnlyOccupation => occupation ? $" ({occupation.className})" : " (Occupation)",
-            BonusScope.OnlyIdeology => ideology ? $" ({ideology.name})" : " (Ideology)",
-            BonusScope.OccupationAndIdeology => $" ({(occupation ? occupation.className : "Occupation")} + {(ideology ? ideology.name : "Ideology")})",
-            _ => string.Empty
-        };
+            string occPart = scope.HasFlag(BonusScope.Occupation)
+                ? (occupation ? occupation.className : "Occupation")
+                : null;
+
+            string ideoPart = scope.HasFlag(BonusScope.Ideology)
+                ? (ideology ? ideology.name : "Ideology")
+                : null;
+
+            if (!string.IsNullOrEmpty(occPart) && !string.IsNullOrEmpty(ideoPart))
+                scopeStr = $" ({occPart} + {ideoPart})";
+            else if (!string.IsNullOrEmpty(occPart))
+                scopeStr = $" ({occPart})";
+            else if (!string.IsNullOrEmpty(ideoPart))
+                scopeStr = $" ({ideoPart})";
+        }
 
         if (operation == BonusOperation.Add)
         {

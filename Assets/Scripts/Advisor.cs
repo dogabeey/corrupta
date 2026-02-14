@@ -16,6 +16,7 @@ public class Advisor<T> where T : AdvisorType
 
     [Header("Bonus Effects")]
     public List<BonusEffect> bonusEffects = new List<BonusEffect>();
+
 }
 
 // Non-generic interface so different Advisor<T> can live in one list

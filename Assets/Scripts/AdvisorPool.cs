@@ -9,6 +9,7 @@ public class AdvisorPool : SerializedMonoBehaviour
     // Holds multiple advisor types at once
     public List<AdvisorBase> advisors = new List<AdvisorBase>();
     public TextAsset maleNameList, femaleNameList, lastNameList;
+    public BonusEffectPool bonusEffectPool;
 
     private void Start()
     {
@@ -54,8 +55,21 @@ public class AdvisorPool : SerializedMonoBehaviour
             apCostMultiplier = Random.Range(0.8f, 1.2f)
         };
 
+        TryAddRandomBonusEffect(advisor);
+
         AddAdvisor(advisor);
         return advisor;
+    }
+
+    private void TryAddRandomBonusEffect<T>(Advisor<T> advisor) where T : AdvisorType
+    {
+        if (advisor == null) return;
+        if (bonusEffectPool == null) return;
+        if (bonusEffectPool.sources == null || bonusEffectPool.sources.Count == 0) return;
+
+        var effect = bonusEffectPool.sources[Random.Range(0, bonusEffectPool.sources.Count)];
+        if (advisor.bonusEffects == null) advisor.bonusEffects = new List<BonusEffect>();
+        advisor.bonusEffects.Add(effect);
     }
 
     public void CreateRandomAdvisorsOfType<T>(int number) where T : AdvisorType, new()
