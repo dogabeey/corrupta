@@ -106,6 +106,10 @@ public class GameManager : MonoBehaviour, ISaveable
             MediaController mediaController = new MediaController(m, m.ideology, m.influence);
             mediaControllers.Add(mediaController);
         });
+
+        // Build lookup after controllers are created.
+        personControllerById = null;
+        EnsurePersonControllerIndex();
     }
 
     private void Update()
@@ -166,4 +170,33 @@ public class GameManager : MonoBehaviour, ISaveable
 
     }
 
+    private Dictionary<int, PersonController> personControllerById;
+
+    public PersonController GetPersonController(int personId)
+    {
+        EnsurePersonControllerIndex();
+        personControllerById.TryGetValue(personId, out var controller);
+        return controller;
+    }
+
+    public PersonController GetPersonController(Person person)
+    {
+        if (person == null) return null;
+        return GetPersonController(person.id);
+    }
+
+    private void EnsurePersonControllerIndex()
+    {
+        if (personControllerById != null) return;
+        personControllerById = new Dictionary<int, PersonController>();
+        if (personControllers == null) return;
+
+        for (int i = 0; i < personControllers.Count; i++)
+        {
+            var pc = personControllers[i];
+            if (pc == null) continue;
+            if (personControllerById.ContainsKey(pc.id)) personControllerById[pc.id] = pc;
+            else personControllerById.Add(pc.id, pc);
+        }
+    }
 }

@@ -9883,9 +9883,10 @@ MonoBehaviour:
   - target: 1
     operation: 1
     value: 1
-    scope: 2
+    scope: 1
     occupation: {fileID: 11400000, guid: 310f7e130b259b74f80c67fcbd7210f7, type: 2}
     ideology: {fileID: 0}
+    bonusEffectCostMultiplier: 0
     customLabel: 
 --- !u!1001 &1051951974
 PrefabInstance:

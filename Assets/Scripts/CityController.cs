@@ -92,7 +92,8 @@ public class CityController : ObjectController, ISaveable
             if (loadData.HasKey("mayor_id"))
             {
                 int mayorId = loadData["mayor_id"].AsInt;
-                mayor = GameManager.Instance.people.FirstOrDefault(p => p.id == mayorId);
+                mayor = GameManager.Instance.GetPersonController(mayorId)?.personSO
+                    ?? GameManager.Instance.people.FirstOrDefault(p => p.id == mayorId);
                 if (!mayor)
                 {
                     Debug.LogWarning($"[CityController] Mayor with ID {mayorId} not found for City ID {citySO.id}. Reverting to default mayor.");
@@ -107,7 +108,8 @@ public class CityController : ObjectController, ISaveable
             if (loadData.HasKey("governor_id"))
             {
                 int governorId = loadData["governor_id"].AsInt;
-                governor = GameManager.Instance.people.FirstOrDefault(p => p.id == governorId);
+                governor = GameManager.Instance.GetPersonController(governorId)?.personSO
+                    ?? GameManager.Instance.people.FirstOrDefault(p => p.id == governorId);
                 if (!governor)
                 {
                     Debug.LogWarning($"[CityController] Governor with ID {governorId} not found for City ID {citySO.id}. Reverting to default governor.");
