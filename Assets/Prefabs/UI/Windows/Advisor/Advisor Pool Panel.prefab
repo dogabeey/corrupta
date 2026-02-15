@@ -261,7 +261,6 @@ MonoBehaviour:
   advisorNameText: {fileID: 0}
   advisorCostText: {fileID: 0}
   advisorBonusContainer: {fileID: 0}
-  advisorAbilityContainer: {fileID: 0}
   advisorPortrait: {fileID: 0}
   advisorTypeIcon: {fileID: 0}
   advisorBonusTextPrefab: {fileID: 0}
