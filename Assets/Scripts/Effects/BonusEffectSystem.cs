@@ -55,6 +55,8 @@ public struct BonusEffect
     [Tooltip("Optional filter when scope includes Ideology")]
     public Ideology ideology;
 
+    public float bonusEffectCostMultiplier;
+
     [Tooltip("UI-friendly label override (optional). When empty, a label is generated.")]
     public string customLabel;
 

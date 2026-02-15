@@ -41,7 +41,29 @@ public abstract class AdvisorBase : IAdvisor
 
     public abstract IReadOnlyList<BonusEffect> BonusEffects { get; }
 
-    public float Cost => GameConstants.Instance.baseAdvsiorCost * Type.CostMultiplier * CostMultiplier;
+    public float Cost => GameConstants.Instance.baseAdvsiorCost * Type.CostMultiplier * CostMultiplier * GetBonusEffectsCostMultiplier();
+
+    private float GetBonusEffectsCostMultiplier()
+    {
+        var effects = BonusEffects;
+        if (effects == null || effects.Count == 0) return 1f;
+
+        float mul = 1f;
+        for (int i = 0; i < effects.Count; i++)
+        {
+            // Treat 0/negative as "unset" to avoid zeroing out costs.
+            float m = effects[i].bonusEffectCostMultiplier;
+            if (m > 0f) mul *= m;
+        }
+
+        return mul;
+    }
+
+    public void BuyAdvisor()
+    {
+        // Implement the logic to buy the advisor, e.g., deduct cost from player's resources, apply effects, etc.
+        Debug.Log($"Bought advisor: {AdvisorName} for cost: {Cost}");
+    }
 }
 
 // Concrete wrapper for Advisor<T>

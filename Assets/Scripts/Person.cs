@@ -23,6 +23,7 @@ public class Person : ListedScriptableObject<Person>
     }
 
     public string firstName, lastName;
+    public float personalMoney = 0;
     public float fame = 0;
     public float personAge = 30;
     public float corruption = 0;
