@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 2488177104434488336}
   - component: {fileID: 390597725718518617}
   - component: {fileID: 9161263007103127738}
+  - component: {fileID: 6402634540069535554}
   m_Layer: 5
   m_Name: Advisor Window
   m_TagString: Untagged
@@ -195,6 +196,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
+--- !u!114 &6402634540069535554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3673177766595053574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c23a945513d60e64cbfbd920d79ee738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateEventString: ADVISORS_PANEL_UPDATED
+  advisorsPoolLayoutGroup: {fileID: 5440533284158189905}
+  currentAdvisorsLayoutGroup: {fileID: 9012673359789492752}
+  poolAdvisorUIPrefab: {fileID: 5587861735535772498, guid: 4cdd64f6ddbf19149874f62e73583a59,
+    type: 3}
+  currentAdvisorUIPrefab: {fileID: 244698283511918241, guid: e727089ecb92e2c43a86c9e210780cca,
+    type: 3}
 --- !u!1 &3792041741050519369
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,7 +894,7 @@ GameObject:
   - component: {fileID: 3661219457703651171}
   - component: {fileID: 9012673359789492752}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Current Advisor Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1095,7 +1115,7 @@ GameObject:
   - component: {fileID: 5440533284158189905}
   - component: {fileID: 3724974639450145025}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Pool Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1200,6 +1220,7 @@ MonoBehaviour:
   elementsPerPage: 4
   includeInactiveChildren: 0
   pageIndicator: {fileID: 8281936290301519128}
+  pageFormat: '{0}/{1}'
   onPageChanged:
     m_PersistentCalls:
       m_Calls: []

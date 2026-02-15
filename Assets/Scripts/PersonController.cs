@@ -17,6 +17,12 @@ public class PersonController : ObjectController, ISaveable
     public int baseSpeech;
     public int baseIntrigue;
 
+    // Advisors currently assigned to this person.
+    // Saved/loaded by advisor name (since advisors are runtime-created, non-ScriptableObject entries).
+    [NonSerialized]
+    private readonly List<AdvisorBase> advisors = new List<AdvisorBase>();
+    public IReadOnlyList<AdvisorBase> Advisors => advisors;
+
     public string SaveId => "Person_" + (personSO != null ? personSO.id : id);
     public SaveDataType SaveDataType => SaveDataType.WorldProgression;
 
@@ -61,6 +67,26 @@ public class PersonController : ObjectController, ISaveable
         baseWisdom = personSO.baseWisdom;
         baseSpeech = personSO.baseSpeech;
         baseIntrigue = personSO.baseIntrigue;
+
+        advisors.Clear();
+    }
+
+    public void AddAdvisor(AdvisorBase advisor)
+    {
+        if (advisor == null) return;
+        if (advisors.Contains(advisor)) return;
+        advisors.Add(advisor);
+    }
+
+    public bool RemoveAdvisor(AdvisorBase advisor)
+    {
+        if (advisor == null) return false;
+        return advisors.Remove(advisor);
+    }
+
+    public void ClearAdvisors()
+    {
+        advisors.Clear();
     }
 
     public Dictionary<string, object> Save()
@@ -80,6 +106,16 @@ public class PersonController : ObjectController, ISaveable
         saveData["baseWisdom"] = baseWisdom;
         saveData["baseSpeech"] = baseSpeech;
         saveData["baseIntrigue"] = baseIntrigue;
+
+        // Advisors
+        int advisorCount = advisors != null ? advisors.Count : 0;
+        saveData["advisors/count"] = advisorCount;
+        for (int i = 0; i < advisorCount; i++)
+        {
+            // AdvisorBase is not a ScriptableObject, so persist by stable key.
+            // Currently advisor name is the only available unique-ish identifier.
+            saveData[$"advisors/{i}/name"] = advisors[i] != null ? advisors[i].AdvisorName : string.Empty;
+        }
 
         return saveData;
     }
@@ -115,6 +151,22 @@ public class PersonController : ObjectController, ISaveable
         baseWisdom = loadData["baseWisdom"].AsInt;
         baseSpeech = loadData["baseSpeech"].AsInt;
         baseIntrigue = loadData["baseIntrigue"].AsInt;
+
+        // Advisors
+        advisors.Clear();
+        int advisorCount = loadData.HasKey("advisors/count") ? loadData["advisors/count"].AsInt : 0;
+        for (int i = 0; i < advisorCount; i++)
+        {
+            string advisorName = loadData.HasKey($"advisors/{i}/name") ? loadData[$"advisors/{i}/name"].Value : null;
+            if (string.IsNullOrEmpty(advisorName)) continue;
+
+            AdvisorBase advisor = null;
+            if (GameManager.Instance != null && GameManager.Instance.advisorPool != null && GameManager.Instance.advisorPool.advisors != null)
+                advisor = GameManager.Instance.advisorPool.advisors.Find(a => a != null && a.AdvisorName == advisorName);
+
+            if (advisor != null)
+                advisors.Add(advisor);
+        }
 
         onLoadSuccess?.Invoke();
         return true;

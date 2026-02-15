@@ -5,18 +5,29 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour, ISaveable
 {
+    [FoldoutGroup("References")]
+    public AdvisorPool advisorPool;
+
     [InlineEditor]
+    [FoldoutGroup("Managers")]
     public GameConstants gameConstants;
     [InlineEditor]
+    [FoldoutGroup("Managers")]
     public EventManager eventManager;
     [InlineEditor]
+    [FoldoutGroup("Managers")]
     public SaveManager saveManager;
     [InlineEditor]
+    [FoldoutGroup("Managers")]
     public PoolingSystem poolingSystem;
 
+    [FoldoutGroup("Controllers")]
     public List<CityController> cityControllers;
+    [FoldoutGroup("Controllers")]
     public List<PersonController> personControllers;
+    [FoldoutGroup("Controllers")]
     public List<PartyController> partyControllers;
+    [FoldoutGroup("Controllers")]
     public List<MediaController> mediaControllers;
 
     internal GameInput gameInput;

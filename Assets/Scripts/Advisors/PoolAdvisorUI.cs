@@ -5,7 +5,7 @@ using UnityEngine.AddressableAssets;
 
 public class PoolAdvisorUI : UIBehaviour
 {
-    protected AdvisorBase poolAdvisor;
+    internal AdvisorBase poolAdvisor;
 
     [Header("UI References")]
     public TMP_Text advisorNameText;

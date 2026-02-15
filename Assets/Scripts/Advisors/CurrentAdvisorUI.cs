@@ -5,7 +5,7 @@ using UnityEngine.AddressableAssets;
 
 public class CurrentAdvisorUI : UIBehaviour
 {
-    protected AdvisorBase currentAdvisor;
+    internal AdvisorBase currentAdvisor;
 
     [Header("UI References")]
     public TMP_Text advisorNameText;

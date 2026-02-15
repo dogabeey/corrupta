@@ -29,7 +29,6 @@ public class Person : ListedScriptableObject<Person>
     public float corruption = 0;
     public Ideology ideology;
 
-
     public int baseManagement;
     public int baseDiplomacy;
     public int baseWisdom;
