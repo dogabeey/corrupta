@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour, ISaveable
     internal List<Person> people;
     internal List<Occupation> occupations;
     internal List<Party> parties;
+    internal List<Player> players;
 
     private static GameManager instance;
 
@@ -63,6 +64,22 @@ public class GameManager : MonoBehaviour, ISaveable
         InitializeControllers();
 
         StartAllControllers();
+
+        // Only create a random player if none were loaded/created.
+        if (players == null || players.Count == 0)
+            SetRandomPersonAsPlayer();
+    }
+
+    private void SetRandomPersonAsPlayer()
+    {
+        if(players == null) players = new List<Player>();
+
+        if (people == null || people.Count == 0) return;
+        int randomIndex = Random.Range(0, people.Count);
+        Person randomPerson = people[randomIndex];
+        Player player = new Player();
+        player.playerPerson = randomPerson;
+        players.Add(player);
     }
 
     private void StartAllControllers()
@@ -149,6 +166,15 @@ public class GameManager : MonoBehaviour, ISaveable
     {
         Dictionary<string, object> saveData = new Dictionary<string, object>();
 
+        // Save players by referencing Person via id.
+        int playerCount = players != null ? players.Count : 0;
+        saveData["players/count"] = playerCount;
+        for (int i = 0; i < playerCount; i++)
+        {
+            int personId = (players[i] != null && players[i].playerPerson != null) ? players[i].playerPerson.id : -1;
+            saveData[$"players/player_{i}/person_id"] = personId;
+        }
+
         return saveData;
     }
 
@@ -157,13 +183,35 @@ public class GameManager : MonoBehaviour, ISaveable
         JSONNode saveData = SaveManager.Instance.LoadSave(this);
         if (saveData != null)
         {
+            // Load players
+            if (players == null) players = new List<Player>();
+            else players.Clear();
+
+            int playerCount = saveData.HasKey("players/count") ? saveData["players/count"].AsInt : 0;
+            for (int i = 0; i < playerCount; i++)
+            {
+                int personId = saveData[$"players/player_{i}/person_id"].AsInt;
+                if (personId < 0) continue;
+
+                Person person = Person.GetInstanceByID(personId);
+                if (person == null)
+                {
+                    Debug.LogWarning($"[GameManager] Saved player person with ID {personId} not found.");
+                    continue;
+                }
+
+                // Player is a MonoBehaviour type in this project, but GameManager currently constructs it with new.
+                // Keep existing behavior for compatibility.
+                Player player = new Player();
+                player.playerPerson = person;
+                players.Add(player);
+            }
 
             onLoadSuccess?.Invoke();
             return true;
         }
         else
         {
-
             onLoadFail?.Invoke();
             return false;
         }
