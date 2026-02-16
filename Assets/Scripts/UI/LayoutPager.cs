@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 /// <summary>
 /// Splits layout children into pages and exposes navigation helpers.
@@ -10,75 +11,47 @@ using TMPro;
 [DisallowMultipleComponent]
 public class LayoutPager : MonoBehaviour
 {
+    [SerializeField]  List<GameObject> managedElements = new List<GameObject>();
     [SerializeField] private Transform layoutRoot;
     [SerializeField] private Button previousButton;
     [SerializeField] private Button nextButton;
-    [SerializeField, Min(1)] private int elementsPerPage = 6;
-    [SerializeField] private bool includeInactiveChildren;
+    [SerializeField] private int elementsPerPage = 5;
     [SerializeField] private TMP_Text pageIndicator;
     [SerializeField] private string pageFormat = "{0}/{1}";
+    [SerializeField] private int currentPage;
 
     [System.Serializable]
     public class PageChangedEvent : UnityEvent<int, int> { }
 
     [SerializeField] private PageChangedEvent onPageChanged;
 
-    private readonly List<GameObject> managedElements = new List<GameObject>();
-    private int currentPage;
-    private bool skipNextOnEnableRefresh;
 
     private int PageCount => Mathf.Max(1, Mathf.CeilToInt(managedElements.Count / (float)elementsPerPage));
 
-    private void Awake()
+    private void Start()
     {
         if (!layoutRoot)
         {
             layoutRoot = transform;
         }
 
-        WireButton(previousButton, GoToPreviousPage);
-        WireButton(nextButton, GoToNextPage);
-
-        skipNextOnEnableRefresh = true;
-        Refresh();
     }
-
     private void OnEnable()
     {
-        if (skipNextOnEnableRefresh)
-        {
-            skipNextOnEnableRefresh = false;
-            return;
-        }
-
-        Refresh();
+        InitializeElements();
+        WireButton(previousButton, GoToPreviousPage);
+        WireButton(nextButton, GoToNextPage);
     }
 
-    /// <summary>
-    /// Rebuilds the cached element list and reapplies the current page.
-    /// </summary>
-    public void Refresh()
+    private void Update()
     {
-        CacheElements();
-        ShowPage(Mathf.Clamp(currentPage, 0, PageCount - 1));
+        UpdateElementVisibility();
     }
 
-    private void CacheElements()
+    private void InitializeElements()
     {
         managedElements.Clear();
-        if (!layoutRoot)
-        {
-            return;
-        }
-
-        foreach (Transform child in layoutRoot)
-        {
-            if (!includeInactiveChildren && !child.gameObject.activeSelf)
-            {
-                continue;
-            }
-            managedElements.Add(child.gameObject);
-        }
+        managedElements.AddRange(layoutRoot.GetComponentsInChildren<AdvisorsPanelUI>(true).ToList().Where(t => t != layoutRoot).Select(t => t.gameObject));
     }
 
     public void GoToNextPage()
@@ -98,27 +71,22 @@ public class LayoutPager : MonoBehaviour
 
     private void ShowPage(int pageIndex)
     {
-        if (managedElements.Count == 0)
-        {
-            currentPage = 0;
-            UpdateButtons();
-            UpdateIndicator();
-            onPageChanged?.Invoke(0, 0);
-            return;
-        }
-
         currentPage = pageIndex;
-        int startIndex = currentPage * elementsPerPage;
-        int endIndex = startIndex + elementsPerPage;
-        for (int i = 0; i < managedElements.Count; i++)
-        {
-            bool shouldBeActive = i >= startIndex && i < endIndex;
-            managedElements[i].SetActive(shouldBeActive);
-        }
+        // Show the elements for the current page, hide the rest
+        UpdateElementVisibility();
 
         UpdateButtons();
         UpdateIndicator();
         onPageChanged?.Invoke(currentPage, PageCount);
+    }
+
+    private void UpdateElementVisibility()
+    {
+        for (int i = 0; i < managedElements.Count; i++)
+        {
+            int pageOfElement = i / elementsPerPage;
+            managedElements[i].SetActive(pageOfElement == currentPage);
+        }
     }
 
     private void UpdateButtons()

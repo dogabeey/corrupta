@@ -16,7 +16,7 @@ MonoBehaviour:
   m_GUID: b08bb516745f0554ebe501fbaae4cbea
   m_SerializeEntries:
   - m_GUID: 437fc855845fb8442b763477d9db8b7f
-    m_Address: Assets/AssetFiles/Images/Icons/advisor_icons.png
+    m_Address: advisor_icons
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

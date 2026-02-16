@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6858862082472445645}
   - component: {fileID: 2099549413543610842}
   m_Layer: 5
-  m_Name: action button
+  m_Name: advisor adbility button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

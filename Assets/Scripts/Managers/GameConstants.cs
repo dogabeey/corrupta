@@ -17,6 +17,8 @@ public class GameConstants : ListedScriptableObject<GameConstants>
     public struct GameEvents
     {
         public const string SELECTED_CITY = "SELECTED_CITY";
+
+        public const string ADVISOR_POOL_UPDATED = "ADVISOR_POOL_UPDATED";
     }
     public struct Gfx
     {
@@ -30,7 +32,7 @@ public class GameConstants : ListedScriptableObject<GameConstants>
                 public const string finance_chairman = "advisor_icons[finance_chairman]";
             }
 
-            public const string advisor_portrait_set = "advisor_portraits[%]";
+            public const string advisor_portraits = "advisor_portraits[{0}]";
         }
     }
 }

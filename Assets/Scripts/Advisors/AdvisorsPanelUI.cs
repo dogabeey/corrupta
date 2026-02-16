@@ -17,6 +17,8 @@ public class AdvisorsPanelUI : UIBehaviour
     protected override string UpdateEventString => updateEventString;
 
     [Header("UI Sections")]
+    public Toggle currentAdvisorsButton;
+    public Toggle poolAdvisorsButton;
     public LayoutGroup advisorsPoolLayoutGroup;
     public LayoutGroup currentAdvisorsLayoutGroup;
     [Header("Prefabs")]
@@ -25,8 +27,24 @@ public class AdvisorsPanelUI : UIBehaviour
 
     private void Awake()
     {
+        currentAdvisorsButton.onValueChanged.AddListener((isOn) =>
+        {
+            CurrentAdvisorButton_OnClick();
+        });
+        poolAdvisorsButton.onValueChanged.AddListener((isOn) =>
+        {
+            PoolAdvisorsButton_OnClick();
+        });
     }
 
+    public void CurrentAdvisorButton_OnClick()
+    {
+        DrawUI();
+    }
+    public void PoolAdvisorsButton_OnClick()
+    {
+        DrawUI();
+    }
 
     public override void DrawUI()
     {

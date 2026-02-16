@@ -22,7 +22,7 @@ public class CurrentAdvisorUI : UIBehaviour
     public override void DrawUI()
     {
         advisorNameText.text = currentAdvisor.AdvisorName;
-        advisorPortrait.sprite = Addressables.LoadAssetAsync<Sprite>(GameConstants.Gfx.Icons.advisor_portrait_set[currentAdvisor.PortraitIndex]).WaitForCompletion();
+        advisorPortrait.sprite = Addressables.LoadAssetAsync<Sprite>(string.Format(GameConstants.Gfx.Icons.advisor_portraits, currentAdvisor.PortraitIndex)).WaitForCompletion();
         advisorTypeIcon.sprite = currentAdvisor.Type.AdvisorIcon;
 
         DrawBonusEffects();
