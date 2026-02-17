@@ -7,7 +7,7 @@ public class BonusEffectPool : SerializedMonoBehaviour
 
     // Add a bonus effect for each idelogy and each occupation
 
-    public void AddBonusEffect(BonusScope scope, BonusOperation operation, BonusTargetStat target, Ideology ideology, Occupation occupation, float value)
+    public void AddBonusEffect(BonusTargetScope scope, BonusOperation operation, BonusStat target, Ideology ideology, Occupation occupation, float value)
     {
         BonusEffect bonusEffect = new()
         {

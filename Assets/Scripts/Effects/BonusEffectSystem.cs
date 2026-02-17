@@ -2,19 +2,26 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BonusTargetStat
+public enum BonusStat
 {
     None = 0,
 
     // Person stats
-    PersonManagement,
-    PersonDiplomacy,
-    PersonWisdom,
-    PersonSpeech,
-    PersonIntrigue,
+    Management,
+    Diplomacy,
+    Wisdom,
+    Speech,
+    Intrigue,
+
+    // Cost related
+    AllCostReduction,
+    AdvisorCostReduction,
+    AdvisorSalaryReduction,
+
 
     // Opinion / popularity-style stats
-    Popularity,
+    MonthlyPopularity,
+
 
     // Country stats (example)
     CountryDiplomacy,
@@ -27,18 +34,19 @@ public enum BonusOperation
 }
 
 [Flags]
-public enum BonusScope
+public enum BonusTargetScope
 {
     Global = 0,
     Occupation = 1 << 0,
-    Ideology = 1 << 1
+    Ideology = 1 << 1,
+    City = 1 << 2,
 }
 
 [Serializable]
 public struct BonusEffect
 {
     [Tooltip("What stat/value this bonus modifies")]
-    public BonusTargetStat target;
+    public BonusStat target;
 
     [Tooltip("Add = flat (+1). Multiply = multiplier (+5% = 1.05)")]
     public BonusOperation operation;
@@ -47,7 +55,7 @@ public struct BonusEffect
     public float value;
 
     [Tooltip("Where this bonus applies (global or filtered). Use flags to combine (Occupation | Ideology).")]
-    public BonusScope scope;
+    public BonusTargetScope scope;
 
     [Tooltip("Optional filter when scope includes Occupation")]
     public Occupation occupation;
@@ -63,17 +71,17 @@ public struct BonusEffect
     public readonly bool AppliesTo(Occupation occ, Ideology ideo)
     {
         // Global means no filtering.
-        if (scope == BonusScope.Global) return true;
+        if (scope == BonusTargetScope.Global) return true;
 
         // If a flag is set, the corresponding filter must match.
-        if (scope.HasFlag(BonusScope.Occupation))
+        if (scope.HasFlag(BonusTargetScope.Occupation))
         {
             if (occupation == null) return false;
             if (occ == null) return false;
             if (occupation != occ) return false;
         }
 
-        if (scope.HasFlag(BonusScope.Ideology))
+        if (scope.HasFlag(BonusTargetScope.Ideology))
         {
             if (ideology == null) return false;
             if (ideo == null) return false;
@@ -90,13 +98,13 @@ public struct BonusEffect
         string targetStr = target.ToString();
         string scopeStr = string.Empty;
 
-        if (scope != BonusScope.Global)
+        if (scope != BonusTargetScope.Global)
         {
-            string occPart = scope.HasFlag(BonusScope.Occupation)
-                ? (occupation ? occupation.className : "Occupation")
+            string occPart = scope.HasFlag(BonusTargetScope.Occupation)
+                ? (occupation ? occupation.name : "Occupation")
                 : null;
 
-            string ideoPart = scope.HasFlag(BonusScope.Ideology)
+            string ideoPart = scope.HasFlag(BonusTargetScope.Ideology)
                 ? (ideology ? ideology.name : "Ideology")
                 : null;
 
@@ -130,7 +138,7 @@ public interface IBonusEffectSource
 
 public static class BonusEffectEvaluator
 {
-    public static float ApplyAdditiveThenMultiplicative(float baseValue, IEnumerable<BonusEffect> bonuses, BonusTargetStat stat, Occupation occ = null, Ideology ideo = null)
+    public static float ApplyAdditiveThenMultiplicative(float baseValue, IEnumerable<BonusEffect> bonuses, BonusStat stat, Occupation occ = null, Ideology ideo = null)
     {
         float add = 0f;
         float mul = 1f;
