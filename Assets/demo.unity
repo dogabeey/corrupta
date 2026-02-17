@@ -4400,6 +4400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2065f7a42890644ba3d4c272fbf3f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  advisorPool: {fileID: 0}
   gameConstants: {fileID: 11400000, guid: d6142786f03e4d54c8eaaaecf92376c6, type: 2}
   eventManager: {fileID: 11400000, guid: a67caadba3501da4ab8583eb3be5e0ae, type: 2}
   saveManager: {fileID: 11400000, guid: 9e293fbb95894f34dbaa71776b8e9e5f, type: 2}
@@ -21042,7 +21043,7 @@ PrefabInstance:
     - target: {fileID: 4390881050427521525, guid: a992a36bf9fbf154bbe4262597a1b9fd,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 639
+      value: 998.20154
       objectReference: {fileID: 0}
     - target: {fileID: 4390881050427521525, guid: a992a36bf9fbf154bbe4262597a1b9fd,
         type: 3}
