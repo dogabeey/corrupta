@@ -36,7 +36,7 @@ public enum BonusOperation
 [Flags]
 public enum BonusTargetScope
 {
-    Global = 0,
+    NotApplicable = 0,
     Occupation = 1 << 0,
     Ideology = 1 << 1,
     City = 1 << 2,
@@ -63,15 +63,18 @@ public struct BonusEffect
     [Tooltip("Optional filter when scope includes Ideology")]
     public Ideology ideology;
 
+    [Tooltip("Optional filter when scope includes City")]
+    public City city;
+
     public float bonusEffectCostMultiplier;
 
     [Tooltip("UI-friendly label override (optional). When empty, a label is generated.")]
     public string customLabel;
 
-    public readonly bool AppliesTo(Occupation occ, Ideology ideo)
+    public readonly bool AppliesTo(Occupation occ, Ideology ideo, City c = null)
     {
-        // Global means no filtering.
-        if (scope == BonusTargetScope.Global) return true;
+        // NotApplicable means no filtering.
+        if (scope == BonusTargetScope.NotApplicable) return true;
 
         // If a flag is set, the corresponding filter must match.
         if (scope.HasFlag(BonusTargetScope.Occupation))
@@ -88,6 +91,13 @@ public struct BonusEffect
             if (ideology != ideo) return false;
         }
 
+        if (scope.HasFlag(BonusTargetScope.City))
+        {
+            if (city == null) return false;
+            if (c == null) return false;
+            if (city != c) return false;
+        }
+
         return true;
     }
 
@@ -96,38 +106,31 @@ public struct BonusEffect
         if (!string.IsNullOrWhiteSpace(customLabel)) return customLabel;
 
         string targetStr = target.ToString();
-        string scopeStr = string.Empty;
 
-        if (scope != BonusTargetScope.Global)
-        {
-            string occPart = scope.HasFlag(BonusTargetScope.Occupation)
-                ? (occupation ? occupation.name : "Occupation")
-                : null;
-
-            string ideoPart = scope.HasFlag(BonusTargetScope.Ideology)
-                ? (ideology ? ideology.name : "Ideology")
-                : null;
-
-            if (!string.IsNullOrEmpty(occPart) && !string.IsNullOrEmpty(ideoPart))
-                scopeStr = $" ({occPart} + {ideoPart})";
-            else if (!string.IsNullOrEmpty(occPart))
-                scopeStr = $" ({occPart})";
-            else if (!string.IsNullOrEmpty(ideoPart))
-                scopeStr = $" ({ideoPart})";
-        }
-
+        string valueStr;
         if (operation == BonusOperation.Add)
         {
             string sign = value >= 0 ? "+" : string.Empty;
-            return $"{sign}{value:0.#} {targetStr}{scopeStr}";
+            valueStr = $"{sign}{value:0.#}";
         }
         else
         {
             // Convert multiplier to percentage delta
             float pct = (value - 1f) * 100f;
             string sign = pct >= 0 ? "+" : string.Empty;
-            return $"{sign}{pct:0.#}% {targetStr}{scopeStr}";
+            valueStr = $"{sign}{pct:0.#}%";
         }
+
+        if (scope == BonusTargetScope.NotApplicable)
+            return $"{valueStr} {targetStr}";
+
+        var parts = new List<string>();
+        if (scope.HasFlag(BonusTargetScope.Occupation)) parts.Add(occupation != null ? occupation.name + "s" : "Occupation");
+        if (scope.HasFlag(BonusTargetScope.Ideology)) parts.Add(ideology != null ? ideology.name + "s" : "Ideology");
+        if (scope.HasFlag(BonusTargetScope.City)) parts.Add(city != null ? city.name + " City" : "City");
+
+        string scopeStr = parts.Count > 0 ? string.Join(" + ", parts) : scope.ToString();
+        return $"{valueStr} {targetStr} with {scopeStr}";
     }
 }
 
@@ -138,7 +141,7 @@ public interface IBonusEffectSource
 
 public static class BonusEffectEvaluator
 {
-    public static float ApplyAdditiveThenMultiplicative(float baseValue, IEnumerable<BonusEffect> bonuses, BonusStat stat, Occupation occ = null, Ideology ideo = null)
+    public static float ApplyAdditiveThenMultiplicative(float baseValue, IEnumerable<BonusEffect> bonuses, BonusStat stat, Occupation occ = null, Ideology ideo = null, City city = null)
     {
         float add = 0f;
         float mul = 1f;
@@ -146,7 +149,7 @@ public static class BonusEffectEvaluator
         foreach (var b in bonuses)
         {
             if (b.target != stat) continue;
-            if (!b.AppliesTo(occ, ideo)) continue;
+            if (!b.AppliesTo(occ, ideo, city)) continue;
 
             if (b.operation == BonusOperation.Add) add += b.value;
             else mul *= b.value;
