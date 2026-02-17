@@ -115,8 +115,7 @@ public struct BonusEffect
         }
         else
         {
-            // Convert multiplier to percentage delta
-            float pct = (value - 1f) * 100f;
+            float pct = value;
             string sign = pct >= 0 ? "+" : string.Empty;
             valueStr = $"{sign}{pct:0.#}%";
         }
@@ -152,7 +151,7 @@ public static class BonusEffectEvaluator
             if (!b.AppliesTo(occ, ideo, city)) continue;
 
             if (b.operation == BonusOperation.Add) add += b.value;
-            else mul *= b.value;
+            else mul *= b.value / 100;
         }
 
         return (baseValue + add) * mul;
