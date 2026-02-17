@@ -9648,7 +9648,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   sources:
-  - target: 1
+  - target: 0
     operation: 1
     value: 1
     scope: 1
@@ -20935,6 +20935,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1305756630}
     m_Modifications:
+    - target: {fileID: 888297089914432585, guid: a992a36bf9fbf154bbe4262597a1b9fd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3304375115876635311, guid: a992a36bf9fbf154bbe4262597a1b9fd,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -21058,11 +21063,6 @@ PrefabInstance:
     - target: {fileID: 7628312084681901196, guid: a992a36bf9fbf154bbe4262597a1b9fd,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7628312084681901196, guid: a992a36bf9fbf154bbe4262597a1b9fd,
-        type: 3}
-      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

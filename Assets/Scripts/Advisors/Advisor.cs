@@ -41,7 +41,7 @@ public abstract class AdvisorBase : IAdvisor
 
     public abstract IReadOnlyList<BonusEffect> BonusEffects { get; }
 
-    public float Cost => GameConstants.Instance.baseAdvsiorCost * Type.CostMultiplier * CostMultiplier * GetBonusEffectsCostMultiplier();
+    public float Cost => Mathf.CeilToInt(GameConstants.Instance.baseAdvsiorCost * Type.CostMultiplier * CostMultiplier * GetBonusEffectsCostMultiplier());
 
     private float GetBonusEffectsCostMultiplier()
     {
