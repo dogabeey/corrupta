@@ -21,7 +21,7 @@ public class PoolAdvisorUI : UIBehaviour
     public override void DrawUI()
     {
         advisorNameText.text = poolAdvisor.AdvisorName;
-        advisorCostText.text = poolAdvisor.CostMultiplier.ToString() + "<sprite index=0>";
+        advisorCostText.text = poolAdvisor.Cost.ToString() + "<sprite index=0>";
         advisorPortrait.sprite = Addressables.LoadAssetAsync<Sprite>(string.Format(GameConstants.Gfx.Icons.advisor_portraits, poolAdvisor.PortraitIndex)).WaitForCompletion();
         advisorTypeIcon.sprite = poolAdvisor.Type.AdvisorIcon;
 

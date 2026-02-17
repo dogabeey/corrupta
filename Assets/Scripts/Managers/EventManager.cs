@@ -8,7 +8,7 @@ public class EventManager : ScriptableObject
 {
     private Dictionary<string, Action<EventParam>> eventDictionary;
 
-    public static EventManager Instance => GameManager.Instance.eventManager;
+    public static EventManager Instance => GameManager.Instance ? GameManager.Instance.eventManager : null;
 
     public void Init()
     {
