@@ -5,17 +5,27 @@ using UnityEngine;
 [Serializable]
 public class PersonController : ObjectController, ISaveable
 {
+    [Header("Person Info")]
     public Person personSO;
     public float fame;
     public float personAge;
     public float corruption;
     public Ideology ideology;
-
+    [Header("Base Stats")]
     public int baseManagement;
     public int baseDiplomacy;
     public int baseWisdom;
     public int baseSpeech;
     public int baseIntrigue;
+    [Header("Effects")]
+    public List<TimedBonusEffect> activeBonusEffects = new List<TimedBonusEffect>();
+
+    [System.Serializable]
+    public class TimedBonusEffect
+    {
+        public int remainingTurns;
+        public BonusEffect effect;
+    }
 
     // Advisors currently assigned to this person.
     // Saved/loaded by advisor name (since advisors are runtime-created, non-ScriptableObject entries).
@@ -117,6 +127,28 @@ public class PersonController : ObjectController, ISaveable
             saveData[$"advisors/{i}/name"] = advisors[i] != null ? advisors[i].AdvisorName : string.Empty;
         }
 
+        // Active bonus effects
+        int bonusCount = activeBonusEffects != null ? activeBonusEffects.Count : 0;
+        saveData["activeBonusEffects/count"] = bonusCount;
+        for (int i = 0; i < bonusCount; i++)
+        {
+            var t = activeBonusEffects[i];
+            saveData[$"activeBonusEffects/{i}/remainingTurns"] = t != null ? t.remainingTurns : 0;
+
+            var e = t != null ? t.effect : default;
+            saveData[$"activeBonusEffects/{i}/target"] = (int)e.target;
+            saveData[$"activeBonusEffects/{i}/operation"] = (int)e.operation;
+            saveData[$"activeBonusEffects/{i}/value"] = e.value;
+            saveData[$"activeBonusEffects/{i}/scope"] = (int)e.scope;
+            saveData[$"activeBonusEffects/{i}/bonusEffectCostMultiplier"] = e.bonusEffectCostMultiplier;
+            saveData[$"activeBonusEffects/{i}/customLabel"] = e.customLabel ?? string.Empty;
+
+            // Optional filters (persist by id; -1 means null)
+            saveData[$"activeBonusEffects/{i}/occupation_id"] = e.occupation != null ? e.occupation.id : -1;
+            saveData[$"activeBonusEffects/{i}/ideology_id"] = e.ideology != null ? e.ideology.id : -1;
+            saveData[$"activeBonusEffects/{i}/city_id"] = e.city != null ? e.city.id : -1;
+        }
+
         return saveData;
     }
 
@@ -166,6 +198,39 @@ public class PersonController : ObjectController, ISaveable
 
             if (advisor != null)
                 advisors.Add(advisor);
+        }
+
+        // Active bonus effects
+        if (activeBonusEffects == null) activeBonusEffects = new List<TimedBonusEffect>();
+        activeBonusEffects.Clear();
+        int bonusCount = loadData.HasKey("activeBonusEffects/count") ? loadData["activeBonusEffects/count"].AsInt : 0;
+        for (int i = 0; i < bonusCount; i++)
+        {
+            int remainingTurns = loadData.HasKey($"activeBonusEffects/{i}/remainingTurns")
+                ? loadData[$"activeBonusEffects/{i}/remainingTurns"].AsInt
+                : 0;
+
+            BonusEffect effect = new BonusEffect();
+            if (loadData.HasKey($"activeBonusEffects/{i}/target")) effect.target = (BonusStat)loadData[$"activeBonusEffects/{i}/target"].AsInt;
+            if (loadData.HasKey($"activeBonusEffects/{i}/operation")) effect.operation = (BonusOperation)loadData[$"activeBonusEffects/{i}/operation"].AsInt;
+            if (loadData.HasKey($"activeBonusEffects/{i}/value")) effect.value = loadData[$"activeBonusEffects/{i}/value"].AsFloat;
+            if (loadData.HasKey($"activeBonusEffects/{i}/scope")) effect.scope = (BonusTargetScope)loadData[$"activeBonusEffects/{i}/scope"].AsInt;
+            if (loadData.HasKey($"activeBonusEffects/{i}/bonusEffectCostMultiplier")) effect.bonusEffectCostMultiplier = loadData[$"activeBonusEffects/{i}/bonusEffectCostMultiplier"].AsFloat;
+            if (loadData.HasKey($"activeBonusEffects/{i}/customLabel")) effect.customLabel = loadData[$"activeBonusEffects/{i}/customLabel"].Value;
+
+            int occupationId = loadData.HasKey($"activeBonusEffects/{i}/occupation_id") ? loadData[$"activeBonusEffects/{i}/occupation_id"].AsInt : -1;
+            int ideologyId = loadData.HasKey($"activeBonusEffects/{i}/ideology_id") ? loadData[$"activeBonusEffects/{i}/ideology_id"].AsInt : -1;
+            int cityId = loadData.HasKey($"activeBonusEffects/{i}/city_id") ? loadData[$"activeBonusEffects/{i}/city_id"].AsInt : -1;
+
+            effect.occupation = occupationId >= 0 ? Occupation.GetInstanceByID(occupationId) : null;
+            effect.ideology = ideologyId >= 0 ? Ideology.GetInstanceByID(ideologyId) : null;
+            effect.city = cityId >= 0 ? City.GetInstanceByID(cityId) : null;
+
+            activeBonusEffects.Add(new TimedBonusEffect
+            {
+                remainingTurns = remainingTurns,
+                effect = effect
+            });
         }
 
         onLoadSuccess?.Invoke();

@@ -35,6 +35,7 @@ public class Person : ListedScriptableObject<Person>
     public int baseSpeech;
     public int baseIntrigue;
 
+
     private void OnValidate()
     {
         // Make asset's file name match person's name
