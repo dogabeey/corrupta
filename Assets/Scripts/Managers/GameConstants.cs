@@ -16,6 +16,8 @@ public class GameConstants : ListedScriptableObject<GameConstants>
 
     public struct GameEvents
     {
+        public const string TURN_PASSED = "TURN_PASSED";
+
         public const string SELECTED_CITY = "SELECTED_CITY";
 
         public const string ADVISOR_POOL_UPDATED = "ADVISOR_POOL_UPDATED";

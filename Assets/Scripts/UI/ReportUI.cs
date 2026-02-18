@@ -45,7 +45,5 @@ public class ReportUI : MonoBehaviour
             eventDescriptionText.text += "\n\n" + e.ToString();
         }
         PersonEvent.gameEvents.Find(e => e.header == activeHeader).isRead = true;
-        FindObjectOfType<Simulator>().gameCanvas.SetActive(false);
-        FindObjectOfType<Simulator>().gameCanvas.SetActive(true);
     }
 }

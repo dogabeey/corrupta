@@ -54,7 +54,7 @@ public class EventManager : ScriptableObject
         }
     }
 
-    public static void TriggerEvent(string eventName, EventParam eventParam)
+    public static void TriggerEvent(string eventName, EventParam eventParam = null)
     {
         Action<EventParam> thisEvent = Instance.eventDictionary.GetValueOrDefault(eventName);
         if (thisEvent != null)
