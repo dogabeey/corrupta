@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour, ISaveable
 {
     [FoldoutGroup("References")]
     public AdvisorPool advisorPool;
+    public Simulator simulatorManager;
 
     [InlineEditor]
     [FoldoutGroup("Managers")]
