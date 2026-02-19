@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Simulator: MonoBehaviour
+public class Simulator : MonoBehaviour
 {
     public int turn = 0; // Each turn is a week. 52 turns is a year.
 
