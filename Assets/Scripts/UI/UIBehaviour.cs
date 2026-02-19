@@ -6,22 +6,28 @@ using TMPro;
 public abstract class UIBehaviour : MonoBehaviour
 {
     /// <summary>
-    /// UpdateEventString is the event string which causes DrawUI() to execute automatically when an event with the same 
+    /// UpdateEventStrings are the event strings which cause DrawUI() to execute automatically when an event with the same 
     /// string fires in another piece of code.
     /// Example: EventManager.TriggerEvent("EVENT_NAME_HERE");
     /// </summary>
-    protected abstract string UpdateEventString
+    protected abstract IEnumerable<string> UpdateEventStrings
     {
         get;
     }
 
     private void OnEnable()
     {
-        EventManager.StartListening(UpdateEventString, OnEvent);
+        foreach (string eventString in UpdateEventStrings)
+        {
+            EventManager.StartListening(eventString, OnEvent);
+        }
     }
     private void OnDisable()
     {
-        EventManager.StopListening(UpdateEventString, OnEvent);
+        foreach (string eventString in UpdateEventStrings)
+        {
+            EventManager.StopListening(eventString, OnEvent);
+        }
     }
 
     protected void OnEvent(EventParam e)

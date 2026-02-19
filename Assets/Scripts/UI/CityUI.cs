@@ -12,7 +12,7 @@ public class CityUI : ToggleUIBehaviour
     public TMP_Text populationText;
     public TMP_Text descriptionText;
 
-    protected override string UpdateEventString { get => GameConstants.GameEvents.SELECTED_CITY; }
+    protected override IEnumerable<string> UpdateEventStrings => new[] { GameConstants.GameEvents.SELECTED_CITY };
 
     // Start is called before the first frame update
     void Start()

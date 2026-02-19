@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -17,7 +18,7 @@ public class PoolAdvisorUI : UIBehaviour
     public TMP_Text advisorBonusTextPrefab;
     public Button advisorAbilityButtonPrefab;
 
-    protected override string UpdateEventString => "ADVISOR_POOL_UPDATED";
+    protected override IEnumerable<string> UpdateEventStrings => new[] { "ADVISOR_POOL_UPDATED" };
     public override void DrawUI()
     {
         advisorNameText.text = poolAdvisor.AdvisorName;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -17,7 +18,7 @@ public class CurrentAdvisorUI : UIBehaviour
     public TMP_Text advisorBonusTextPrefab;
     public Button advisorAbilityButtonPrefab;
 
-    protected override string UpdateEventString => "ADVISOR_UPDATED";
+    protected override IEnumerable<string> UpdateEventStrings => new[] { "ADVISOR_UPDATED" };
 
     public override void DrawUI()
     {

@@ -14,7 +14,7 @@ public class AdvisorsPanelUI : UIBehaviour
     [Header("Events")]
     [SerializeField] private string updateEventString = "ADVISORS_PANEL_UPDATED";
 
-    protected override string UpdateEventString => updateEventString;
+    protected override IEnumerable<string> UpdateEventStrings => new[] { updateEventString };
 
     [Header("UI Sections")]
     public Toggle currentAdvisorsButton;
