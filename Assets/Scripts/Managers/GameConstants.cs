@@ -9,6 +9,11 @@ public class GameConstants : ListedScriptableObject<GameConstants>
     public float mapMaxColorDistanceDetection = 0.1f;
     public string mapShaderProvinceColorString = "_ProvinceColor";
     public string mapShaderProvinceSelectString = "_ProvinceSelect";
+    [Header("ELECTION")]
+    public int defaultGeneralElectionsPeriodYear = 4;
+    public int defaultLocalElectionsPeriodYear = 4;
+    public int defaultGeneralElectionsMonthOffset = 12; // 10 months after the start of the game, then every 4 years after that.
+    public int defaultLocalElectionsMonthOffset = 6; // 6 months after the start of the game, then every 4 years after that.
     [Header("ECONOMY")]
     public float baseStartingMoney = 1000f;
     public float baseAdvsiorCost = 100f;
