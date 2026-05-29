@@ -48,7 +48,7 @@ public class Simulator : MonoBehaviour
 
         // passing of a week
         turn++;
-        Country.Instance.UpdateAll();
+        //Country.Instance.UpdateAll();
     }
 
     public List<int> GetNextGeneralElection()

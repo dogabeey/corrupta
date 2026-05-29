@@ -59,6 +59,7 @@ public class EventManager : ScriptableObject
         Action<EventParam> thisEvent = Instance.eventDictionary.GetValueOrDefault(eventName);
         if (thisEvent != null)
         {
+            Debug.Log($"Event triggered: {eventName}");
             thisEvent.Invoke(eventParam);
             // OR USE  instance.eventDictionary[eventName](eventParam);
         }

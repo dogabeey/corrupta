@@ -70,7 +70,8 @@ public class GameManager : MonoBehaviour, ISaveable
 
     private void InitGame()
     {
-        EventManager.Instance.Init();
+        //if(EventManager.Instance)
+            EventManager.Instance.Init();
 
         LoadInstances();
         InitializeControllers();
